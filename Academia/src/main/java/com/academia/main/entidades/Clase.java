@@ -1,14 +1,14 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 public class Clase implements Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	private Asignatura asignatura;
 	private Profesor profesor;
-	private List<Date> horario;
+	private List<HoraSemanal> horario;
 	
 	public Clase() {
 		super();
@@ -31,11 +31,11 @@ public class Clase implements Serializable {
 		this.profesor = profesor;
 	}
 
-	public List<Date> getHorario() {
+	public List<HoraSemanal> getHorario() {
 		return horario;
 	}
 
-	public void setHorario(List<Date> horario) {
+	public void setHorario(List<HoraSemanal> horario) {
 		this.horario = horario;
 	}
 	
