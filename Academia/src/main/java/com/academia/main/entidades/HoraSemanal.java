@@ -3,14 +3,32 @@ package com.academia.main.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+@Entity
 public class HoraSemanal implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(nullable = false)
 	private String dia;
+	
+	@Column(nullable = false)
 	private String hora;
+	
+	@Column(nullable = false)
 	private Integer diaindice;
+	
+	@Column(nullable = false)
 	private Integer horaindice;
+	
+	//no se si falte
 	private List<Clase> clases;
 	
 	public HoraSemanal() {
@@ -18,11 +36,11 @@ public class HoraSemanal implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

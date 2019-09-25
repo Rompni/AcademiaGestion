@@ -4,26 +4,65 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+@Entity
 public class Alumno implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(nullable = false)
 	private String nombre;
+	
+	@Column(nullable = false)
 	private String apellido1;
+	
 	private String apellido2;
+	
+	@Column(unique = true, nullable = false)
 	private String nif;
+	
 	private String telefono;
+	
 	private String correo;
+	
+	//falta relacion
 	private Curso curso;
+	
+	@Column(nullable = false)
 	private Boolean repetidor;
+	
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date fechaalta;
+	
+	@Temporal(TemporalType.DATE)
 	private Date fechabaja;
+	
 	private String observaciones;
+	
 	private List<Clase> clases;
 	
 	
 	public Alumno() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
