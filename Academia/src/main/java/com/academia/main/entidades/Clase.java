@@ -24,10 +24,11 @@ public class Clase implements Serializable {
 	@JoinColumn(name = "ID_ASIGNATURA")
 	private Asignatura asignatura;
 	
-	//falta relacion
+	@ManyToOne
+	@JoinColumn(name = "ID_PROFESOR")
 	private Profesor profesor;
 	
-	//falta algo aqui
+	@ManyToMany(mappedBy="claseh")
 	private List<HoraSemanal> horario;
 	
 	@ManyToMany(mappedBy="clases") 
@@ -61,6 +62,23 @@ public class Clase implements Serializable {
 	public void setHorario(List<HoraSemanal> horario) {
 		this.horario = horario;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public List<Alumno> getAlumnos() {
+		return alumnos;
+	}
+
+	public void setAlumnos(List<Alumno> alumnos) {
+		this.alumnos = alumnos;
+	}
+	
 	
 	
 	

@@ -8,7 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 @Entity
+@Table(name = "HORA_SEMANAL")
 public class HoraSemanal implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -28,8 +33,13 @@ public class HoraSemanal implements Serializable {
 	@Column(nullable = false)
 	private Integer horaindice;
 	
-	//no se si falte
-	private List<Clase> clases;
+	@ManyToMany
+	@JoinTable(name= "CLASE_HORA",
+	joinColumns= @JoinColumn(
+	name="ID_HORASEMANAL", referencedColumnName="id"),
+	inverseJoinColumns=@JoinColumn(
+	name="ID_CLASE",referencedColumnName="id"))
+	private List<Clase> claseh;
 	
 	public HoraSemanal() {
 		super();
@@ -76,13 +86,14 @@ public class HoraSemanal implements Serializable {
 		this.horaindice = horaindice;
 	}
 
-	public List<Clase> getClases() {
-		return clases;
+	public List<Clase> getClaseh() {
+		return claseh;
 	}
 
-	public void setClases(List<Clase> clases) {
-		this.clases = clases;
+	public void setClaseh(List<Clase> claseh) {
+		this.claseh = claseh;
 	}
+
 	
 	
 	

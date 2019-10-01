@@ -1,13 +1,17 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 @Entity
+@Table(name = "PROFESOR")
 public class Profesor implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -33,6 +37,9 @@ public class Profesor implements Serializable {
 	private String correo;
 	
 	private String titulacion;
+	
+	@OneToMany(mappedBy = "profesor")
+	private List<Clase> clases;
 	
 	public Profesor() {
 		super();
@@ -95,6 +102,23 @@ public class Profesor implements Serializable {
 		this.titulacion = titulacion;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public List<Clase> getClases() {
+		return clases;
+	}
+
+	public void setClases(List<Clase> clases) {
+		this.clases = clases;
+	}
+
+	
 	
 	
 	
