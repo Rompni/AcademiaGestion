@@ -93,6 +93,8 @@ public class HoraSemanal implements Serializable {
 	public void setClaseh(List<Clase> claseh) {
 		this.claseh = claseh;
 	}
+	
+	
 
 	
 	

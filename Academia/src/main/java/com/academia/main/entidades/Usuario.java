@@ -15,13 +15,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "USUARIOS")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(nullable = false)
 	private String usuario;
@@ -35,21 +35,13 @@ public class Usuario implements Serializable {
 	private String role;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName="id"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName="rol_id"))
+    @JoinTable(name = "USUARIOS_ROLES", joinColumns = @JoinColumn(name = "ID_USER", referencedColumnName="id"), inverseJoinColumns = @JoinColumn(name = "ID_ROL", referencedColumnName="id_rol"))
     private Set<Rol> roles;
 	
 	
 	public Usuario() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getUsuario() {
@@ -83,6 +75,25 @@ public class Usuario implements Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Set<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Rol> roles) {
+		this.roles = roles;
+	}
+	
+	
+	
 	
 	
 	

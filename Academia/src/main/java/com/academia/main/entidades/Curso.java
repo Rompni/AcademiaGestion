@@ -32,12 +32,31 @@ public class Curso implements Serializable {
 	private List<Asignatura> asignaturas;
 	
 	public Curso() {
+		super();
 	}
 
-	public Curso(Integer nivel, String etapa) {
-		super();
-		this.nivel = nivel;
-		this.etapa = etapa;
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public List<Alumno> getAlumnos() {
+		return alumnos;
+	}
+
+	public void setAlumnos(List<Alumno> alumnos) {
+		this.alumnos = alumnos;
+	}
+
+	public List<Asignatura> getAsignaturas() {
+		return asignaturas;
+	}
+
+	public void setAsignaturas(List<Asignatura> asignaturas) {
+		this.asignaturas = asignaturas;
 	}
 
 	public Integer getNivel() {

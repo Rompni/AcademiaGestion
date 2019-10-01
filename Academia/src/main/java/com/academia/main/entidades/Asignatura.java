@@ -33,6 +33,7 @@ public class Asignatura implements Serializable {
 	
 	
 	public Asignatura() {
+		super();
 	}
 
 	public String getNombre() {
@@ -59,6 +60,14 @@ public class Asignatura implements Serializable {
 
 	public void setCursoa(Curso cursoa) {
 		this.cursoa = cursoa;
+	}
+
+	public List<Clase> getClases() {
+		return clases;
+	}
+
+	public void setClases(List<Clase> clases) {
+		this.clases = clases;
 	}
 	
 	

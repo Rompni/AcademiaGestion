@@ -9,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 @Entity
+@Table(name = "RESPONSABLES")
 public class Responsable implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -88,6 +90,22 @@ public class Responsable implements Serializable {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public List<Alumno> getAlumnosrespon() {
+		return alumnosrespon;
+	}
+
+	public void setAlumnosrespon(List<Alumno> alumnosrespon) {
+		this.alumnosrespon = alumnosrespon;
 	}
 
 	
