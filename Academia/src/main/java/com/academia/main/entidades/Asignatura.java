@@ -1,12 +1,16 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 @Entity
 public class Asignatura implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,24 +22,15 @@ public class Asignatura implements Serializable {
 	@Column(nullable = false)
 	private String nombre;
 	
-	//falta relacion
-	private Curso curso;	
+	@ManyToOne
+	@JoinColumn(name = "ID_CURSO")
+	private Curso cursoa;	
+	
+	@OneToMany(mappedBy = "asignatura")
+	private List<Clase> clases;
+	
 	
 	public Asignatura() {
-	}
-
-	public Asignatura(Curso curso, String nombre) {
-		super();
-		this.curso = curso;
-		this.nombre = nombre;
-	}
-
-	public Curso getCurso() {
-		return curso;
-	}
-
-	public void setCurso(Curso curso) {
-		this.curso = curso;
 	}
 
 	public String getNombre() {
@@ -45,6 +40,25 @@ public class Asignatura implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Curso getCursoa() {
+		return cursoa;
+	}
+
+	public void setCursoa(Curso cursoa) {
+		this.cursoa = cursoa;
+	}
+	
 	
 	
 	

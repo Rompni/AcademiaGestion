@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "CLASES")
@@ -18,7 +20,8 @@ public class Clase implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	//falta relacion
+	@ManyToOne
+	@JoinColumn(name = "ID_ASIGNATURA")
 	private Asignatura asignatura;
 	
 	//falta relacion

@@ -74,11 +74,11 @@ public class Alumno implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -177,6 +177,15 @@ public class Alumno implements Serializable {
 	public void setClases(List<Clase> clases) {
 		this.clases = clases;
 	}
+
+	public Responsable getResponsable() {
+		return responsable;
+	}
+
+	public void setResponsable(Responsable responsable) {
+		this.responsable = responsable;
+	}
+	
 	
 	
 }
