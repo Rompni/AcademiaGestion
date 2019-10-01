@@ -1,13 +1,21 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 @Entity
+@Table(name = "usuarios")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -23,6 +31,13 @@ public class Usuario implements Serializable {
 	
 	@Column(nullable = false)
 	private Boolean habilitado;
+	
+	private String role;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "usuarios_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName="id"), inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName="rol_id"))
+    private Set<Rol> roles;
+	
 	
 	public Usuario() {
 		super();
@@ -59,6 +74,14 @@ public class Usuario implements Serializable {
 
 	public void setHabilitado(Boolean habilitado) {
 		this.habilitado = habilitado;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	

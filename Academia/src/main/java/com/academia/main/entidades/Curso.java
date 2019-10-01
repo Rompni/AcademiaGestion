@@ -1,13 +1,17 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 @Entity
+@Table(name = "cursos")
 public class Curso implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -20,6 +24,9 @@ public class Curso implements Serializable {
 	
 	@Column(nullable = false)
 	private String etapa;
+	
+	@OneToMany(mappedBy = "curso")
+	private List<Alumno> alumnos;
 	
 	public Curso() {
 	}

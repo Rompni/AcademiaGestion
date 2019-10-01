@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 @Entity
+@Table(name = "CLASES")
 public class Clase implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -23,6 +26,9 @@ public class Clase implements Serializable {
 	
 	//falta algo aqui
 	private List<HoraSemanal> horario;
+	
+	@ManyToMany(mappedBy="clases") 
+	private List<Alumno> alumnos; 
 	
 	public Clase() {
 		super();
