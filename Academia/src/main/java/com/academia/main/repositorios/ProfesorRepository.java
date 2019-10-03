@@ -17,13 +17,15 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long> {
 	
 	Profesor findById(Integer id);
 	
-	@Value("${spring.queries.profesor-busqueda}")
-	List<Profesor> findProfesorByNameOrNif(
-			@Param("nombre") String nombre,
-			@Param("nif") String nif);
+	@Query("SELECT f FROM Profesor f")
+	List<Profesor> findProfesores();
 	
-	@Value("${spring.queries.profesor-busqueda2}")
-	List<Profesor> findAllProfesors();
+	@Query("SELECT f FROM Profesor f WHERE f.nombre = :nombre or f.nif = :nif")
+	List<Profesor> findProfesorByNombreOrNif(
+			@Param("nombre") String nombre,
+			@Param("nif") String Nif
+			);
+	
 	
 	
 }

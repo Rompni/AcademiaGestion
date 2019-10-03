@@ -34,6 +34,15 @@ public class Curso implements Serializable {
 	public Curso() {
 		super();
 	}
+	
+
+	public Curso(Integer nivel, String etapa) {
+		super();
+		this.nivel = nivel;
+		this.etapa = etapa;
+	}
+
+
 
 	public Integer getId() {
 		return id;

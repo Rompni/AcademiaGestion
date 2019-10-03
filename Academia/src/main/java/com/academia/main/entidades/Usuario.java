@@ -1,6 +1,7 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -39,7 +40,7 @@ public class Usuario implements Serializable {
     @JoinTable(name = "USUARIOS_ROLES",
     joinColumns = @JoinColumn(
     name = "ID_USER", referencedColumnName="id"),
-    inverseJoinColumns = @JoinColumn(name = "ID_ROL", referencedColumnName="id_rol"))
+    inverseJoinColumns = @JoinColumn(name = "ID_ROL", referencedColumnName="id"))
     private Set<Rol> roles;
 	
 	@OneToOne

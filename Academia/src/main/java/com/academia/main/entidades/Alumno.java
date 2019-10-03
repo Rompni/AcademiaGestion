@@ -54,7 +54,7 @@ public class Alumno implements Serializable {
 	private String observaciones;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_CURSO", referencedColumnName = "id")
+	@JoinColumn(name = "ID_CURSO")
 	private Curso curso;
 	
 	@ManyToMany
@@ -66,7 +66,7 @@ public class Alumno implements Serializable {
 	private List<Clase> clases;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_RESPONSABLE", referencedColumnName = "id")
+	@JoinColumn(name = "ID_RESPONSABLE")
 	private Responsable responsable;
 	
 	@OneToOne(mappedBy = "alumno")

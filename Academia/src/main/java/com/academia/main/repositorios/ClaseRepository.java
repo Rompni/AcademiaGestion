@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.academia.main.entidades.Alumno;
 import com.academia.main.entidades.Asignatura;
 import com.academia.main.entidades.Clase;
 import com.academia.main.entidades.Curso;
@@ -19,13 +20,15 @@ public interface ClaseRepository extends JpaRepository<Clase, Long> {
 	@Query("SELECT c FROM Clase c")
 	List<Clase> findAllClases();
 	
-	List<Clase> findClasesByCurso(Curso curso);
+	@Query("SELECT c FROM Clase c WHERE :alumno MEMBER OF c.alumnos")
+	List<Clase> findClasesByAlumno(
+			@Param("alumno") Alumno alumno
+			);
+
+	//porcursp
 	
-	List<Clase> findClasesByAsignatura(Asignatura asignatura);
+	//por asignatura
 	
-	List<Clase> findClasesByProfesor(Profesor profesor);
+	//por profesor
 	
-	@Query("SELECT c, a FROM Clase c, Alumno a WHERE c.id_alumno = :Id AND a.fechabaja is null")
-	List<Clase> findClasesByIdAlumno(
-			@Param("Id") Integer Id);
 }

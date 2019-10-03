@@ -17,17 +17,16 @@ public class Rol implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_rol")
     private Long id;
 	
     @Column(name = "rol")
     private String rol;
     
-    @ManyToMany(mappedBy="roles") 
     private Usuario usuario;
 	
 	public Rol() {
-		// TODO Auto-generated constructor stub
+		super();
+		
 	}
 
 	public Long getId() {
