@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,8 +36,19 @@ public class Usuario implements Serializable {
 	private String role;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "USUARIOS_ROLES", joinColumns = @JoinColumn(name = "ID_USER", referencedColumnName="id"), inverseJoinColumns = @JoinColumn(name = "ID_ROL", referencedColumnName="id_rol"))
+    @JoinTable(name = "USUARIOS_ROLES",
+    joinColumns = @JoinColumn(
+    name = "ID_USER", referencedColumnName="id"),
+    inverseJoinColumns = @JoinColumn(name = "ID_ROL", referencedColumnName="id_rol"))
     private Set<Rol> roles;
+	
+	@OneToOne
+	@JoinColumn(name = "ID_PROFESOR", referencedColumnName = "id")
+	private Profesor profesor;
+	
+	@OneToOne
+	@JoinColumn(name = "ID_ALUMNO", referencedColumnName = "id")
+	private Alumno alumno;
 	
 	
 	public Usuario() {
@@ -90,6 +102,22 @@ public class Usuario implements Serializable {
 
 	public void setRoles(Set<Rol> roles) {
 		this.roles = roles;
+	}
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
+	}
+
+	public Alumno getAlumno() {
+		return alumno;
+	}
+
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
 	}
 	
 	

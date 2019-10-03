@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -53,7 +54,7 @@ public class Alumno implements Serializable {
 	private String observaciones;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_CURSO")
+	@JoinColumn(name = "ID_CURSO", referencedColumnName = "id")
 	private Curso curso;
 	
 	@ManyToMany
@@ -65,8 +66,11 @@ public class Alumno implements Serializable {
 	private List<Clase> clases;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_RESPONSABLE")
+	@JoinColumn(name = "ID_RESPONSABLE", referencedColumnName = "id")
 	private Responsable responsable;
+	
+	@OneToOne(mappedBy = "alumno")
+	private Usuario usuario;
 	
 	
 	public Alumno() {
@@ -185,6 +189,15 @@ public class Alumno implements Serializable {
 	public void setResponsable(Responsable responsable) {
 		this.responsable = responsable;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 	
 	
 	

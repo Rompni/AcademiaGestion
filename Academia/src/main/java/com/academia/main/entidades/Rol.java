@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +22,9 @@ public class Rol implements Serializable {
 	
     @Column(name = "rol")
     private String rol;
+    
+    @ManyToMany(mappedBy="roles") 
+    private Usuario usuario;
 	
 	public Rol() {
 		// TODO Auto-generated constructor stub
@@ -42,5 +46,14 @@ public class Rol implements Serializable {
 		this.rol = rol;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	
 	
 }

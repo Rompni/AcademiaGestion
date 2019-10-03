@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "PROFESORES")
@@ -40,6 +41,10 @@ public class Profesor implements Serializable {
 	
 	@OneToMany(mappedBy = "profesor")
 	private List<Clase> clases;
+	
+	@OneToOne(mappedBy = "profesor")
+	private Usuario usuario;
+	
 	
 	public Profesor() {
 		super();
@@ -116,6 +121,14 @@ public class Profesor implements Serializable {
 
 	public void setClases(List<Clase> clases) {
 		this.clases = clases;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	

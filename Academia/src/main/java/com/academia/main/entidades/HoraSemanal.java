@@ -13,7 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 @Entity
-@Table(name = "HORA_SEMANAL")
+@Table(name = "HORAS_SEMANALES")
 public class HoraSemanal implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

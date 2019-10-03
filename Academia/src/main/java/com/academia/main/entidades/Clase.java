@@ -21,11 +21,11 @@ public class Clase implements Serializable {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_ASIGNATURA")
+	@JoinColumn(name = "ID_ASIGNATURA", referencedColumnName = "id")
 	private Asignatura asignatura;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_PROFESOR")
+	@JoinColumn(name = "ID_PROFESOR", referencedColumnName = "id")
 	private Profesor profesor;
 	
 	@ManyToMany(mappedBy="claseh")

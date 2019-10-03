@@ -25,7 +25,7 @@ public class Asignatura implements Serializable {
 	private String nombre;
 	
 	@ManyToOne
-	@JoinColumn(name = "ID_CURSO")
+	@JoinColumn(name = "ID_CURSO", referencedColumnName = "id")
 	private Curso cursoa;	
 	
 	@OneToMany(mappedBy = "asignatura")
