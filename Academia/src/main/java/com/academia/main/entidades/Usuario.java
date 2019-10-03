@@ -1,7 +1,6 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;

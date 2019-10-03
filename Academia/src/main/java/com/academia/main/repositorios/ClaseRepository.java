@@ -8,10 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.academia.main.entidades.Alumno;
-import com.academia.main.entidades.Asignatura;
 import com.academia.main.entidades.Clase;
-import com.academia.main.entidades.Curso;
-import com.academia.main.entidades.Profesor;
 @Repository
 public interface ClaseRepository extends JpaRepository<Clase, Long> {
 
