@@ -96,5 +96,14 @@ body {
   background: linear-gradient(to left, #76b852, #8DC26F);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;      
+  -moz-osx-font-smoothing: grayscale; 
+  margin: 0%;     
+}
+
+footer {
+  padding: 0.5% 5%;
+  text-align:center;
+  background-color: #373B44;
+  color: white;
+
 }
