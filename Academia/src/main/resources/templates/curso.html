@@ -57,8 +57,8 @@
         </div>
       <div class="card-body">
         <div class="form-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-secondary">Nuevo Curso</button>
-                  <button type="button" class="btn btn-outline-secondary">Editar Curso</button>
+                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Nuevo Curso" data-boton="Crear">Nuevo Curso</button>
+                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Modificar Curso" data-boton="Modificar">Editar Curso</button>
                   <button type="button" class="btn btn-outline-secondary">Eliminar Curso</button>
       </div>
     <div class="form-group">
@@ -83,13 +83,60 @@
   </div>
 </div>
 
+<section3>
+    
+    <!-- The Modal -->
+    <div class="modal" id="myModal3" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="p-3 mb-2 bg-success text-white">
+              <div class="modal-header">
+                  <h4 class="modal-title">Crear Curso</h4>
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+          </div>
+          
+    
+          <!-- Modal body -->
+          <div class="modal-body">              
+              <div class="row">
+              <div class="col">
+                      <div class="form-group">
+                          <div class="col">
+                            <input type="text" class="form-control" id="InputText" placeholder="Nivel">
+                          </div>
+                      </div>
+                <div class="form-group">
+                    <div class="col">
+                      <input type="text" class="form-control" id="InputText" placeholder="Etapa">
+                    </div>
+                </div>
+            </div>       
+          </div>
+        </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-success" id="boton">Crear</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+            
+          </div>
+    
+        </div>
+      </div>
+    </div>
+ </section3>
+
 <footer>
     <p>Copyright &copy; Academia</p>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script src="../static/js/curso.js"></script>
 </footer>
 </body>
 
