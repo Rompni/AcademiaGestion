@@ -66,22 +66,23 @@
           </div> 
           <div class="card-footer text-center ">
                 <button type="button" class="btn btn-success">Buscar</button>
-                <button type="button" class="btn btn-success ">Limpiar</button>
+                <button type="button" class="btn btn-success " id="limpiar">Limpiar</button>
           </div>
     </div>
+
       <div class="card">
         <div class="card-header bg-success">
           <h2 class="card-title">Resultado de la busqueda</h2>
         </div>
       <div class="card-body">
         <div class="form-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-secondary">Nuevo profesor</button>
-                  <button type="button" class="btn btn-outline-secondary">Datos personales</button>
-                  <button type="button" class="btn btn-outline-secondary">Clases</button>
-                  <button type="button" class="btn btn-outline-secondary">Eliminar Profesor</button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal" data-titulo="Nuevo Profesor" data-boton="Crear">Nuevo Profesor</button>      
+        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal"  data-titulo="Datos personales" data-boton="Modificar">Datos personales</button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal2">Clases</button>
+        <button type="button" class="btn btn-outline-secondary">Eliminar Profesor</button>
       </div>
     <div class="form-group">
-      <table class="table">
+      <table class="table table-striped table-inverse table-bordered text-center">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -97,6 +98,7 @@
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
+            <td></td>
           </tr>
         </tbody>
       </table>
@@ -105,12 +107,225 @@
   </div>
 </div>
 
+<section>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="p-3 mb-2 bg-success text-white">
+      <div class="modal-header">
+        <h4 class="modal-title">Nuevo profesor</h4>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+    </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+          <div class="form-group">
+              <label class="col-md-4 control-label">Nombre</label>
+                  <div class="col-sm-10">
+                      <input type="text" class="form-control" id="ImputText" placeholder="First Name" name="firstName">
+                  </div>
+          </div>
+          <div class="form-group">
+                  <label class="col-md-4 control-label">Primer Apellido</label>
+                      <div class="col-sm-10">
+                          <input type="text" class="form-control" id="ImputText" placeholder="Last Name" name="lastName">
+                      </div>
+          </div>
+          <div class="form-group">
+                  <label class="col-md-4 control-label">Segundo Apellido</label>
+                      <div class="col-sm-10">
+                          <input type="text" class="form-control" id="ImputText" placeholder="Second Last Name" name="SecondLastName">
+                      </div>
+          </div>
+          <div class="form-group">
+                  <label class="col-md-4 control-label">Nif</label>
+                      <div class="col-sm-10">
+                          <input type="number" class="form-control" id="ImputNumber">
+                      </div>
+          </div>
+          <div class="form-group">
+                  <label class="col-md-4 control-label">Telefono</label>
+                      <div class="col-sm-10">
+                          <input type="number" class="form-control" id="ImputNumber">
+                      </div>
+          </div>
+          <div class="form-group">
+              <label class="col-md-4 control-label">Email address</label>
+              <div class="col-sm-10">
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+          </div>
+          <div class="form-group">
+                  <label class="col-md-4 control-label">Titulacion</label>
+                      <div class="col-sm-10">
+                          <input type="text" class="form-control" id="ImputText">
+                      </div>
+          </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+
+        <button id="boton" type="button" class="btn btn-success">Crear</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+</section>
+
+<section2> 
+    <!-- The Modal -->
+    <div class="modal" id="myModal2" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="p-3 mb-2 bg-success text-white">
+          <div class="modal-header">
+            <h4 class="modal-title">Horario</h4>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+          </div>
+        </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+                  <table class="table table-striped table-inverse table-bordered text-center">
+                          <thead class="thead-inverse">
+                              <tr>
+                                  <th>Hora</th>
+                                  <th>Lunes</th>
+                                  <th>Martes</th>
+                                  <th>Miercoles</th>
+                                  <th>Jueves</th>
+                                  <th>Viernes</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td scope="row">09:00 - 10:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td scope="row">10:00 - 11:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td scope="row">11:00 - 12:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td scope="row">12:00 - 13:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td scope="row">13:00 - 14:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                   <td scope="row">14:00 - 15:00</td>
+                                   <td>-</td>
+                                   <td>-</td>
+                                   <td>-</td>
+                                   <td>-</td>
+                                   <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td scope="row">15:00 - 16:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td scope="row">16:00 - 17:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td scope="row">17:00 - 18:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td scope="row">18:00 - 19:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td scope="row">19:00 - 20:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                                <tr>
+                                  <td scope="row">20:00 - 21:00</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                  <td>-</td>
+                                </tr>
+                              </tbody>
+                      </table>
+          </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+            
+          </div>
+    
+        </div>
+      </div>
+    </div>
+ </section2>
+
+
 <footer>
     <p>Copyright &copy; Academia</p>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="../static/js/profesor.js"></script>
 
 </footer>
 </body>
