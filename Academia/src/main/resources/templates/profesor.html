@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Profesores</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="../static/css/profesor.css">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#">Academia</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                  <ul class="navbar-nav">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="home.html">Inicio<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="profesor.html">Profesores</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="alumno.html">Alumnos</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="clase.html">Clases</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                            <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Mantenimiento
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bd-versions">
+                              <a class="dropdown-item" href="curso.html">Cursos</a>
+                              <a class="dropdown-item" href="../templates/asignatura.html">Asignaturas</a>
+                            </div>
+                    </li>
+                  </ul>
+                    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                            <li class="nav-item"><a class="nav-link" href="#">Usuario</a></li>
+                            <li class="nav-item"><a class="nav-link" href="login.html"> Salir</a></li>
+                    </ul>
+                </div>
+              </nav>
+</header>
+
+<div class="container">
+  <h1>Profesorado</h1>
+  <hr/>
+  <div class="card">
+            <div class="card-header bg-success">
+                    <h2 class="card-title">Busqueda de profesores</h2>
+            </div>
+          <div class="card-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputProfesor" placeholder="Nombre del Profesor">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" id="inputNif" placeholder="Numero de Identificación">
+                </div>
+          </div> 
+          <div class="card-footer text-center ">
+                <button type="button" class="btn btn-success">Buscar</button>
+                <button type="button" class="btn btn-success ">Limpiar</button>
+          </div>
+    </div>
+      <div class="card">
+        <div class="card-header bg-success">
+          <h2 class="card-title">Resultado de la busqueda</h2>
+        </div>
+      <div class="card-body">
+        <div class="form-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-outline-secondary">Nuevo profesor</button>
+                  <button type="button" class="btn btn-outline-secondary">Datos personales</button>
+                  <button type="button" class="btn btn-outline-secondary">Clases</button>
+                  <button type="button" class="btn btn-outline-secondary">Eliminar Profesor</button>
+      </div>
+    <div class="form-group">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">NIF</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Telefono</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div> 
+  </div>
+</div>
+
+<footer>
+    <p>Copyright &copy; Academia</p>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</footer>
+</body>
+
+
+</html>

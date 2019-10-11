@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Alumnos</title>
+  <title>Mantenimiento de Asignaturas</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="../static/css/profesor.css">
-  <link rel="stylesheet" href="../static/css/alumno.css">
+  <link rel="stylesheet" href="../static/css/curso.css">
 
 </head>
 
@@ -50,50 +49,17 @@
 </header>
 
 <div class="container">
-  <h1>Alumnado</h1>
+  <h1>Mantenimiento de Asignaturas</h1>
   <hr/>
-  <div class="card">
-            <div class="card-header bg-success">
-                    <h2 class="card-title">Busqueda de Estudiantes</h2>
-            </div>
-          <div class="card-body">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="inputProfesor" placeholder="Nombre del Estudiante">
-                </div>
-
-                <div class="form-group">
-                        <label for="sel1">Cursos:</label>
-                        <select class="form-control" id="sel1">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                        </select>
-                      </div>
-
-                <div class="form-group ">
-                        <div class="form-check">
-                            <label class="form-check-label" for="dropdownCheck">Mostrar solo actuales</label>
-                            <input type="checkbox" class="form-check-input" id="dropdownCheck">
-                          
-                        </div>
-                    </div>
-          </div> 
-          <div class="card-footer text-center ">
-                <button type="button" class="btn btn-success">Buscar</button>
-                <button type="button" class="btn btn-success ">Limpiar</button>
-          </div>
-    </div>
       <div class="card">
         <div class="card-header bg-success">
-          <h2 class="card-title">Resultado de la busqueda</h2>
+          <h2 class="card-title">Asignaturas Actuales</h2>
         </div>
       <div class="card-body">
         <div class="form-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-secondary">Nuevo Alumno</button>
-                  <button type="button" class="btn btn-outline-secondary">Datos personales</button>
-                  <button type="button" class="btn btn-outline-secondary">Clases</button>
-                  <button type="button" class="btn btn-outline-secondary">Dar de alta/baja</button>
+                  <button type="button" class="btn btn-outline-secondary">Nueva Asignatura</button>
+                  <button type="button" class="btn btn-outline-secondary">Editar Asignatura</button>
+                  <button type="button" class="btn btn-outline-secondary">Eliminar Asignatura</button>
       </div>
     <div class="form-group">
       <table class="table">
@@ -102,19 +68,13 @@
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
             <th scope="col">Curso</th>
-            <th scope="col">Responsable</th>
-            <th scope="col">Fecha alta</th>
-            <th scope="col">Fecha baja</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">1</th>
             <td>Mark</td>
-            <td>2</td>
-            <td>javier</td>
-            <td>05/17</td>
-            <td>no aplica</td>
+            <td>Otto</td>
           </tr>
         </tbody>
       </table>
