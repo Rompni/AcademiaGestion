@@ -16,5 +16,21 @@ body {
     text-align:center;
     background-color: #373B44;
     color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
 }
+
+h1, h2, h3 {
+      color: white;
+  }
   
+  #chartContainer, #chartContainer1{
+    height: 370px;
+     width: 50%;
+    }
+
+    p {
+      font-size: 20px;
+    }
