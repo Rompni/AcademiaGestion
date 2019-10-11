@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - AcademiaApplication",
+            "request": "launch",
+            "mainClass": "com.academia.main.AcademiaApplication",
+            "projectName": "Academia"
+        }
+    ]
+}
