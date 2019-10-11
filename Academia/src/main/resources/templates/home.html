@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../static/css/home.css">
 </head>
 <body>
-
+<header>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -32,7 +32,8 @@
       </ul>
   </div>
 </nav>
-  
+</header>
+
 <div class="container">
   <div class="row">
     <div>
@@ -45,26 +46,30 @@
       <hr/>
     </div>
   </div>
+
   <div class="row">
-    <div class="col col-md-6" id="chartContainer1"></div>
-    <div class="col col-md-6" id="chartContainer"></div>
+    <div class="card col col-md-6">
+      <canvas id="doughnut-chart"></canvas>
+    </div>
+    <div class="card col col-md-6">
+      <canvas id="bar-chart-grouped"></canvas>
     </div>
   </div>
-
 </div>
 
+<footer>
+    <p>Copyright &copy; Academia</p>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <!--  Chartist Plugin  -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="../static/js/grafica1.js"></script>
+    <script src="../static/js/grafica2.js"></script>
+    
+
+</footer>
 </body>
 
-<footer>
-        <p>Copyright &copy; Academia</p>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        <script src="https://canvasjs.com/assets/script/jquery-ui.1.11.2.min.js"></script>
-        <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
-        
 
-        <script src="../static/js/grafica1.js"></script>
-        <script src="../static/js/grafica2.js"></script>
-</footer>
 </html>

@@ -8,7 +8,6 @@ body {
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; 
-    margin: 0%;     
   }
   
   footer {
@@ -26,11 +25,13 @@ h1, h2, h3 {
       color: white;
   }
   
-  #chartContainer, #chartContainer1{
-    height: 370px;
-     width: 50%;
-    }
+#doughnut-chart, #bar-chart-grouped {
+  width: 50%; 
+  height: 450;
+  background-color: white;
+  padding: 1% 5%;
+}
 
-    p {
+p {
       font-size: 20px;
-    }
+  }
