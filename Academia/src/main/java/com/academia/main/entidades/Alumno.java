@@ -24,27 +24,27 @@ public class Alumno implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
-	@Column(nullable = false)
+	@Column
 	private String nombre;
 	
-	@Column(nullable = false)
+	@Column
 	private String apellido1;
 	
 	private String apellido2;
 	
-	@Column(unique = true, nullable = false)
+	@Column(unique = true)
 	private String nif;
 	
 	private String telefono;
 	
 	private String correo;
 	
-	@Column(nullable = false)
+	@Column
 	private Boolean repetidor;
 	
-	@Column(nullable = false)
+	@Column
 	@Temporal(TemporalType.DATE)
 	private Date fechaalta;
 	
@@ -78,11 +78,11 @@ public class Alumno implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

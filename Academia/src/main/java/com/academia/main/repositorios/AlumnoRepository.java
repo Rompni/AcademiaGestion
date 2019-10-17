@@ -11,7 +11,7 @@ import com.academia.main.entidades.Alumno;
 import com.academia.main.entidades.Curso;
 @Repository
 public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
-
+/*
 	Alumno findAlumnoById(Integer Id);
 	
 	@Query("SELECT a FROM Alumno a")
@@ -25,4 +25,5 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
 
 	@Query("SELECT a FROM Alumno a WHERE a.fechabaja IS NOT NULL")
 	List<Alumno> findAlumnosByNotNullFechaBaja();
+	*/
 }
