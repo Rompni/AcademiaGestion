@@ -1,4 +1,4 @@
-package com.academia.main.controlladores;
+package com.academia.main.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

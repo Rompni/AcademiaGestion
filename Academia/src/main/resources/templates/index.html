@@ -16,15 +16,15 @@
         <input type="text" placeholder="Usuario" id="inputUsuario"/>
         <input type="password" placeholder="Clave" id="inputClave"/>
         <input type="email" placeholder="Email"/>
-        <button>Crear Usuario</button>
+        <button type="submit">Crear Usuario</button>
         <p class="message">Ya registrado? <a href="#">Inicia</a></p>
     </form>
  
-    <form class="login-form" th:action="@{/index}" method="post">
+    <form class="login-form" th:action="@{/home}" method="post">
         <h1>Iniciar Sesion</h1>
         <input type="text" placeholder="Usuario" id="inputUsuario"/>
         <input type="password" placeholder="Clave" id="inputClave"/>
-      <button>Iniciar Sesion</button>
+      <button type="submit">Iniciar Sesion</button>
       <p class="message">No registrado? <a href="#">Crear una cuenta</a></p>
     </form>
    
