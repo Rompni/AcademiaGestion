@@ -15,7 +15,7 @@ public class AsignaturaControlador {
 	@Autowired
 	private AsignaturaRepository Asignaturapositorio;
 	
-	@GetMapping("/asignaturas")
+	@GetMapping("/asignatura")
 	public String buscarAsignaturaForm() {
 		return "asignatura";
 

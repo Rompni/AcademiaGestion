@@ -13,9 +13,4 @@ public class IndexControlador {
 		return "index";
 	}
 	
-	@PostMapping("/home")
-	public String home() {	
-		return "home";
-	}
-	
 }

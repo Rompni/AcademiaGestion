@@ -15,7 +15,7 @@ public class AlumnoControlador {
 	@Autowired
 	private AlumnoRepository alumnorepositorio;
 	
-	@GetMapping("/alumnos")
+	@GetMapping("/alumno")
 	public String buscarAlumnoForm() {
 		return "alumno";
 
