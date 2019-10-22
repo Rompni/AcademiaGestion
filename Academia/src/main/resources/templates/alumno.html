@@ -18,21 +18,18 @@
   <hr/>
   <div class="card">
             <div class="card-header bg-success">
-                    <h2 class="card-title">Busqueda de Estudiantes</h2>
+            <h2 class="card-title">Busqueda de Alumnos</h2>
             </div>
+          <form id="formB" >
           <div class="card-body">
-          <form th:action="@{/alumno}" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="inputProfesor" placeholder="Nombre del Estudiante">
+                    <input type="text" class="form-control" id="inputAlumno" placeholder="Nombre del Alumno">
                 </div>
 
                 <div class="form-group">
                         <label for="inputCurso">Cursos:</label>
                         <select class="form-control" id="inputCurso">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
+                          <option >Seleccionar el Curso</option>
                         </select>
                       </div>
 
@@ -42,14 +39,15 @@
                             <input type="checkbox" class="form-check-input" id="inputCheck">       
                         </div>
                     </div>
-          </form > 
+         
+
           </div>
-          
-          
           <div class="card-footer text-center ">
-                <button type="button" class="btn btn-success">Buscar</button>
+                <button id="btn1" type="submit" class="btn btn-success">Buscar</button>
                 <button type="button" class="btn btn-success " id="limpiar">Limpiar</button>
           </div>
+
+           </form > 
     </div>
       <div class="card">
         <div class="card-header bg-success">
@@ -57,29 +55,22 @@
         </div>
       <div class="card-body">
         <div class="form-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Nuevo Alumno" data-boton="Crear">Nuevo Alumno</button>
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Datos Personales" data-boton="Modificar">Datos personales</button>
+                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Nuevo Alumno" data-boton="Crear" id="btnnuevo">Nuevo Alumno</button>
+                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Datos Personales" data-boton="Modificar" id="btneditar">Datos personales</button>
                   <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal4">Clases</button>
-                  <button type="button" class="btn btn-outline-secondary">Dar de alta/baja</button>
+                  <button type="button" class="btn btn-outline-secondary" id="btnbaja" >Dar de alta/baja</button>
       </div>
     <div class="form-group">
-      <table class="table">
-        <thead>
+      <table class="table" id="A-tabla" >
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
             <th scope="col">Curso</th>
             <th scope="col">Responsable</th>
             <th scope="col">Fecha alta</th>
             <th scope="col">Fecha baja</th>
           </tr>
-        </thead>
-        <tbody>
-        
-          <tr th:each="alumno : ${alumnos}">
-            <td th:text="${alumno.id}"></td>
-          </tr>
-        </tbody>
       </table>
       </div>
     </div> 
@@ -87,7 +78,6 @@
 </div>
 
 <section>
-    
     <!-- The Modal -->
     <div class="modal" id="myModal3" aria-hidden="true" style="display: none;">
       <div class="modal-dialog modal-lg">
@@ -100,126 +90,120 @@
                   <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
           </div>
-          
-    
+         
           <!-- Modal body -->
           <div class="modal-body">              
               <div class="row">
               <div class="col">
+
+              <form id="formNA" th:action="@{#}" method="post">
                       <div class="form-group">
                           <div class="col-sm-10">
-                            <input type="text" class="form-control" id="ImputText" placeholder="Nombre">
+                            <input type="text" class="form-control" id="inputNombre" placeholder="Nombre" required>
                           </div>
                       </div>
                 <div class="form-group">
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="ImputText" placeholder="Primer Apellido">
+                      <input type="text" class="form-control" id="inputApellido1" placeholder="Primer Apellido">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="ImputText" placeholder="Segundo Apellido">
+                      <input type="text" class="form-control" id="inputApellido2" placeholder="Segundo Apellido">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10">
-                      <input type="number" class="form-control" id="ImputNumber" placeholder="Nif">
+                      <input type="number" class="form-control" id="inputNif" placeholder="Nif">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10">
-                      <input type="number" class="form-control" id="ImputNumber" placeholder="Telefono">
+                      <input type="number" class="form-control" id="inputTelefono" placeholder="Telefono">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" >
+                      <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email" >
                     </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-md-4 control-label" for="exampleFormControlSelect1">Curso</label>
+                  <label class="col-md-4 control-label" for="CursoAlumno">Curso</label>
                   <div class="col-sm-10">
-                  <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1°</option>
-                    <option>2°</option>
-                    <option>3°</option>
-                    <option>4°</option>
-                    <option>5°</option>
-                    <option>6°</option>
-                    <option>7°</option>
-                    <option>8°</option>
-                    <option>9°</option>
-                    <option>10°</option>
-                  </select>
+                  <select class="form-control" id="CursoAlumno"></select>
                 </div>
                 </div>
                 <div class="form-group ">
                     <div class="form-check">
-                        <label class="form-check-label" for="dropdownCheck">Repetidor</label>
-                        <input type="checkbox" class="form-check-input" id="dropdownCheck">       
+                        <label class="form-check-label" for="inputRepetidor">Repetidor</label>
+                        <input type="checkbox" class="form-check-input" id="inputRepetidor">       
                     </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-4 control-label">Fecha Alta</label>
                       <div class="col-sm-10">
-                          <input type="date" class="form-control" id="InputFechaAlta" readonly>
+                          <input type="date" class="form-control" id="inputFechaAlta" readonly>
                       </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-4 control-label">Fecha Baja</label>
                       <div class="col-sm-10">
-                          <input type="date" class="form-control" id="ImputDate">
+                          <input type="date" class="form-control" id="inputFechaBaja">
                       </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="exampleFormControlTextarea1">Observaciones</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <textarea class="form-control" id="inputObservaciones" rows="3"></textarea>
                 </div>
+              </form>
               </div>
 
               <div class="col col md-6">
                   <div>
-                      <h5 class="text-success">Responsable</h5>
+                    <h5 class="text-success">Responsable</h5>
                   </div> 
+              <form id="formNR" th:action="@{#}" method="post">
                   <div class="form-group">
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="ImputText" placeholder="Nombre">
+                        <input type="text" class="form-control" id="inputNombreResponsable" placeholder="Nombre">
                       </div>
                   </div>
             <div class="form-group">
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="ImputText" placeholder="Primer Apellido">
+                  <input type="text" class="form-control" id="inputApellido1Responsable" placeholder="Primer Apellido">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="ImputText" placeholder="Segundo Apellido">
+                  <input type="text" class="form-control" id="inputApellido2Responsable" placeholder="Segundo Apellido">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-10">
-                  <input type="number" class="form-control" id="ImputNumber" placeholder="Nif">
+                  <input type="number" class="form-control" id="inputNifResponsable" placeholder="Nif">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-10">
-                  <input type="number" class="form-control" id="ImputNumber" placeholder="Telefono">
+                  <input type="number" class="form-control" id="inputTelefonoResponsable" placeholder="Telefono">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-10">
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" >
+                  <input type="email" class="form-control" id="inputEmailResponsable" aria-describedby="emailHelp" placeholder="Enter email" >
                 </div>
             </div>
+
+            </form>
           </div>
              
           </div>
           </div>
     
           <!-- Modal footer -->
-          <div class="modal-footer">
+          <div class="modal-footer" id="divmodal1">
 
-            <button type="button" class="btn btn-success" id="boton">Crear</button>
+            
             <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
             
           </div>
@@ -257,16 +241,7 @@
                      </tr>
                      </thead>
                      <tbody>
-                         <tr>
-                             <td scope="row">Calculo Integral</td>
-                             <td>Pedro Gutierrez </td>
-                             <td>lunes , Viernes cienaga grande norte 201</td>
-                         </tr>
-                         <tr>
-                                <td scope="row">Electricidad y Magnetismo</td>
-                                <td>Gilma 500</td>
-                                <td>Viernes, 14:00-16:00 Sierra Nevada Sur 205, 16:00-18:00 Lab Electricidad y Magnetismo </td>
-                            </tr>
+  
                      </tbody>
              </table>
              <h5>Horario</h5><table class="table table-striped table-inverse table-bordered text-center">
@@ -397,11 +372,11 @@
 
 <footer>
     <p>Copyright &copy; Academia</p>
-    
     <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
     <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
     <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/alumno.js}"></script>
+    <script th:src="@{/js/ajaxcomplemento.js}"></script>
 </footer>
 
 </body>

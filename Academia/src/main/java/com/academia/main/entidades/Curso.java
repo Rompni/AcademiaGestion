@@ -17,10 +17,10 @@ public class Curso implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@Column(nullable = false)
-	private Integer nivel;
+	private Long nivel;
 	
 	@Column(nullable = false)
 	private String etapa;
@@ -36,7 +36,7 @@ public class Curso implements Serializable {
 	}
 	
 
-	public Curso(Integer nivel, String etapa) {
+	public Curso(Long nivel, String etapa) {
 		super();
 		this.nivel = nivel;
 		this.etapa = etapa;
@@ -44,11 +44,11 @@ public class Curso implements Serializable {
 
 
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -68,11 +68,11 @@ public class Curso implements Serializable {
 		this.asignaturas = asignaturas;
 	}
 
-	public Integer getNivel() {
+	public Long getNivel() {
 		return nivel;
 	}
 
-	public void setNivel(Integer nivel) {
+	public void setNivel(Long nivel) {
 		this.nivel = nivel;
 	}
 

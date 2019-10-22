@@ -17,7 +17,7 @@ public class Responsable implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@Column(nullable = false)
 	private String nombre;
@@ -39,9 +39,13 @@ public class Responsable implements Serializable {
 	@OneToMany(mappedBy = "responsable")
 	private List<Alumno> alumnosrespon;
 	
-	public Responsable() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Responsable(String nombre, String apellido1, String apellido2, String nif, String telefono, String correo) {
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.nif = nif;
+		this.telefono = telefono;
+		this.correo = correo;
 	}
 
 	public String getNombre() {
@@ -92,11 +96,11 @@ public class Responsable implements Serializable {
 		this.correo = correo;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -107,7 +111,6 @@ public class Responsable implements Serializable {
 	public void setAlumnosrespon(List<Alumno> alumnosrespon) {
 		this.alumnosrespon = alumnosrespon;
 	}
-
 	
 	
 }

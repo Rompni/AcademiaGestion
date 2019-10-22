@@ -19,7 +19,7 @@ public class HoraSemanal implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@Column(nullable = false)
 	private String dia;
@@ -28,10 +28,10 @@ public class HoraSemanal implements Serializable {
 	private String hora;
 	
 	@Column(nullable = false)
-	private Integer diaindice;
+	private Long diaindice;
 	
 	@Column(nullable = false)
-	private Integer horaindice;
+	private Long horaindice;
 	
 	@ManyToMany
 	@JoinTable(name= "CLASE_HORA",
@@ -46,11 +46,11 @@ public class HoraSemanal implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -70,19 +70,19 @@ public class HoraSemanal implements Serializable {
 		this.hora = hora;
 	}
 
-	public Integer getDiaindice() {
+	public Long getDiaindice() {
 		return diaindice;
 	}
 
-	public void setDiaindice(Integer diaindice) {
+	public void setDiaindice(Long diaindice) {
 		this.diaindice = diaindice;
 	}
 
-	public Integer getHoraindice() {
+	public Long getHoraindice() {
 		return horaindice;
 	}
 
-	public void setHoraindice(Integer horaindice) {
+	public void setHoraindice(Long horaindice) {
 		this.horaindice = horaindice;
 	}
 

@@ -75,8 +75,22 @@ public class Alumno implements Serializable {
 	
 	public Alumno() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+
+	
+	public Alumno(String nombre, String apellido1, String apellido2, String nif, String telefono, String correo,
+		 Date fechaalta, Date fechabaja, String observaciones) {
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.nif = nif;
+		this.telefono = telefono;
+		this.correo = correo;
+		this.fechaalta = fechaalta;
+		this.fechabaja = fechabaja;
+		this.observaciones = observaciones;
+	}
+	
 	
 	public Long getId() {
 		return id;
@@ -197,10 +211,5 @@ public class Alumno implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
-	
-	
-	
 	
 }
