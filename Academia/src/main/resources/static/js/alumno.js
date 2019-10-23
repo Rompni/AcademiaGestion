@@ -2,10 +2,9 @@ $(function() {
 
   ListarCursos()
   BuscarA()  
-  agregarAlumno();
-  editarAlumno();
-  guardarEdicionAlumno();
+  agregarModificarAlumno();
   eliminar();
+  CambiodeBoton();
 });
 
 function ListarCursos() {
@@ -55,8 +54,8 @@ function BuscarA() {
     });    
   }
 
-function agregarAlumno() {
-    $('#boton').on('click', function(e) {
+function agregarModificarAlumno() {
+    $('#botonAceptar').on('click', function(e) {
         e.preventDefault();
         var nombre = $("#inputNombre").val();
         var apellido1 = $("#inputApellido1").val();
@@ -99,6 +98,9 @@ function agregarAlumno() {
 
 
       if(nombre && apellido1 && nif && telefono && email && fechaalta){
+    	 var elboton = $('#myModal3').find('.modal-footer button[id=botonAceptar]').text()
+    	  console.log(elboton)
+    	if(elboton == "Crear"){  
         $.ajax("./api/v1/Alumnos",
         		{
         		contentType: "application/json",
@@ -107,13 +109,18 @@ function agregarAlumno() {
         		data:JSON.stringify(alumno),
         		success:function(){
               console.log("Se agrego el alumno")
-        			$("input[type=val]").val("");
-        			$("input[type=number]").val("");
-              $("input[type=email]").val("");
-              $("#fechabaja").val("");
-              $("#inputObservaciones").val("");
+              LimpiarTodo()
             }     		
         }); 
+        
+    	}else if(elboton == "Modificar"){
+            $.put("./api/v1/Alumnos/",JSON.stringify(alumno),
+                    function(){
+                    console.log("Modificado")
+                    LimpiarTodo()
+                  }, "application/json")     		
+              }
+    		
       }else{
         alert("Faltan Datos por rellenar");
       }
@@ -134,72 +141,11 @@ function agregarResponsable(responsable){
 
 }
 
-function editarAlumno() {
-    $('#btneditar').on('click', function(e) {
-        e.preventDefault();
-        var selectedOption = $("input:radio[name=selected]:checked").val()
-        $.get( "./api/v1/Alumnos/"+selectedOption, function( datos) {
-        $("#inputNombre").val(datos.nombre);
-        $("#inputApellido1").val(datos.apellido1);
-        $("#inputApellido2").val(datos.apellido2);
-        $("#inputNif").val(datos.nif);
-        $("#inputTelefono").val(datos.telefono);
-        $("#inputEmail").val(datos.correo);
-        $("#inputFechaAlta").val(datos.fechaalta);
-        $("#inputFechaBaja").val(datos.fechabaja);
-        $("#inputObservaciones").val(datos.observaciones);
-        
-        $("#divmodal1").append(
-          "<button type='button' class='btn btn-success modificar' data-dismiss='modal' id='boton' >Modificar</button>"
-        )
-        });
-});
-}
 
-function guardarEdicionAlumno() {
-    $('#divmodal1').on('click', '.modificar', function(e) {
-        e.preventDefault();
-        var id = $("input:radio[name=selected]:checked").val()
-        var nombre = $("#inputNombre").val();
-        var apellido1 = $("#inputApellido1").val();
-        var apellido2 = $("#inputApellido2").val();
-        var nif = $("#inputNif").val();
-        var telefono = $("#inputTelefono").val();
-        var email = $("#inputEmail").val();
-        var fechaalta = $("#inputFechaAlta").val();
-        var fechabaja = $("#inputFechaBaja").val();
-        var observaciones = $("#inputObservaciones").val();
 
-        var alumno = {
-        "id": id,
-        "nombre": nombre,
-        "apellido1": apellido1,
-        "apellido2": apellido2,
-        "nif": nif,
-        "telefono":telefono,
-        "correo": email,
-        "fechaalta":fechaalta,
-        "fechabaja": fechabaja,
-        "observaciones": observaciones
-        }
-
-        if(nombre && apellido1 && nif && telefono && email && fechaalta){
-        $.put("./api/v1/Alumnos/",JSON.stringify(alumno),
-              function(){
-              console.log("Modificado")
-        			$("input[type=val]").val("");
-        			$("input[type=number]").val("");
-              $("input[type=email]").val("");
-              $("#fechabaja").val("");
-              $("#inputObservaciones").val("");
-              $("#boton").remove()
-            }, "application/json")     		
-        } 
-      });
-}
 
 function eliminar() {
-  $('#btneditar').on('click', function(e) { 
+  $('#btnbaja').on('click', function(e) { 
     var selectedOption = $("input:radio[name=selected]:checked").val()
     $.delete("./api/v1/Alumnos/"+selectedOption,{},function(e){
     })
@@ -208,17 +154,18 @@ function eliminar() {
 
 
 //POP UPS
-
+function CambiodeBoton(){
 $('#myModal3').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
+    var button = $(event.relatedTarget)// Button that triggered the modal
     var recipient = button.data('titulo') // Extract info from data-* attributes
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var recipient2 = button.data('boton')
     var modal = $(this)
-    modal.find('.modal-title').val(recipient)
-    modal.find('.modal-footer button[id=boton]').val(recipient2)
+    modal.find('.modal-title').text(recipient)
+    modal.find('.modal-footer button[id=botonAceptar]').text(recipient2)
   })
+}
 
 $('#limpiar').on('click', function(event){
     $('.card-body input').val("")
@@ -235,3 +182,11 @@ window.onload = function(){
       mes='0'+mes //agrega cero si el menor de 10
     document.getElementById('inputFechaAlta').value=ano+"-"+mes+"-"+dia;
   }
+
+function LimpiarTodo(){
+	$("input[type=val]").val("");
+    $("input[type=number]").val("");
+    $("input[type=email]").val("");
+    $("#fechabaja").val("");
+    $("#inputObservaciones").val("");
+}
