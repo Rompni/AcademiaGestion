@@ -48,7 +48,6 @@ public class Profesor implements Serializable {
 	
 	public Profesor() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getNombre() {

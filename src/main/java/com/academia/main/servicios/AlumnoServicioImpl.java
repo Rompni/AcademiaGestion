@@ -1,19 +1,24 @@
 package com.academia.main.servicios;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
 
 import com.academia.main.entidades.Alumno;
 import com.academia.main.repositorios.AlumnoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AlumnoServicioImpl implements AlumnoServicio {
 
     @Autowired private AlumnoRepository alumnorepositorio;
 
     @Override
-    public void save(Alumno alumno) {
-        alumnorepositorio.save(alumno);
+    public Alumno save(Alumno alumno) {
+        return alumnorepositorio.save(alumno);
     }
 
     @Override
@@ -23,13 +28,24 @@ public class AlumnoServicioImpl implements AlumnoServicio {
 
     @Override
     public Alumno BuscarAlumnoPorId(Long id) {
-        return alumnorepositorio.getOne(id);
+        Optional<Alumno> alumno = alumnorepositorio.findById(id);
+        if(!alumno.isPresent()){
+            throw new EntityNotFoundException("No se encontro el alumno con id "+id);
+        }
+        return alumno.get();
+        }
+
+    @Override
+    public List<Alumno> BuscarAlumnoPorNombre(String nombre) {
+        String[] parts = nombre.split("(?=\\s)");
+        System.out.println(parts[0]);
+        List <Alumno> alumnos = alumnorepositorio.findAlumnoByNombre(parts[0]);
+        return alumnos;
     }
 
     @Override
-    public List<Alumno> BuscarAlumnoPorNombreCurso(String nombre) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Alumno> buscarAlumnos() {
+        return alumnorepositorio.findAll();
     }
 
     

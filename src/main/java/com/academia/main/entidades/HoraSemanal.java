@@ -43,7 +43,6 @@ public class HoraSemanal implements Serializable {
 	
 	public HoraSemanal() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {

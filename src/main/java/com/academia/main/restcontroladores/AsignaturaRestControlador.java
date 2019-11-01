@@ -1,12 +1,9 @@
 package com.academia.main.restcontroladores;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
 
 import com.academia.main.entidades.Asignatura;
-import com.academia.main.repositorios.AsignaturaRepository;
+import com.academia.main.servicios.AsignaturaServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,38 +20,39 @@ import org.springframework.web.bind.annotation.RestController;
 public class AsignaturaRestControlador {
 
 	@Autowired
-	private AsignaturaRepository Asignaturarepositorio;
+	private AsignaturaServicio AsignaturaServicio;
 
 	@GetMapping("/Asignaturas")
 	public List<Asignatura> getAsignaturas(){
-		return Asignaturarepositorio.findAll();
+		return AsignaturaServicio.buscarAsignaturas();
 	}
 	
 	@PostMapping("/Asignaturas")
 	public Asignatura crearAsignatura(@RequestBody Asignatura Asignatura) {
-		return Asignaturarepositorio.save(Asignatura);
+		return AsignaturaServicio.save(Asignatura);
 	}
 	
 	@GetMapping("/Asignaturas/{id}")
-	public Asignatura getAsignatura(@PathVariable Long id) {
-		Optional<Asignatura> Asignatura = Asignaturarepositorio.findById(id);
-		if(!Asignatura.isPresent()) {
-			throw new EntityNotFoundException("No se encontro la Asignatura con id "+id);
-		}
-				
-		return Asignatura.get();
+	public Asignatura getAsignaturas(@PathVariable Long id) {
+		return AsignaturaServicio.BuscarAsignaturaPorId(id);	
+		
+	}
+
+	@GetMapping("/Asignaturas/name/{nombre}")
+	public List<Asignatura> AsignaturasbyName(@PathVariable String nombre) {
+		return AsignaturaServicio.BuscarAsignaturaPorNombre(nombre);	 
 	}
 	
 	@PutMapping("/Asignaturas")
 	public Asignatura updateAsignatura(@RequestBody Asignatura Asignatura) {
-		return Asignaturarepositorio.save(Asignatura);
+		return AsignaturaServicio.save(Asignatura);
 	}
+
 	
 	@DeleteMapping("/Asignaturas/{id}")
 	public void eliminar(@PathVariable Long id) {
-		Asignatura Asignatura = Asignaturarepositorio.getOne(id);
-		Asignaturarepositorio.delete(Asignatura);
-
+		Asignatura Asignatura = AsignaturaServicio.BuscarAsignaturaPorId(id);
+		AsignaturaServicio.delete(Asignatura);
 	}
 	
 }

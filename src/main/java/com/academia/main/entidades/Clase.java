@@ -36,7 +36,6 @@ public class Clase implements Serializable {
 	
 	public Clase() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Asignatura getAsignatura() {

@@ -6,7 +6,9 @@ import com.academia.main.entidades.Responsable;
 
 public interface ResponsableServicio {
     
-    void save(Responsable Responsable);
+    Responsable save(Responsable Responsable);
+
+    List<Responsable> buscarResponsables();
 
     void delete(Responsable Responsable);
 

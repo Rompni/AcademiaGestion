@@ -1,18 +1,18 @@
-new Chart(document.getElementById("bar-chart-grouped"), {
+new Chart($("#bar-chart-grouped"), {
   type: 'bar',
   data: {
-    labels: ["05/19", "06/19", "07/19", "08/19"],
+    labels: ["Total"],
     datasets: [
       {
         label: "Altas",
         backgroundColor: "#3e95cd",
         borderColor: 'rgb(255, 255, 255)',
-        data: [133,221,783,2478]
+        data: [133]
       }, {
         label: "Bajas",
         backgroundColor: "#8e5ea2",
         borderColor: 'rgb(255, 255, 255)',
-        data: [408,547,675,734]
+        data: [408]
       }
     ]
   },

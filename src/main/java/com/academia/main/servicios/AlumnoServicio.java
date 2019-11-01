@@ -6,13 +6,14 @@ import com.academia.main.entidades.Alumno;
 
 public interface AlumnoServicio {
     
-    void save(Alumno alumno);
+    Alumno save(Alumno alumno);
+
+    List<Alumno> buscarAlumnos();
 
     void delete(Alumno alumno);
 
     Alumno BuscarAlumnoPorId(Long id);
 
-    List<Alumno> BuscarAlumnoPorNombreCurso(String nombre);
-
+    List<Alumno> BuscarAlumnoPorNombre(String nombre);
     
 }

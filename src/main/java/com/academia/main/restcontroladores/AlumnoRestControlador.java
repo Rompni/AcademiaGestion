@@ -1,12 +1,10 @@
 package com.academia.main.restcontroladores;
 
 import java.util.List;
-import java.util.Optional;
 
-import javax.persistence.EntityNotFoundException;
 
 import com.academia.main.entidades.Alumno;
-import com.academia.main.repositorios.AlumnoRepository;
+import com.academia.main.servicios.AlumnoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,40 +21,39 @@ import org.springframework.web.bind.annotation.RestController;
 public class AlumnoRestControlador {
 
 	@Autowired
-	private AlumnoRepository alumnorepositorio;
+	private AlumnoServicio alumnoservicio;
 
 	@GetMapping("/Alumnos")
 	public List<Alumno> getAlumnos(){
-		return alumnorepositorio.findAll();
-
+		return alumnoservicio.buscarAlumnos();
 	}
 	
 	@PostMapping("/Alumnos")
 	public Alumno crearAlumno(@RequestBody Alumno alumno) {
-		return alumnorepositorio.save(alumno);
+		return alumnoservicio.save(alumno);
 	}
 	
 	@GetMapping("/Alumnos/{id}")
 	public Alumno getAlumnos(@PathVariable Long id) {
-		Optional<Alumno> alumno = alumnorepositorio.findById(id);
-		if(!alumno.isPresent()) {
-			throw new EntityNotFoundException("No se encontro el Alumno con id "+id);
-		}
-				
-		return alumno.get();
+		return alumnoservicio.BuscarAlumnoPorId(id);	
+		
+	}
+
+	@GetMapping("/Alumnos/name/{nombre}")
+	public List<Alumno> AlumnosbyName(@PathVariable String nombre) {
+		return alumnoservicio.BuscarAlumnoPorNombre(nombre);	 
 	}
 	
 	@PutMapping("/Alumnos")
 	public Alumno updateAlumno(@RequestBody Alumno alumno) {
-		return alumnorepositorio.save(alumno);
+		return alumnoservicio.save(alumno);
 	}
 
 	
 	@DeleteMapping("/Alumnos/{id}")
 	public void eliminar(@PathVariable Long id) {
-		Alumno alumno = alumnorepositorio.getOne(id);
-		alumnorepositorio.delete(alumno);
-
+		Alumno alumno = alumnoservicio.BuscarAlumnoPorId(id);
+		alumnoservicio.delete(alumno);
 	}
 	
 }
