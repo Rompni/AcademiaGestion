@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.academia.main.entidades.Alumno;
 import com.academia.main.entidades.Responsable;
 import com.academia.main.repositorios.ResponsableRepository;
 
@@ -14,11 +15,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResponsableServicioImpl implements ResponsableServicio {
 
-    @Autowired private ResponsableRepository responsablerepositorio;
+    @Autowired
+    private ResponsableRepository responsablerepositorio;
 
     @Override
     public Responsable save(Responsable Responsable) {
-        return responsablerepositorio.save(Responsable);
+        return responsablerepositorio.save(Responsable);   
     }
 
     @Override
@@ -29,8 +31,8 @@ public class ResponsableServicioImpl implements ResponsableServicio {
     @Override
     public Responsable BuscarResponsablePorId(Long id) {
         Optional<Responsable> responsable = responsablerepositorio.findById(id);
-        if(!responsable.isPresent()){
-            throw new EntityNotFoundException("No se encontro el responsable con id "+id);
+        if (!responsable.isPresent()) {
+            throw new EntityNotFoundException("No se encontro el responsable con id " + id);
         }
         return responsable.get();
     }
@@ -46,6 +48,12 @@ public class ResponsableServicioImpl implements ResponsableServicio {
     @Override
     public List<Responsable> buscarResponsables() {
         return responsablerepositorio.findAll();
+    }
+
+    @Override
+    public List<Alumno> getAlumnosResponsable(Long id) {
+        Responsable responsable = BuscarResponsablePorId(id);
+        return responsable.getAlumnosrespon();
     }
 
     

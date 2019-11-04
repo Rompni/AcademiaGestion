@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <!-- Head -->
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<head th:fragment="head(title,micss)">
+	<title th:text="${title}"></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/css/} + ${micss} + .css">
 </head>
 <body>
 	<!-- Cabecera -->
@@ -47,6 +48,12 @@
         </div>
       </nav>
 </header>
-	<footer></footer>
+	<footer th:fragment="footer(name)">
+      <p>Copyright© Academia </p>
+      <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
+      <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
+      <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+      <script th:src="@{/js/} + ${name} + .js"></script>
+  </footer>
 </body>
 </html>

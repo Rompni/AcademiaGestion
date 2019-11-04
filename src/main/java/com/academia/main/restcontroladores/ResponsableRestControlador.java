@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.academia.main.entidades.Alumno;
 import com.academia.main.entidades.Responsable;
 import com.academia.main.servicios.ResponsableServicio;
 
@@ -34,20 +35,23 @@ public class ResponsableRestControlador {
 	
 	@GetMapping("/Responsables/{id}")
 	public Responsable getResponsables(@PathVariable Long id) {
-		return Responsableservicio.BuscarResponsablePorId(id);	
-		
+		return Responsableservicio.BuscarResponsablePorId(id);		
 	}
 
 	@GetMapping("/Responsables/name/{nombre}")
 	public List<Responsable> ResponsablesbyName(@PathVariable String nombre) {
 		return Responsableservicio.BuscarResponsablePorNombre(nombre);	 
 	}
+
+	@GetMapping("/Responsables/alumnos/{id}")
+	public List<Alumno> ResponsablesbyName(@PathVariable Long id) {
+		return Responsableservicio.getAlumnosResponsable(id);	 
+	}
 	
 	@PutMapping("/Responsables")
 	public Responsable updateResponsable(@RequestBody Responsable Responsable) {
 		return Responsableservicio.save(Responsable);
 	}
-
 	
 	@DeleteMapping("/Responsables/{id}")
 	public void eliminar(@PathVariable Long id) {

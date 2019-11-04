@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -71,27 +72,7 @@ public class Alumno implements Serializable {
 	
 	@OneToOne(mappedBy = "alumno")
 	private Usuario usuario;
-	
-	
-	public Alumno() {
-		super();
-	}
 
-	
-	public Alumno(String nombre, String apellido1, String apellido2, String nif, String telefono, String correo,
-		 Date fechaalta, Date fechabaja, String observaciones) {
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.apellido2 = apellido2;
-		this.nif = nif;
-		this.telefono = telefono;
-		this.correo = correo;
-		this.fechaalta = fechaalta;
-		this.fechabaja = fechabaja;
-		this.observaciones = observaciones;
-	}
-	
-	
 	public Long getId() {
 		return id;
 	}
@@ -211,5 +192,22 @@ public class Alumno implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public Alumno(String nombre, String apellido1, String apellido2, String nif, String telefono, String correo,
+			Date fechaalta, String observaciones, Responsable responsable) {
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.nif = nif;
+		this.telefono = telefono;
+		this.correo = correo;
+		this.fechaalta = fechaalta;
+		this.observaciones = observaciones;
+		this.responsable = responsable;
+	}
+
+	public Alumno(){
+	}
+	
 	
 }

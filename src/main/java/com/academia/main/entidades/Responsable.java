@@ -3,6 +3,7 @@ package com.academia.main.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,43 +11,51 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "RESPONSABLES")
 public class Responsable implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(nullable = false)
 	private String nombre;
-	
+
 	@Column(nullable = false)
 	private String apellido1;
-	
+
 	private String apellido2;
-	
+
 	@Column(nullable = false)
 	private String nif;
-	
+
 	@Column(nullable = false)
 	private String telefono;
-	
+
 	@Column(nullable = false)
 	private String correo;
-	
+
 	@OneToMany(mappedBy = "responsable")
+	@JsonBackReference
 	private List<Alumno> alumnosrespon;
-	
-	public Responsable(String nombre, String apellido1, String apellido2, String nif, String telefono, String correo) {
+
+	public Responsable(String nombre, String apellido1, String apellido2, String nif, String telefono, String correo,
+		List<Alumno> alumnosrespon) {
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.nif = nif;
 		this.telefono = telefono;
 		this.correo = correo;
+		this.alumnosrespon = alumnosrespon;
 	}
+
+	public Responsable(){}
 
 	public String getNombre() {
 		return nombre;
@@ -111,6 +120,13 @@ public class Responsable implements Serializable {
 	public void setAlumnosrespon(List<Alumno> alumnosrespon) {
 		this.alumnosrespon = alumnosrespon;
 	}
-	
+
+	public void addAlumno(Alumno alumno){
+		if(alumnosrespon.contains(alumno))
+			return;
+		else	
+			alumnosrespon.add(alumno);
+		
+		}
 	
 }

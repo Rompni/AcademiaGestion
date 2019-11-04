@@ -5,7 +5,7 @@ $(function() {
   agregarmodificarAlumno();
   eliminarAlumno();
   cambiodeBoton();
-  limpiarBusqueda()
+  limpiarBusqueda();
 });
 
 function listarCursos() {
@@ -16,8 +16,8 @@ function listarCursos() {
     		type: "GET",
     		success:function(datos){
     			 $.each(datos, function(i, e) {
-    			        $('#inputCurso').append("<option data-id="+e.id+">" + e.etapa + "</option>");
-                  $('#CursoAlumno').append("<option data-id="+e.id+">" + e.etapa + "</option>");
+    			        $('#inputCurso').append("<option value="+e.id+">" + e.nivel +" - "+ e.etapa+"</option>");
+                  $('#CursoAlumno').append("<option value="+e.id+">" + e.nivel + " - "+e.etapa+"</option>");
                                         });
                                 },
         error: function(xhr){alert("Error al listar cursos >>> " + xhr.status + " " + xhr.statusText);}    		
@@ -30,7 +30,7 @@ function buscarAlumno() {
   $(".f").remove();
   var url = "./api/v1/Alumnos";
   var busqueda = $('.card-body input').val();
-
+    console.log(busqueda)
   if( busqueda != ""){
     url = "./api/v1/Alumnos/name/"+busqueda;
   }
@@ -41,21 +41,42 @@ function buscarAlumno() {
     		dataType:'json',
     		type: "GET",
     		success:function(datos){
+          console.log(datos)
+          if(datos.length == 0){ alert("No se encontró la busqueda");}
+          else{
     			 $.each(datos, function(i, e) {
+             var name;
+             if(!e.responsable) name = 'NO APLICA'; else name = e.responsable.nombre;
                   $('#A-tabla').append("<tr class='f' data-id="+e.id+">" +
                       "<td>" + "<input value='"+e.id + "' type='radio' class='form-check-input' name='selected'>" + "</td>" +
     			            "<td>" + e.nombre + "</td>" +
     			            "<td>" + e.apellido1 + "</td>" +
                       "<td>" +  "</td>" +
-                      "<td>" +  "</td>" +
+                      "<td>" + name +"</td>" +
                       "<td>" + e.fechaalta + "</td>" +
                       "<td>" +  "</td>" + 			            
                       "</tr>");
                                           });
+              }
                                 },
         error: function(xhr){alert("Error al buscar alumnos >>> " + xhr.status + " " + xhr.statusText);}    		
           }); 
                                         });    
+}
+
+function buscarResponsables(my_callback) {
+  var url = "./api/v1/Responsables";
+	$.ajax(url,
+        {
+        async:false,
+    		contentType: "application/json",
+    		dataType:'json',
+    		type: "GET",
+    		success:function(datos){
+            my_callback(datos)
+                  },
+        error: function(xhr){alert("Error al buscar responsables >>> " + xhr.status + " " + xhr.statusText);}    		
+          });   
 }
 
 function agregarmodificarAlumno() {
@@ -71,7 +92,7 @@ function agregarmodificarAlumno() {
     var fechaalta = $("#inputFechaAlta").val();
     var fechabaja = $("#inputFechaBaja").val();
     var observaciones = $("#inputObservaciones").val();
-    console.log(nombre, apellido1, nif, telefono, email, fechaalta)
+    
     
     var nombreResponsable = $("#inputNombreResponsable").val();
     var apellido1Responsable = $("#inputApellido1Responsable").val();
@@ -79,6 +100,8 @@ function agregarmodificarAlumno() {
     var nifResponsable = $("#inputNifResponsable").val();
     var telefonoResponsable = $("#inputTelefonoResponsable").val();
     var emailResponsable = $("#inputEmailResponsable").val(); 
+
+    var duplicate = false;
 
     var alumno = {
     "nombre": nombre,
@@ -90,23 +113,43 @@ function agregarmodificarAlumno() {
     "fechaalta":fechaalta,
     "fechabaja": fechabaja,
     "observaciones": observaciones
-                  }
+    }
 
-    var responsable = {"nombre": nombreResponsable,
+    var responsable = {
+    "nombre": nombreResponsable,
     "apellido1": apellido1Responsable,
     "apellido2": apellido2Responsable,
     "nif": nifResponsable,
     "telefono":telefonoResponsable,
     "correo": emailResponsable,
+    "alumnosrespon":[]
     }
-    if(nombreResponsable && apellido1Responsable && nifResponsable && telefonoResponsable && emailResponsable && fechaaltaResponsable)
-      var respo = agregarResponsable(responsable)
+    
+    buscarResponsables(function(datos){
+      responsables = datos;
+    });
+      console.log(responsables);
+      for(i=0; i <responsables.length; i++){
+        if(responsables[i].nif == nifResponsable)
+        alumno["responsable"] = responsables[i];
+        duplicate = true;
+      }
 
-    console.log(respo.success)
+    if(nombreResponsable && apellido1Responsable && nifResponsable && telefonoResponsable && emailResponsable && !duplicate){
+      agregarResponsable(responsable,function(errorLanzado, datosDevueltos){
+        if(!errorLanzado){
+          alumno["responsable"] = datosDevueltos;
+        }        
+      });   
+    } 
+    
+    console.log(alumno)
+
     if(nombre && apellido1 && nif && telefono && email && fechaalta){
       var elboton = $('#myModal3').find('.modal-footer button[id=botonAceptar]').text()
       console.log(elboton)
-      if(elboton == "Crear"){  
+      if(elboton == "Crear"){
+        console.log(alumno)
         $.ajax("./api/v1/Alumnos",
           {
             contentType: "application/json",
@@ -114,7 +157,7 @@ function agregarmodificarAlumno() {
             type: "POST",
             data:JSON.stringify(alumno),
             success:function(){
-              console.log("Se agrego el alumno");
+              alert("Se agrego el alumno");
               limpiarTodo();
                               },
             error: function(xhr){alert("Error al insertar un alumno >>> " + xhr.status + " " + xhr.statusText);}
@@ -128,8 +171,9 @@ function agregarmodificarAlumno() {
         dataType:'json',
         type: "PUT",
         data: JSON.stringify(alumno),
-        success:function(){
-              console.log("Modificado");
+        success:function(e){
+          alert("Modificado");
+          console.log(e)
               limpiarTodo();
                           },
         error: function(xhr){alert("Error al modificar un alumno >>> " + xhr.status + " " + xhr.statusText);}  		
@@ -158,6 +202,14 @@ function llenarCampos() {
             $("#inputFechaAlta").val(datos.fechaalta);
             $("#inputFechaBaja").val(datos.fechabaja);
             $("#inputObservaciones").val(datos.observaciones);
+
+            $("#inputNombreResponsable").val(datos.responsable.nombre);
+            $("#inputApellido1Responsable").val(datos.responsable.apellido1);
+            $("#inputApellido2Responsable").val(datos.responsable.apellido2);
+            $("#inputNifResponsable").val(datos.responsable.nif);
+            $("#inputTelefonoResponsable").val(datos.responsable.telefono);
+            $("#inputEmailResponsable").val(datos.responsable.correo); 
+
             },
           error: function(xhr){
             $('#myModal3').modal('hide')
@@ -167,23 +219,28 @@ function llenarCampos() {
                                                 });
 }
 
-function agregarResponsable(responsable) {
-  return $.ajax("./api/v1/Responsables",
+function agregarResponsable(responsable, my_callback) {
+  $.ajax("./api/v1/Responsables",
         		{
+            async : false,
         		contentType: "application/json",
         		dataType:'json',
         		type: "POST",
         		data:JSON.stringify(responsable),
             success:function(dato){ 
               console.log("se agrego el responsable");
-              return dato;
+              my_callback(null, dato);
             },
-            error: function(xhr){alert("Error al insertar un responsable >>> " + xhr.status + " " + xhr.statusText);}      		
+            error: function(xhr){
+              alert("Error al insertar un responsable >>> " + xhr.status + " " + xhr.statusText);
+              my_callback(xrh);
+            }      		
         });
 }
 
 function eliminarAlumno() {
   $('#btnbaja').on('click', function(e) { 
+    e.preventDefault();
     var id = $("input:radio[name=selected]:checked").val()
     $.ajax("./api/v1/Alumnos/"+id,{
       type: "DELETE",

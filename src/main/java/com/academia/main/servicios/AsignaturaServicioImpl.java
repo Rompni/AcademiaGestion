@@ -17,8 +17,8 @@ public class AsignaturaServicioImpl implements AsignaturaServicio {
     @Autowired private AsignaturaRepository Asignaturarepositorio;
 
     @Override
-    public Asignatura save(Asignatura Asignatura) {
-        return Asignaturarepositorio.save(Asignatura);
+    public Asignatura save(Asignatura asignatura) {
+        return Asignaturarepositorio.save(asignatura);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class AsignaturaServicioImpl implements AsignaturaServicio {
 
     @Override
     public List<Asignatura> buscarAsignaturas() {
-        return Asignaturarepositorio.findAll();
+        return Asignaturarepositorio.findAllAsignaturas();
     }
 
     

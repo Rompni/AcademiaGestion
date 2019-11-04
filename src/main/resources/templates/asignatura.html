@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Mantenimiento de Asignaturas</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="../static/css/curso.css">
-
-</head>
+<head th:replace="layouts/base::head('Mantenimiento de Asignaturas','curso')"></head>
 
 <body>
     <header th:replace="layouts/base::header()"></header>
@@ -22,11 +15,11 @@
       <div class="card-body">
         <div class="form-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Nueva Asignatura" data-boton="Crear">Nueva Asignatura</button>
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Modificar Asignatura" data-boton="Modificar">Editar Asignatura</button>
-                  <button type="button" class="btn btn-outline-secondary">Eliminar Asignatura</button>
+                  <button type="button" class="btn btn-outline-secondary" id="btnEditar" data-toggle="modal" data-target="#myModal3" data-titulo="Modificar Asignatura" data-boton="Modificar">Editar Asignatura</button>
+                  <button type="button" class="btn btn-outline-secondary" id="btnbaja">Eliminar Asignatura</button>
       </div>
     <div class="form-group">
-      <table class="table">
+      <table class="table" id="A-tabla">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -34,13 +27,6 @@
             <th scope="col">Curso</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-          </tr>
-        </tbody>
       </table>
       </div>
     </div> 
@@ -69,14 +55,16 @@
               <div class="col">
                       <div class="form-group">
                           <div class="col">
-                            <input type="text" class="form-control" id="InputText" placeholder="Nivel">
+                            <input type="text" class="form-control" id="inputNombre" placeholder="Nombre de la Asignatura">
                           </div>
                       </div>
-                <div class="form-group">
-                    <div class="col">
-                      <input type="text" class="form-control" id="InputText" placeholder="Etapa">
+                    <div class="form-group">
+                      <div class="col">
+                        <label for="inputCurso">Cursos:</label>
+                        <select class="form-control" id="inputCurso">
+                        </select>
+                      </div>
                     </div>
-                </div>
             </div>       
           </div>
         </div>
@@ -84,7 +72,7 @@
           <!-- Modal footer -->
           <div class="modal-footer">
 
-            <button type="button" class="btn btn-success" id="boton">Crear</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" id="botonAceptar">Crear</button>
             <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
             
           </div>
@@ -93,15 +81,8 @@
       </div>
     </div>
  </section3>
-
-<footer>
-    <p>Copyright &copy; Academia</p>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="../static/js/asignatura.js"></script>
-</footer>
+  
+<footer th:replace="layouts/base::footer('asignatura')"></footer>
 </body>
 
 

@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>Alumnos</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}">
-  <link rel="stylesheet" th:href="@{/css/profesor.css}">
-  <link rel="stylesheet" th:href="@{/css/alumno.css}">
-
-</head>
-
+<head th:replace="layouts/base::head('Alumnos','alumno')"></head>
 <body>
-   <header th:replace="layouts/base::header()"></header>
+<header th:replace="layouts/base::header()"></header>
 
 <div class="container">
   <h1>Alumnado</h1>
@@ -151,7 +142,7 @@
                 <div class="form-group">
                   <label class="col-md-4 control-label">Fecha Baja</label>
                       <div class="col-sm-10">
-                          <input type="date" class="form-control" id="inputFechaBaja">
+                          <input type="date" class="form-control" id="inputFechaBaja" readonly>
                       </div>
                 </div>
                 <div class="form-group">
@@ -372,14 +363,7 @@
       </div>
    </section>
 
-<footer>
-    <p>Copyright &copy; Academia</p>
-    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
-    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
-    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/alumno.js}"></script>
-    <script th:src="@{/js/ajaxcomplemento.js}"></script>
-</footer>
+<footer th:replace="layouts/base::footer('alumno')"></footer>
 
 </body>
 

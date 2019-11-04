@@ -1,19 +1,12 @@
 package com.academia.main.restcontroladores;
 
+import java.util.List;
+
 import com.academia.main.entidades.Curso;
 import com.academia.main.servicios.CursoServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import antlr.collections.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -23,7 +16,7 @@ public class CursoRestControlador {
 	private CursoServicio Cursoservicio;
 
 	@GetMapping("/Cursos")
-	public java.util.List<Curso> getCursos(){
+	public List<Curso> getCursos(){
 		return Cursoservicio.buscarCursos();
 	}
 	
