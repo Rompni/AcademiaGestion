@@ -7,12 +7,12 @@ new Chart($("#bar-chart-grouped"), {
         label: "Altas",
         backgroundColor: "#3e95cd",
         borderColor: 'rgb(255, 255, 255)',
-        data: [133]
+        data: [2]
       }, {
         label: "Bajas",
         backgroundColor: "#8e5ea2",
         borderColor: 'rgb(255, 255, 255)',
-        data: [408]
+        data: [4]
       }
     ]
   },

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro Academia</title>
+  <link rel="stylesheet" th:href="@{/css/registro.css}">
+</head>
+
+<body>
+<!-- partial:index.partial.html -->
+<div class="box">
+  
+  <h2>REGISTRO</h2> 
+  <form th:action="@{/registro}" th:object="${usuario}" role="form" autocomplete="off" method="POST">   
+    <!-- Login -->  
+    <div class="login-form">
+      
+      <label for="inputUsuario">Username</label>
+      <input type="text" th:field="*{usuario}" class="form-control" id="inputUsuario" placeholder="Nombre de usuario" name="usuario"required>
+      
+      <label for="inputClave">Password</label>
+      <input type="password" th:field="*{clave}" class="form-control" id="inputClave" placeholder="Contraseña" name="clave" required>
+      
+    </div>
+
+    <!-- Submit -->
+    
+    <input type="submit" id="submit" value="Registrarse">
+    
+  </form>
+</div>
+</body>
+</html>

@@ -14,13 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "ALUMNOS")
@@ -75,8 +73,6 @@ public class Alumno implements Serializable {
 	@JoinColumn(name = "ID_RESPONSABLE")
 	private Responsable responsable;
 	
-	@OneToOne(mappedBy = "alumno")
-	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -190,14 +186,6 @@ public class Alumno implements Serializable {
 		this.responsable = responsable;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 	public Alumno(){
 	}
 
@@ -220,7 +208,6 @@ public class Alumno implements Serializable {
 		result = prime * result + ((repetidor == null) ? 0 : repetidor.hashCode());
 		result = prime * result + ((responsable == null) ? 0 : responsable.hashCode());
 		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -302,11 +289,6 @@ public class Alumno implements Serializable {
 			if (other.telefono != null)
 				return false;
 		} else if (!telefono.equals(other.telefono))
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}

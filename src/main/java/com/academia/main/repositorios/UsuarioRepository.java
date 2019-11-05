@@ -7,6 +7,5 @@ import com.academia.main.entidades.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-
-	Usuario findById(Integer id);
+	Usuario findByUsuario(String username);
 }

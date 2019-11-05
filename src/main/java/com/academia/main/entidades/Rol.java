@@ -16,14 +16,12 @@ public class Rol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-    @Column(name = "rol")
-    private String rol;
+    @Column(name = "role")
+    private String role;
     
     private Usuario usuario;
 	
 	public Rol() {
-		super();
-		
 	}
 
 	public Long getId() {
@@ -34,12 +32,12 @@ public class Rol {
 		this.id = id;
 	}
 
-	public String getRol() {
-		return rol;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setRole(String rol) {
+		this.role = rol;
 	}
 
 	public Usuario getUsuario() {

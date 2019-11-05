@@ -35,7 +35,6 @@ public class Clase implements Serializable {
 	private List<Alumno> alumnos; 
 	
 	public Clase() {
-		super();
 	}
 
 	public Asignatura getAsignatura() {

@@ -18,7 +18,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "USUARIOS")
 public class Usuario implements Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,26 +33,19 @@ public class Usuario implements Serializable {
 	private Boolean habilitado;
 	
 	private String role;
-	
-	@ManyToMany(cascade = CascadeType.PERSIST)
+
+	@ManyToMany()//cascade = CascadeType.PERSIST
     @JoinTable(name = "USUARIOS_ROLES",
     joinColumns = @JoinColumn(
     name = "ID_USER", referencedColumnName="id"),
     inverseJoinColumns = @JoinColumn(name = "ID_ROL", referencedColumnName="id"))
     private Set<Rol> roles;
 	
-	@OneToOne
-	@JoinColumn(name = "ID_PROFESOR", referencedColumnName = "id")
-	private Profesor profesor;
-	
-	@OneToOne
-	@JoinColumn(name = "ID_ALUMNO", referencedColumnName = "id")
-	private Alumno alumno;
-	
-	
 	public Usuario() {
 		super();
 	}
+
+	
 
 	public String getUsuario() {
 		return usuario;
@@ -103,26 +95,4 @@ public class Usuario implements Serializable {
 		this.roles = roles;
 	}
 
-	public Profesor getProfesor() {
-		return profesor;
-	}
-
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
-	}
-
-	public Alumno getAlumno() {
-		return alumno;
-	}
-
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
-	}
-	
-	
-	
-	
-	
-	
-	
 }

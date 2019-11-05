@@ -6,5 +6,5 @@ import com.academia.main.entidades.Rol;
 
 @Repository
 public interface RolRepository extends JpaRepository<Rol, Long> {
-
+    Rol findByRole(String role);
 }

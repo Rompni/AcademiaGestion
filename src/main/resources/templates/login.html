@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Academia</title>
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<aside id="aside"></aside>
+<div id="wrapper">
+
+    <div class="justify-content-center">
+        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+          Usuario o contraseña invalido.</div>
+        <div th:if="${param.logout}" class="alert alert-success"
+          role="alert">Tu has cerrado sesion.</div>
+    </div>
+
+  <form name="login"  th:action="@{/login}" method="POST">
+    <h1>Login</h1>
+    <div class="row inputtxt">
+      <label for="usuario">Usuario</label>
+      <input type="text" id="inputUsuario" placeholder="Usuario" name="usuario">
+    </div>
+
+    <div class="row inputtxt">
+      <label for="pass">Password</label>
+      <input type="password" id="inputClave" placeholder="Contraseña" name="clave">
+    </div>
+
+    <div class="row btn">
+      <input type="submit" value="Login">
+      <button type="button" class="btn btn-primary"> <a class="button" th:href="@{/registro}">Registrarse</a></button>
+    </div>
+  </form>  
+</div>
+<!-- partial -->
+  
+</body>
+</html>

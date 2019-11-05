@@ -1,116 +1,117 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(https://fonts.googleapis.com/css?family=Dosis:200,400);
+* {
+  outline: none;
+}
 
-.login-page {
-  width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
-}
-.form {
-  position: relative;
-  z-index: 1;
-  background: #FFFFFF;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-.form input {
-  font-family: "Roboto", sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
-}
-.form button {
-  font-family: "Roboto", sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #4CAF50;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
-}
-.form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
-}
-.form .message {
-  margin: 15px 0 0;
-  color: #b3b3b3;
-  font-size: 12px;
-}
-.form .message a {
-  color: #4CAF50;
-  text-decoration: none;
-}
-.form .register-form {
-  display: none;
-}
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 300px;
-  margin: 0 auto;
-}
-.container:before, .container:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-.container .info {
-  margin: 50px auto;
-  text-align: center;
-}
-.container .info h1 {
-  margin: 0 0 15px;
+*, body {
+  margin: 0;
   padding: 0;
-  font-size: 36px;
-  font-weight: 300;
-  color: #1a1a1a;
 }
-.container .info span {
-  color: #4d4d4d;
-  font-size: 12px;
-}
-.container .info span a {
-  color: #000000;
-  text-decoration: none;
-}
-.container .info span .fa {
-  color: #EF3B3A;
-}
+
 body {
-  background: #76b852; /* fallback for old browsers */
-  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-  background: -moz-linear-gradient(right, #76b852, #8DC26F);
-  background: -o-linear-gradient(right, #76b852, #8DC26F);
-  background: linear-gradient(to left, #76b852, #8DC26F);
-  font-family: "Roboto", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; 
-  margin: 0%;     
+  font-size: 1.2em;
+  font-weight: 200;
+  font-family: 'Dosis', sans-serif;
+  -webkit-text-size-adjust: 200%;
+     -moz-text-size-adjust: 200%;
+      -ms-text-size-adjust: 200%;
+          text-size-adjust: 200%;
+  color: black;
+  background-color: white;
 }
 
-  
-footer {
-  text-align:center;
-  background-color: #373B44;
+h1 {
+  font-size: 2em;
+  font-weight: 200;
+  text-shadow: 0 1px 1px black;
+}
+
+#aside, #wrapper {
+  float: left;
+  height: 100vh;
+}
+
+#aside {
+  width: 30%;
+  background-color: black;
+  background-image: linear-gradient(left, transparent, rgba(255, 255, 255, 0.2));
+}
+
+#wrapper {
+  margin-left: 25px;
+}
+
+form {
+  height: 280px;
+  position: relative;
+  top: 50%;
+  margin-top: -140px;
+}
+form .row {
+  overflow: auto;
+  margin: 10px 0;
+}
+form .row.inputtxt {
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.row.inputtxt label, .row.inputtxt input {
+  float: left;
+  display: inline-block;
+}
+.row.inputtxt label {
+  margin-right: 15px;
+  color: rgba(0, 0, 0, 0.75);
+  text-align: right;
+}
+.row.inputtxt input {
+  transition: .3s ease;
+  font: inherit;
+  text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.03);
+  width: 35ex;
+  border: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  padding: 0 0 5px 5px;
+}
+.row.inputtxt input:focus {
+  outline: none;
+  transition: .3s ease;
+  border-left-color: rgba(0, 0, 0, 0.25);
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.08);
+  transition: border-color .9s ease;
+  border-color: rgba(0, 0, 0, 0.7);
+}
+
+.row.btn input, .row.btn button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  display: inline-block;
+  float: left;
+  min-width: 100px;
+  margin: 5px;
+  padding: 5px;
+  transition: background-image .3s ease-out;
+  background-image: linear-gradient(transparent, rgba(255, 255, 255, 0.08));
+}
+.row.btn input[type="submit"] {
+  background-color: darkgreen;
   color: white;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
 }
-
-.p {
-  font-size: 20px;
+.row.btn input[type="button"] {
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  background-color: silver;
+}
+.row.btn input:hover, .row.btn button:hover {
+  transition: 3s;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
+}
+a:link
+{
+text-decoration:none;
 }
