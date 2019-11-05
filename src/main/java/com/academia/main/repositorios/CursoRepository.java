@@ -6,12 +6,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import com.academia.main.entidades.Curso;
 
 @Repository
 public interface CursoRepository extends JpaRepository<Curso, Long> {
 
     @Query("SELECT c FROM Curso c WHERE c.etapa = :nombre" )
-    java.util.List<Curso> findCursoByNombre(
+    List<Curso> findCursoByNombre(
         @Param("nombre") String nombre);
 }

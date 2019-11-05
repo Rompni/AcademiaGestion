@@ -2,6 +2,7 @@ package com.academia.main.restcontroladores;
 
 import java.util.List;
 
+import javax.validation.Valid;
 
 import com.academia.main.entidades.Alumno;
 import com.academia.main.servicios.AlumnoServicio;
@@ -29,7 +30,7 @@ public class AlumnoRestControlador {
 	}
 	
 	@PostMapping("/Alumnos")
-	public Alumno crearAlumno(@RequestBody Alumno alumno) {
+	public Alumno crearAlumno(@Valid @RequestBody Alumno alumno) {
 		return alumnoservicio.save(alumno);
 	}
 	

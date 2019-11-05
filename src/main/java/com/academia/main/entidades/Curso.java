@@ -8,8 +8,8 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "CURSOS")
 //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -26,22 +26,18 @@ public class Curso implements Serializable {
 	@Column(nullable = false)
 	private String etapa;
 	
-	@OneToMany(mappedBy = "curso")
+	@OneToMany(mappedBy = "cursoA")
 	private List<Alumno> alumnos;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso")
-	@JsonBackReference
+	//@JsonBackReference
+	@JsonIgnore
 	private List<Asignatura> asignaturas;
 	
 	public Curso() {
 	}
-	/*
 
-	public Curso(Long nivel, String etapa) {
-		super();
-		this.nivel = nivel;
-		this.etapa = etapa;
-	} */
+
 
 
 
@@ -83,6 +79,10 @@ public class Curso implements Serializable {
 
 	public void setEtapa(String etapa) {
 		this.etapa = etapa;
+	}
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override
@@ -133,6 +133,14 @@ public class Curso implements Serializable {
 			return false;
 		return true;
 	}
+
+	public Curso(Long nivel, String etapa, List<Alumno> alumnos) {
+		this.nivel = nivel;
+		this.etapa = etapa;
+		this.alumnos = alumnos;
+	}
+
+	
 	
 	
 }

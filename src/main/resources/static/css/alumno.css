@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+
 body {
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -32,3 +34,9 @@ p {
     margin-left: 0;
     position: relative;
 }
+
+thead {
+   
+    text-align: center;
+  }
+

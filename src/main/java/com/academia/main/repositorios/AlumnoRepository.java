@@ -16,4 +16,5 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
         @Param("nombre") String nombre);
 
     
+    
 }

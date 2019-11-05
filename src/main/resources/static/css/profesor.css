@@ -27,3 +27,16 @@ h1 {
 p {
     font-size: 20px;
 }
+
+thead {
+    text-align: center;
+  }
+
+.alineado{
+    text-align: center;
+  }
+
+  .form-check-input {
+    margin-left: 0;
+    position: relative;
+}

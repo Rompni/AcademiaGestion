@@ -24,6 +24,19 @@ function listarCursos() {
       }); 
 }
 
+function buscarCurso(id, my_callback) {
+  var url = "./api/v1/Cursos/"+id;
+	$.ajax(url,
+        {
+    		contentType: "application/json",
+    		dataType:'json',
+    		type: "GET",
+    		success:function(datos){my_callback(null,datos)},
+        error: function(xhr){alert("Error al buscar curso >>> " + xhr.status + " " + xhr.statusText); my_callback(xhr,null)}    		
+          }); 
+                                          
+}
+
 function buscarAlumno() {
   $('#btn1').on('click', function(ev) {
   ev.preventDefault();
@@ -92,8 +105,10 @@ function agregarmodificarAlumno() {
     var fechaalta = $("#inputFechaAlta").val();
     var fechabaja = $("#inputFechaBaja").val();
     var observaciones = $("#inputObservaciones").val();
-    
-    
+    var curso = $("#CursoAlumno").val();
+    var repetidor = $('.checking').prop('checked', function (i, value) {return value;});
+    repetidor = repetidor[0].checked
+
     var nombreResponsable = $("#inputNombreResponsable").val();
     var apellido1Responsable = $("#inputApellido1Responsable").val();
     var apellido2Responsable = $("#inputApellido2Responsable").val();
@@ -102,6 +117,7 @@ function agregarmodificarAlumno() {
     var emailResponsable = $("#inputEmailResponsable").val(); 
 
     var duplicate = false;
+    var responsables;
 
     var alumno = {
     "nombre": nombre,
@@ -112,7 +128,8 @@ function agregarmodificarAlumno() {
     "correo": email,
     "fechaalta":fechaalta,
     "fechabaja": fechabaja,
-    "observaciones": observaciones
+    "observaciones": observaciones,
+    "repetidor":repetidor
     }
 
     var responsable = {
@@ -124,24 +141,30 @@ function agregarmodificarAlumno() {
     "correo": emailResponsable,
     "alumnosrespon":[]
     }
-    
+
+    buscarCurso(curso,function(errorLanzado, datosDevueltos){
+      if(!errorLanzado){alumno["cursoA"] = datosDevueltos;}        
+      });
+
     buscarResponsables(function(datos){
-      responsables = datos;
-    });
+      responsables = datos;  })
+/*
       console.log(responsables);
       for(i=0; i <responsables.length; i++){
         if(responsables[i].nif == nifResponsable)
         alumno["responsable"] = responsables[i];
         duplicate = true;
       }
-
+    ;
+*/
     if(nombreResponsable && apellido1Responsable && nifResponsable && telefonoResponsable && emailResponsable && !duplicate){
       agregarResponsable(responsable,function(errorLanzado, datosDevueltos){
         if(!errorLanzado){
           alumno["responsable"] = datosDevueltos;
+          console.log("entro")
         }        
       });   
-    } 
+    }
     
     console.log(alumno)
 
@@ -153,11 +176,12 @@ function agregarmodificarAlumno() {
         $.ajax("./api/v1/Alumnos",
           {
             contentType: "application/json",
-            dataType:'json',
+            //dataType:'json',
             type: "POST",
             data:JSON.stringify(alumno),
-            success:function(){
+            success:function(datos){
               alert("Se agrego el alumno");
+              console.log(datos)
               limpiarTodo();
                               },
             error: function(xhr){alert("Error al insertar un alumno >>> " + xhr.status + " " + xhr.statusText);}
@@ -182,7 +206,8 @@ function agregarmodificarAlumno() {
     }else{
       alert("Faltan Datos por rellenar");
     }
-  }});
+  }else alert("Faltan Datos por rellenar");
+});
 }
 
 function llenarCampos() {

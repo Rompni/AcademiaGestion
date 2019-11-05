@@ -14,7 +14,7 @@
           <form id="formB" >
           <div class="card-body">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="inputAlumno" placeholder="Nombre del Alumno">
+                    <input type="text" class="form-control" id="inputNombreBusqueda" placeholder="Nombre del Alumno">
                 </div>
 
                 <div class="form-group">
@@ -26,7 +26,7 @@
 
                 <div class="form-group ">
                         <div class="form-check">
-                            <label class="form-check-label" for="dropdownCheck">Mostrar solo actuales</label>
+                            <label class="form-check-label" for="inputCheck">Mostrar solo actuales</label>
                             <input type="checkbox" class="form-check-input" id="inputCheck">       
                         </div>
                     </div>
@@ -34,8 +34,8 @@
 
           </div>
           <div class="card-footer text-center ">
-                <button id="btn1" type="submit" class="btn btn-success">Buscar</button>
-                <button type="button" class="btn btn-success " id="limpiar">Limpiar</button>
+                <button type="submit" class="btn btn-success" id="btn1">Buscar</button>
+                <button type="button" class="btn btn-success" id="limpiar">Limpiar</button>
           </div>
 
            </form > 
@@ -48,12 +48,13 @@
         <div class="form-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Nuevo Alumno" data-boton="Crear" id="btnnuevo">Nuevo Alumno</button>
                   <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Datos Personales" data-boton="Modificar" id="btneditar">Datos personales</button>
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal4" id="btneditar" disabled>Clases</button>
+                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal4" id="btnclases" disabled>Clases</button>
                   <button type="button" class="btn btn-outline-secondary" id="btnbaja" >Dar de alta/baja</button>
       </div>
     <div class="form-group">
-      <table class="table" id="A-tabla" >
-          <tr>
+      <table class="table table-bordered table-hover" id="A-tabla" >
+        <thead class="thead-light">
+          <tr >
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
@@ -62,6 +63,7 @@
             <th scope="col">Fecha alta</th>
             <th scope="col">Fecha baja</th>
           </tr>
+        </thead>
       </table>
       </div>
     </div> 
@@ -130,7 +132,7 @@
                 <div class="form-group ">
                     <div class="form-check">
                         <label class="form-check-label" for="inputRepetidor">Repetidor</label>
-                        <input type="checkbox" class="form-check-input" id="inputRepetidor">       
+                        <input type="checkbox" class="checking form-check-input" id="inputRepetidor">       
                     </div>
                 </div>
                 <div class="form-group">

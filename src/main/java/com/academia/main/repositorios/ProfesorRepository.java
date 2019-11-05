@@ -20,7 +20,7 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long> {
 	@Query("SELECT f FROM Profesor f WHERE f.nombre = :nombre or f.nif = :nif")
 	List<Profesor> findProfesorByNombreOrNif(
 			@Param("nombre") String nombre,
-			@Param("nif") String Nif
+			@Param("nif") String nif
 			);
 	
 	

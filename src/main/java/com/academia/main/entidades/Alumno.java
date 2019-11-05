@@ -18,8 +18,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @Table(name = "ALUMNOS")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id" )
 public class Alumno implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -54,9 +59,9 @@ public class Alumno implements Serializable {
 	
 	private String observaciones;
 	
-	@ManyToOne
-	@JoinColumn(name = "ID_CURSO")
-	private Curso curso;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ID_CURSOA")
+	private Curso cursoA;
 	
 	@ManyToMany
 	@JoinTable(name= "CLASE_ALUMNO",
@@ -129,12 +134,12 @@ public class Alumno implements Serializable {
 		this.correo = correo;
 	}
 
-	public Curso getCurso() {
-		return curso;
+	public Curso getCursoA() {
+		return cursoA;
 	}
 
-	public void setCurso(Curso curso) {
-		this.curso = curso;
+	public void setCursoA(Curso cursoA) {
+		this.cursoA = cursoA;
 	}
 
 	public Boolean getRepetidor() {
@@ -193,21 +198,140 @@ public class Alumno implements Serializable {
 		this.usuario = usuario;
 	}
 
+	public Alumno(){
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((apellido1 == null) ? 0 : apellido1.hashCode());
+		result = prime * result + ((apellido2 == null) ? 0 : apellido2.hashCode());
+		result = prime * result + ((clases == null) ? 0 : clases.hashCode());
+		result = prime * result + ((correo == null) ? 0 : correo.hashCode());
+		result = prime * result + ((cursoA == null) ? 0 : cursoA.hashCode());
+		result = prime * result + ((fechaalta == null) ? 0 : fechaalta.hashCode());
+		result = prime * result + ((fechabaja == null) ? 0 : fechabaja.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nif == null) ? 0 : nif.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((observaciones == null) ? 0 : observaciones.hashCode());
+		result = prime * result + ((repetidor == null) ? 0 : repetidor.hashCode());
+		result = prime * result + ((responsable == null) ? 0 : responsable.hashCode());
+		result = prime * result + ((telefono == null) ? 0 : telefono.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Alumno other = (Alumno) obj;
+		if (apellido1 == null) {
+			if (other.apellido1 != null)
+				return false;
+		} else if (!apellido1.equals(other.apellido1))
+			return false;
+		if (apellido2 == null) {
+			if (other.apellido2 != null)
+				return false;
+		} else if (!apellido2.equals(other.apellido2))
+			return false;
+		if (clases == null) {
+			if (other.clases != null)
+				return false;
+		} else if (!clases.equals(other.clases))
+			return false;
+		if (correo == null) {
+			if (other.correo != null)
+				return false;
+		} else if (!correo.equals(other.correo))
+			return false;
+		if (cursoA == null) {
+			if (other.cursoA != null)
+				return false;
+		} else if (!cursoA.equals(other.cursoA))
+			return false;
+		if (fechaalta == null) {
+			if (other.fechaalta != null)
+				return false;
+		} else if (!fechaalta.equals(other.fechaalta))
+			return false;
+		if (fechabaja == null) {
+			if (other.fechabaja != null)
+				return false;
+		} else if (!fechabaja.equals(other.fechabaja))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nif == null) {
+			if (other.nif != null)
+				return false;
+		} else if (!nif.equals(other.nif))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (observaciones == null) {
+			if (other.observaciones != null)
+				return false;
+		} else if (!observaciones.equals(other.observaciones))
+			return false;
+		if (repetidor == null) {
+			if (other.repetidor != null)
+				return false;
+		} else if (!repetidor.equals(other.repetidor))
+			return false;
+		if (responsable == null) {
+			if (other.responsable != null)
+				return false;
+		} else if (!responsable.equals(other.responsable))
+			return false;
+		if (telefono == null) {
+			if (other.telefono != null)
+				return false;
+		} else if (!telefono.equals(other.telefono))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
+			return false;
+		return true;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public Alumno(String nombre, String apellido1, String apellido2, String nif, String telefono, String correo,
-			Date fechaalta, String observaciones, Responsable responsable) {
+			Boolean repetidor, Date fechaalta, Date fechabaja, String observaciones, Curso cursoA,
+			Responsable responsable) {
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.nif = nif;
 		this.telefono = telefono;
 		this.correo = correo;
+		this.repetidor = repetidor;
 		this.fechaalta = fechaalta;
+		this.fechabaja = fechabaja;
 		this.observaciones = observaciones;
+		this.cursoA = cursoA;
 		this.responsable = responsable;
 	}
-
-	public Alumno(){
-	}
+	
 	
 	
 }

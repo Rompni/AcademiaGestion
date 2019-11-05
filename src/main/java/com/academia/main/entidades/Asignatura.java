@@ -37,6 +37,7 @@ public class Asignatura implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "ID_CURSO")
+	//@JsonManagedReference
 	private Curso curso;	
 	
 	@OneToMany(mappedBy = "asignatura")
@@ -44,11 +45,6 @@ public class Asignatura implements Serializable {
 
 	public Asignatura() {
 		//super();
-	}
-
-	public Asignatura(String nombre, Curso curso) {
-		this.nombre = nombre;
-		this.curso = curso;
 	}
 
 	public String getNombre() {
