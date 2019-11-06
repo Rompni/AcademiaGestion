@@ -166,9 +166,10 @@ function agregarmodificarAlumno() {
       });   
     }
     
-    console.log(alumno)
+    console.log(alumno, curso)
 
     if(nombre && apellido1 && nif && telefono && email && fechaalta){
+
       var elboton = $('#myModal3').find('.modal-footer button[id=botonAceptar]').text()
       console.log(elboton)
       if(elboton == "Crear"){
@@ -302,6 +303,23 @@ $('#limpiar').on('click', function(event){
   });
 }
 
+function actualizarCurso(alumno){
+  console.log(alumno)
+$.ajax("./api/v1/Cursos/update/",
+{
+  async:false,
+  contentType: "application/json",
+  dataType:'json',
+  type: "PUT",
+  data: JSON.stringify(alumno),
+  success:function(e){
+    console.log("Alumno agregado al curso");
+    console.log(e)
+                    },
+  error: function(xhr){alert("Error al modificar un curso>>> " + xhr.status + " " + xhr.statusText);}  		
+  });
+}
+
 window.onload = function() {
     var fecha = new Date(); //Fecha actual
     var mes = fecha.getMonth()+1; //obteniendo mes
@@ -313,5 +331,6 @@ window.onload = function() {
       mes='0'+mes //agrega cero si el menor de 10
     $('#inputFechaAlta').val(ano+"-"+mes+"-"+dia);  
   }
+
 
 

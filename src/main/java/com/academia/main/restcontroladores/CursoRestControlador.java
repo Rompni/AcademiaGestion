@@ -2,6 +2,7 @@ package com.academia.main.restcontroladores;
 
 import java.util.List;
 
+import com.academia.main.entidades.Alumno;
 import com.academia.main.entidades.Curso;
 import com.academia.main.servicios.CursoServicio;
 
@@ -46,5 +47,12 @@ public class CursoRestControlador {
 	public void eliminar(@PathVariable Long id) {
 		Curso Curso = Cursoservicio.BuscarCursoPorId(id);
 		Cursoservicio.delete(Curso);
+	}
+
+	@PutMapping("/Cursos/update/{id}")
+	public void AddAlumnoCurso(@RequestBody Alumno alumno, @PathVariable Long id) {
+		Curso curso = Cursoservicio.BuscarCursoPorId(id);
+		curso.agregarAlumno(alumno);
+		
 	}
 }

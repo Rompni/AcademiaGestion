@@ -1,6 +1,7 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -36,7 +37,12 @@ public class Curso implements Serializable {
 	public Curso() {
 	}
 
-
+	public Curso agregarAlumno(Alumno alumno){
+		
+		if(!this.alumnos.contains(alumno))
+		this.alumnos.add(alumno);
+		return this;
+	}
 
 
 
@@ -133,11 +139,13 @@ public class Curso implements Serializable {
 		return true;
 	}
 
-	public Curso(Long nivel, String etapa, List<Alumno> alumnos) {
+	public Curso(Long nivel, String etapa) {
 		this.nivel = nivel;
 		this.etapa = etapa;
-		this.alumnos = alumnos;
+		this.alumnos = new LinkedList<>();
 	}
+
+
 
 	
 	

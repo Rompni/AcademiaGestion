@@ -1,13 +1,16 @@
 package com.academia.main.servicios;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
 import com.academia.main.entidades.Alumno;
+import com.academia.main.entidades.Curso;
 import com.academia.main.repositorios.AlumnoRepository;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +18,16 @@ import org.springframework.stereotype.Service;
 public class AlumnoServicioImpl implements AlumnoServicio {
 
     @Autowired private AlumnoRepository alumnorepositorio;
+    @Autowired private CursoServicio cService;
+    private Logger LOG = Logger.getLogger(AlumnoServicioImpl.class);
 
     @Override
     public Alumno save(Alumno alumno) {
+        Curso curso = alumno.getCursoA();
+        LOG.info(curso);
+        curso.getAlumnos().add(alumno);
+        curso = cService.save(curso);
+        alumno.setCursoA(curso);
         return alumnorepositorio.save(alumno);
     }
 
