@@ -82,8 +82,7 @@ function agregarmodificarProfesor() {
             type: "POST",
             data:JSON.stringify(profesor),
             success:function(datos){
-              alert("Se agrego el profesor");
-              console.log(datos)
+              console.log("Se agrego el profesor");
               limpiarTodo();
                               },
             error: function(xhr){alert("Error al insertar un profesor >>> " + xhr.status + " " + xhr.statusText);}
@@ -98,8 +97,7 @@ function agregarmodificarProfesor() {
         type: "PUT",
         data: JSON.stringify(profesor),
         success:function(e){
-          alert("Modificado");
-          console.log(e)
+          console.log("Modificado");
               limpiarTodo();
                           },
         error: function(xhr){alert("Error al modificar un profesor >>> " + xhr.status + " " + xhr.statusText);}  		
@@ -108,6 +106,7 @@ function agregarmodificarProfesor() {
     }else{
       alert("Faltan Datos por rellenar");
     }
+    window.location.href = "./profesor"
   }else alert("Faltan Datos por rellenar");
 });
 }
@@ -119,7 +118,7 @@ function eliminarProfesor() {
     if(confirm("¿Desea eliminar este profesor?")){
     $.ajax("./api/v1/Profesores/"+id,{
       type: "DELETE",
-      success:function(){alert("Se eliminó el profesor")},
+      success:function(){console.log("Se eliminó el profesor"); window.location.href = "./profesor" },
       error: function(xhr){alert("Error al eliminar un profesor>>> " + xhr.status + " " + xhr.statusText);}
         });
       }else {

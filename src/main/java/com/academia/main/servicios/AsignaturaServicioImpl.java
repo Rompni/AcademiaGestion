@@ -6,8 +6,10 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import com.academia.main.entidades.Asignatura;
+import com.academia.main.entidades.Curso;
 import com.academia.main.repositorios.AsignaturaRepository;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,16 @@ public class AsignaturaServicioImpl implements AsignaturaServicio {
 
     @Autowired private AsignaturaRepository Asignaturarepositorio;
 
+    @Autowired private CursoServicio cService;
+
+    private Logger LOG = Logger.getLogger(AsignaturaServicioImpl.class);
+
     @Override
     public Asignatura save(Asignatura asignatura) {
+        Curso curso = cService.BuscarCursoPorId(asignatura.getCurso().getId());
+        curso.getAsignaturas().add(asignatura);
+        curso = cService.save(curso);
+        asignatura.setCurso(curso);
         return Asignaturarepositorio.save(asignatura);
     }
 
@@ -45,7 +55,12 @@ public class AsignaturaServicioImpl implements AsignaturaServicio {
 
     @Override
     public List<Asignatura> buscarAsignaturas() {
-        return Asignaturarepositorio.findAllAsignaturas();
+        return Asignaturarepositorio.findAll();
+    }
+    
+    public List<Asignatura> BuscarAsignaturaPorCurso(String id) {
+        Curso curso = cService.BuscarCursoPorId(Long.parseLong(id));
+        return curso.getAsignaturas();
     }
 
     

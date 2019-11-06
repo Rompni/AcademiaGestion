@@ -1,18 +1,15 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "CURSOS")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Curso implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -27,24 +24,15 @@ public class Curso implements Serializable {
 	private String etapa;
 	
 	@OneToMany(mappedBy = "cursoA")
+	@JsonIgnore
 	private List<Alumno> alumnos;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "curso")
-	//@JsonBackReference
+	@OneToMany(mappedBy = "curso")
 	@JsonIgnore
 	private List<Asignatura> asignaturas;
 	
 	public Curso() {
 	}
-
-	public Curso agregarAlumno(Alumno alumno){
-		
-		if(!this.alumnos.contains(alumno))
-		this.alumnos.add(alumno);
-		return this;
-	}
-
-
 
 	public Long getId() {
 		return id;
@@ -142,10 +130,7 @@ public class Curso implements Serializable {
 	public Curso(Long nivel, String etapa) {
 		this.nivel = nivel;
 		this.etapa = etapa;
-		this.alumnos = new LinkedList<>();
 	}
-
-
 
 	
 	

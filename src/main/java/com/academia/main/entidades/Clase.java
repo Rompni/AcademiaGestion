@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "CLASES")
 public class Clase implements Serializable {
@@ -33,6 +36,15 @@ public class Clase implements Serializable {
 	
 	@ManyToMany(mappedBy="clases") 
 	private List<Alumno> alumnos; 
+
+	@Transient
+	private String idAsignatura;
+
+	@Transient
+	private String idProfesor;
+	
+	@Transient
+	private String idCurso;
 	
 	public Clase() {
 	}
@@ -76,11 +88,29 @@ public class Clase implements Serializable {
 	public void setAlumnos(List<Alumno> alumnos) {
 		this.alumnos = alumnos;
 	}
-	
-	
-	
-	
-	
-	
+
+	public String getIdAsignatura() {
+		return idAsignatura;
+	}
+
+	public void setIdAsignatura(String idAsignatura) {
+		this.idAsignatura = idAsignatura;
+	}
+
+	public String getIdProfesor() {
+		return idProfesor;
+	}
+
+	public void setIdProfesor(String idProfesor) {
+		this.idProfesor = idProfesor;
+	}
+
+	public String getIdCurso() {
+		return idCurso;
+	}
+
+	public void setIdCurso(String idCurso) {
+		this.idCurso = idCurso;
+	}
 	
 }

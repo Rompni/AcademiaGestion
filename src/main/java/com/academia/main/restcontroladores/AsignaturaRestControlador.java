@@ -2,11 +2,10 @@ package com.academia.main.restcontroladores;
 
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import com.academia.main.entidades.Asignatura;
 import com.academia.main.servicios.AsignaturaServicio;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,7 +43,14 @@ public class AsignaturaRestControlador {
 	public List<Asignatura> AsignaturasbyName(@PathVariable String nombre) {
 		return AsignaturaServicio.BuscarAsignaturaPorNombre(nombre);	 
 	}
+
+	@GetMapping("/Asignaturas/curso/{id}")
+	public List<Asignatura> AsignaturasbyCurso(@PathVariable String id) {
+		return AsignaturaServicio.BuscarAsignaturaPorCurso(id);	 
+	}
 	
+	
+
 	@PutMapping("/Asignaturas")
 	public Asignatura updateAsignatura(@RequestBody Asignatura Asignatura) {
 		return AsignaturaServicio.save(Asignatura);

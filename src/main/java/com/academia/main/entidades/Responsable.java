@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "RESPONSABLES")
@@ -41,19 +42,8 @@ public class Responsable implements Serializable {
 	private String correo;
 
 	@OneToMany(mappedBy = "responsable")
-	@JsonBackReference
+	@JsonIgnore
 	private List<Alumno> alumnosrespon;
-
-	public Responsable(String nombre, String apellido1, String apellido2, String nif, String telefono, String correo,
-		List<Alumno> alumnosrespon) {
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.apellido2 = apellido2;
-		this.nif = nif;
-		this.telefono = telefono;
-		this.correo = correo;
-		this.alumnosrespon = alumnosrespon;
-	}
 
 	public Responsable(){}
 
@@ -120,13 +110,5 @@ public class Responsable implements Serializable {
 	public void setAlumnosrespon(List<Alumno> alumnosrespon) {
 		this.alumnosrespon = alumnosrespon;
 	}
-
-	public void addAlumno(Alumno alumno){
-		if(alumnosrespon.contains(alumno))
-			return;
-		else	
-			alumnosrespon.add(alumno);
-		
-		}
 	
 }

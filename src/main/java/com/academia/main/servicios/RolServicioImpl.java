@@ -9,12 +9,13 @@ import com.academia.main.repositorios.*;
 
 @Service
 public class RolServicioImpl implements RolServicio {
+
 	@Autowired
 	private RolRepository rolRepositorio;
 
     @Override
-    public Usuario findUsuarioByRol(String username) {
-       return null;
+    public Rol findRolByName(String rolname) {
+       return rolRepositorio.findByRole(rolname);
     }
 
     @Override
@@ -27,7 +28,4 @@ public class RolServicioImpl implements RolServicio {
         rolRepositorio.save(rol);
 
     }
-
-	
-
 }

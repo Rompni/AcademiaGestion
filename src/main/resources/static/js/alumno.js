@@ -24,19 +24,6 @@ function listarCursos() {
       }); 
 }
 
-function buscarCurso(id, my_callback) {
-  var url = "./api/v1/Cursos/"+id;
-	$.ajax(url,
-        {
-    		contentType: "application/json",
-    		dataType:'json',
-    		type: "GET",
-    		success:function(datos){my_callback(null,datos)},
-        error: function(xhr){alert("Error al buscar curso >>> " + xhr.status + " " + xhr.statusText); my_callback(xhr,null)}    		
-          }); 
-                                          
-}
-
 function buscarAlumno() {
   $('#btn1').on('click', function(ev) {
   ev.preventDefault();
@@ -64,7 +51,7 @@ function buscarAlumno() {
                       "<td>" + "<input value='"+e.id + "' type='radio' class='form-check-input' name='selected'>" + "</td>" +
     			            "<td>" + e.nombre + "</td>" +
     			            "<td>" + e.apellido1 + "</td>" +
-                      "<td>" +  "</td>" +
+                      "<td>" + e.cursoA.nivel +" DE "+e.cursoA.etapa+"</td>" +
                       "<td>" + name +"</td>" +
                       "<td>" + e.fechaalta + "</td>" +
                       "<td>" +  "</td>" + 			            
@@ -129,7 +116,8 @@ function agregarmodificarAlumno() {
     "fechaalta":fechaalta,
     "fechabaja": fechabaja,
     "observaciones": observaciones,
-    "repetidor":repetidor
+    "repetidor":repetidor,
+    "stringaux":curso
     }
 
     var responsable = {
@@ -142,9 +130,9 @@ function agregarmodificarAlumno() {
     "alumnosrespon":[]
     }
 
-    buscarCurso(curso,function(errorLanzado, datosDevueltos){
-      if(!errorLanzado){alumno["cursoA"] = datosDevueltos;}        
-      });
+    // buscarCurso(curso,function(errorLanzado, datosDevueltos){
+    //   if(!errorLanzado){alumno["cursoA"] = datosDevueltos;}        
+    //   });
 
     buscarResponsables(function(datos){
       responsables = datos;  })
@@ -166,10 +154,9 @@ function agregarmodificarAlumno() {
       });   
     }
     
-    console.log(alumno, curso)
+    console.log(alumno)
 
     if(nombre && apellido1 && nif && telefono && email && fechaalta){
-
       var elboton = $('#myModal3').find('.modal-footer button[id=botonAceptar]').text()
       console.log(elboton)
       if(elboton == "Crear"){
@@ -207,6 +194,7 @@ function agregarmodificarAlumno() {
     }else{
       alert("Faltan Datos por rellenar");
     }
+    window.location.href = "./alumno"
   }else alert("Faltan Datos por rellenar");
 });
 }
@@ -270,7 +258,7 @@ function eliminarAlumno() {
     var id = $("input:radio[name=selected]:checked").val()
     $.ajax("./api/v1/Alumnos/"+id,{
       type: "DELETE",
-      success:function(){console.log("Se eliminó el alumno")},
+      success:function(){console.log("Se eliminó el alumno"); window.location.href = "./alumno";},
       error: function(xhr){alert("Error al eliminar un alumno >>> " + xhr.status + " " + xhr.statusText);}
     })
   });
@@ -303,23 +291,6 @@ $('#limpiar').on('click', function(event){
   });
 }
 
-function actualizarCurso(alumno){
-  console.log(alumno)
-$.ajax("./api/v1/Cursos/update/",
-{
-  async:false,
-  contentType: "application/json",
-  dataType:'json',
-  type: "PUT",
-  data: JSON.stringify(alumno),
-  success:function(e){
-    console.log("Alumno agregado al curso");
-    console.log(e)
-                    },
-  error: function(xhr){alert("Error al modificar un curso>>> " + xhr.status + " " + xhr.statusText);}  		
-  });
-}
-
 window.onload = function() {
     var fecha = new Date(); //Fecha actual
     var mes = fecha.getMonth()+1; //obteniendo mes
@@ -331,6 +302,5 @@ window.onload = function() {
       mes='0'+mes //agrega cero si el menor de 10
     $('#inputFechaAlta').val(ano+"-"+mes+"-"+dia);  
   }
-
 
 

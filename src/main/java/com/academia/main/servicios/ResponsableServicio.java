@@ -9,13 +9,13 @@ public interface ResponsableServicio {
     
     Responsable save(Responsable Responsable);
 
-    List<Responsable> buscarResponsables();
+ List<Responsable> buscarResponsables();
 
     void delete(Responsable Responsable);
 
     Responsable BuscarResponsablePorId(Long id);
 
-    List<Responsable> BuscarResponsablePorNombre(String nombre);
+ List<Responsable> BuscarResponsablePorNombre(String nombre);
 
-    List<Alumno> getAlumnosResponsable(Long id);
+ List<Alumno> getAlumnosResponsable(Long id);
 }

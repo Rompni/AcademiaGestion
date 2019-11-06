@@ -1,11 +1,11 @@
 package com.academia.main.restcontroladores;
 
 import java.util.List;
-
-import javax.validation.Valid;
+import org.jboss.logging.Logger;
 
 import com.academia.main.entidades.Alumno;
 import com.academia.main.servicios.AlumnoServicio;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,8 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class AlumnoRestControlador {
 
-	@Autowired
-	private AlumnoServicio alumnoservicio;
+	@Autowired private AlumnoServicio alumnoservicio;
 
 	@GetMapping("/Alumnos")
 	public List<Alumno> getAlumnos(){
@@ -30,7 +29,7 @@ public class AlumnoRestControlador {
 	}
 	
 	@PostMapping("/Alumnos")
-	public Alumno crearAlumno(@Valid @RequestBody Alumno alumno) {
+	public Alumno crearAlumno( @RequestBody Alumno alumno) {
 		return alumnoservicio.save(alumno);
 	}
 	

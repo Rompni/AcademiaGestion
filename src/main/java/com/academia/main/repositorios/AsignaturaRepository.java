@@ -15,6 +15,4 @@ public interface AsignaturaRepository extends JpaRepository<Asignatura, Long> {
     List<Asignatura> findAsignaturaByNombre(
         @Param("nombre") String nombre);
 
-    @Query("SELECT a FROM Asignatura a")
-    List<Asignatura> findAllAsignaturas();
 }

@@ -41,7 +41,7 @@ public class ResponsableServicioImpl implements ResponsableServicio {
     public List<Responsable> BuscarResponsablePorNombre(String nombre) {
         String[] parts = nombre.split("(?=\\s)");
         System.out.println(parts[0]);
-        List<Responsable> responsables = responsablerepositorio.findResponsablebyNombreCurso(parts[0]);
+        List <Responsable> responsables = responsablerepositorio.findResponsablebyNombre(parts[0]);
         return responsables;
     }
 

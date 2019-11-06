@@ -28,12 +28,12 @@ public class UsuarioControlador {
 	@GetMapping("/registro")
 	public String mostrarFormRegistro(Model model) {
 		Usuario u = new Usuario();
-		model.addAttribute("usuario", u);
+		model.addAttribute("user", u);
 		return "registro";
 	}
 
 	@PostMapping("/registro")
-	public String registroUsuario(@ModelAttribute("usuario") @Valid Usuario usuario, BindingResult result, Model model) {
+	public String registroUsuario(@ModelAttribute("user") @Valid Usuario usuario, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "registro";
 		}

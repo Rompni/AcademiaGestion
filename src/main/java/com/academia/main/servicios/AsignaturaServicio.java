@@ -16,5 +16,7 @@ public interface AsignaturaServicio {
 
     List<Asignatura> BuscarAsignaturaPorNombre(String nombre);
 
+    List<Asignatura> BuscarAsignaturaPorCurso(String id);
+
     
 }

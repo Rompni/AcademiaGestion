@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 public interface ResponsableRepository extends JpaRepository<Responsable, Long> {
 
     @Query("SELECT a FROM Responsable a WHERE a.nombre = :nombre" )
-    List<Responsable> findResponsablebyNombreCurso(
+    List<Responsable> findResponsablebyNombre(
         @Param("nombre") String nombre);
+
+    
 }

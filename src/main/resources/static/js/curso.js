@@ -29,7 +29,7 @@ function buscarCurso() {
     		dataType:'json',
     		type: "GET",
     		success:function(datos){
-          if(datos.length == 0){ alert("No hay cursos");}
+          if(datos.length == 0){ console.log("No hay cursos");}
           else{
     			 $.each(datos, function(i, e) {
                   $('#A-tabla').append("<tr class='f' data-id="+e.id+">" +
@@ -38,6 +38,7 @@ function buscarCurso() {
     			            "<td>" + e.etapa + "</td>" +			            
                       "</tr>");
                                           });
+      
               }
                                 },
         error: function(xhr){alert("Error al buscar cursos >>> " + xhr.status + " " + xhr.statusText);}    		
@@ -69,7 +70,6 @@ function agregarmodificarCurso(){
               type: "POST",
               data:JSON.stringify(curso),
               success:function(e){
-                console.log(e)
                 console.log("Se agrego el curso");
                 limpiarTodo();
                                 },
@@ -94,6 +94,8 @@ function agregarmodificarCurso(){
       }else{
         alert("Faltan Datos por rellenar");
       }
+
+      window.location.href = "./curso"
     }
    
   });
@@ -124,10 +126,9 @@ function eliminarCurso() {
     var id = $("input:radio[name=selected]:checked").val()
     $.ajax("./api/v1/Cursos/"+id,{
       type:"DELETE",
-      success:function(){console.log("Se eliminó el curso")},
+      success:function(){console.log("Se eliminó el curso"); window.location.href = "./curso"},
       error: function(xhr){alert("Error al eliminar un curso >>> " + xhr.status + " " + xhr.statusText);}
     })
-    buscarCurso();
   });
 }
 

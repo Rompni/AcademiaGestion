@@ -11,12 +11,12 @@
 <div class="box">
   
   <h2>REGISTRO</h2> 
-  <form th:action="@{/registro}" th:object="${usuario}" role="form" autocomplete="off" method="POST">   
+  <form th:action="@{/registro}" th:object="${user}"  autocomplete="off" method="POST">   
     <!-- Login -->  
     <div class="login-form">
       
       <label for="inputUsuario">Username</label>
-      <input type="text" th:field="*{usuario}" class="form-control" id="inputUsuario" placeholder="Nombre de usuario" name="usuario"required>
+      <input type="text" th:field="*{usuario}" class="form-control" id="inputUsuario" placeholder="Nombre de usuario" name="usuario" required>
       
       <label for="inputClave">Password</label>
       <input type="password" th:field="*{clave}" class="form-control" id="inputClave" placeholder="Contraseña" name="clave" required>

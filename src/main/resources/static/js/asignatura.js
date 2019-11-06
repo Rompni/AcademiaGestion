@@ -4,15 +4,8 @@ $(function(){
   agregarmodificarAsignatura();
   eliminarAsignatura();
   cambiodeBoton();
-  alerta();
+
 });
-
-function alerta(){
-
-  $(".close").on("click",function(){
-    $("#myAlert").alert("close");
-  });
-}
 
 function listarCursos() {
 	$.ajax("./api/v1/Cursos",
@@ -40,7 +33,7 @@ function buscarAsignaturas(){
     		type: "GET",
     		success:function(datos){
           console.log(datos)
-          if(datos.length == 0){ alert("No hay asignaturas");}
+          if(datos.length == 0){ console.log("No hay asignaturas");}
           else{
     			 $.each(datos, function(i, e) {
                   $('#A-tabla').append("<tr class='f' data-id="+e.id+">" +
@@ -109,8 +102,8 @@ function agregarmodificarAsignatura(){
     }else{
       alert("Faltan Datos por rellenar");
     }
+    window.location.href = "./asignatura";
   }
-  buscarAsignaturas();
 });
 }
 
@@ -131,14 +124,14 @@ function BuscarCurso(id, my_callback) {
         });
 }
 
-function eliminarAsignatura() {
+function eliminarAsignatura() {  
   $('#btnbaja').on('click', function(e) {
     e.preventDefault(); 
     var id = $("input:radio[name=selected]:checked").val()
     console.log(id)
     $.ajax("./api/v1/Asignaturas/"+id,{
       type:"DELETE",
-      success:function(){alert("Se eliminó la asignatura")},
+      success:function(){console.log("Se eliminó la asignatura"); window.location.href = "./asignatura";},
       error: function(xhr){alert("Error al eliminar una Asignatura >>> " + xhr.status + " " + xhr.statusText);}
     })
   });
