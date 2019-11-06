@@ -48,6 +48,13 @@ public class Rol {
 		this.usuario = usuario;
 	}
 
+	public Rol(Long i, String role2) {
+		this.id = i;
+		this.role = role2;
+
+	}
+
+	
 	
 	
 }

@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -45,7 +44,6 @@ public class Usuario implements Serializable {
 		super();
 	}
 
-	
 
 	public String getUsuario() {
 		return usuario;

@@ -2,6 +2,7 @@ package com.academia.main;
 
 import javax.annotation.PostConstruct;
 
+import com.academia.main.entidades.Rol;
 import com.academia.main.servicios.RolServicio;
 import com.academia.main.servicios.UsuarioServicio;
 
@@ -12,11 +13,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AcademiaApplication {
 	
-	// @Autowired
-	// private RolServicio rolservicio;
+	@Autowired
+	private RolServicio rolservicio;
 
-	// @Autowired
-	// private UsuarioServicio usuarioservicio;
+	@Autowired
+	private UsuarioServicio usuarioservicio;
  
 	public static void main(String[] args) {
 		SpringApplication.run(AcademiaApplication.class, args);
@@ -24,6 +25,10 @@ public class AcademiaApplication {
 
 	@PostConstruct
 	public void Inicializar(){
+		rolservicio.save(new Rol((long) 1,"ADMIN"));
+		rolservicio.save(new Rol((long) 2,"ALUMNO"));
+		rolservicio.save(new Rol((long) 3,"PROFESOR"));
+		usuarioservicio.crearUsuario("admin", "ADMIN", "admin");
 
 	}
 }
