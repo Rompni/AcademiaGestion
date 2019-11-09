@@ -22,6 +22,11 @@ public class CursoRestControlador {
 	
 	@PostMapping("/Cursos")
 	public Curso crearCurso(@RequestBody Curso Curso) {
+		Curso curso = Cursoservicio.BuscarCursoPorNivelEtapa(Curso.getNivel(), Curso.getEtapa());
+		if(curso != null)
+			return null;
+
+		Curso.setAsignaturas(null);
 		return Cursoservicio.save(Curso);
 	}
 	
@@ -38,7 +43,11 @@ public class CursoRestControlador {
 	
 	@PutMapping("/Cursos")
 	public Curso updateCurso(@RequestBody Curso Curso) {
-		return Cursoservicio.save(Curso);
+		Curso curso = Cursoservicio.BuscarCursoPorId(Curso.getId());
+		curso.setNivel(Curso.getNivel());
+		curso.setEtapa(Curso.getEtapa());
+		curso.setAsignaturas(Curso.getAsignaturas());
+		return Cursoservicio.save(curso);
 	}
 
 	

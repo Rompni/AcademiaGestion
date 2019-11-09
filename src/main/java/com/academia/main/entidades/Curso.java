@@ -1,6 +1,7 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -18,16 +19,16 @@ public class Curso implements Serializable {
 	private Long id;
 	
 	@Column(nullable = false)
-	private Long nivel;
+	private String nivel;
 	
 	@Column(nullable = false)
 	private String etapa;
 	
-	@OneToMany(mappedBy = "cursoA")
+	@OneToMany(mappedBy = "cursoA", cascade = { CascadeType.ALL })
 	@JsonIgnore
 	private List<Alumno> alumnos;
 
-	@OneToMany(mappedBy = "curso")
+	@OneToMany(mappedBy = "curso", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	@JsonIgnore
 	private List<Asignatura> asignaturas;
 	
@@ -47,7 +48,9 @@ public class Curso implements Serializable {
 	}
 
 	public void setAlumnos(List<Alumno> alumnos) {
-		this.alumnos = alumnos;
+		this.alumnos.addAll(alumnos);
+		for(Alumno alumno: alumnos)
+			alumno.setCursoA(this);
 	}
 
 	public List<Asignatura> getAsignaturas() {
@@ -55,14 +58,27 @@ public class Curso implements Serializable {
 	}
 
 	public void setAsignaturas(List<Asignatura> asignaturas) {
-		this.asignaturas = asignaturas;
+		if(this.asignaturas == null){
+		this.asignaturas = new LinkedList<Asignatura>();
+			this.asignaturas.clear();
+		}
+
+		if(asignaturas == null)
+			return;
+
+		this.asignaturas.addAll(asignaturas);
+		for(Asignatura asignatura: asignaturas)
+			asignatura.setCurso(this);
+		
+		
 	}
 
-	public Long getNivel() {
+
+	public String getNivel() {
 		return nivel;
 	}
 
-	public void setNivel(Long nivel) {
+	public void setNivel(String nivel) {
 		this.nivel = nivel;
 	}
 
@@ -76,6 +92,11 @@ public class Curso implements Serializable {
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Curso(String nivel, String etapa) {
+		this.nivel = nivel;
+		this.etapa = etapa;
 	}
 
 	@Override
@@ -126,13 +147,6 @@ public class Curso implements Serializable {
 			return false;
 		return true;
 	}
-
-	public Curso(Long nivel, String etapa) {
-		this.nivel = nivel;
-		this.etapa = etapa;
-	}
-
-	
 	
 	
 }

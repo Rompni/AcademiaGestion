@@ -4,6 +4,7 @@ $(function(){
   agregarmodificarAsignatura();
   eliminarAsignatura();
   cambiodeBoton();
+  llenarCampos();
 
 });
 
@@ -128,7 +129,16 @@ function eliminarAsignatura() {
   $('#btnbaja').on('click', function(e) {
     e.preventDefault(); 
     var id = $("input:radio[name=selected]:checked").val()
-    console.log(id)
+    if (!id) {
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Ninguna asignatura ha sido seleccionado'
+        });
+        return;
+    }
+
+    cambiodeBoton("#btnbaja", "#myModal3");
     $.ajax("./api/v1/Asignaturas/"+id,{
       type:"DELETE",
       success:function(){console.log("Se eliminó la asignatura"); window.location.href = "./asignatura";},
@@ -137,29 +147,38 @@ function eliminarAsignatura() {
   });
 }
 
-function cambiodeBoton(){
-$('#myModal3').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var recipient = button.data('titulo') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var recipient2 = button.data('boton')
-    var modal = $(this)
-    modal.find('.modal-title').text(recipient)
-    modal.find('.modal-footer button[id=botonAceptar]').text(recipient2)
-  })
+function cambiodeBoton(name, modal) {
+  var button = $(name)
+  var recipient = button.data('titulo') 
+  var recipient2 = button.data('boton')
+  console.log(recipient, recipient2);
+  var modal = $(modal);
+  modal.find('.modal-title').text(recipient)
+  modal.find('.modal-footer button[id=botonAceptar]').text(recipient2)
 }
 
 function llenarCampos() {
   $('#btnEditar').on('click', function(e) {
       e.preventDefault();
       var id = $("input:radio[name=selected]:checked").val()
+      if (!id) {
+
+          Toast.fire({
+              icon: 'error',
+              title: 'Ninguna asignatura ha sido seleccionada'
+          });
+          return;
+      }
+      cambiodeBoton("#btnEditar", "#myModal3");
+      $('#myModal3').modal('show');
       $.ajax( "./api/v1/Asignaturas/"+id, 
       {
         type: "GET",
         success:function(datos){
+          console.log(datos);
+          console.log($("#inputCurso"));
           $("#inputNombre").val(datos.nombre);
-          $("#inputCurso").val(datos.curso);
+          $("#inputCurso").val(datos.curso.id);
           },
         error: function(xhr){
           $('#myModal3').modal('hide')

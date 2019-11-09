@@ -1,6 +1,7 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "ASIGNATURAS")
+@Table(name = "clases")
 public class Asignatura implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -32,7 +33,7 @@ public class Asignatura implements Serializable {
 	@JoinColumn(name = "ID_CURSO")
 	private Curso curso;	
 	
-	@OneToMany(mappedBy = "asignatura")
+	@OneToMany(mappedBy = "asignatura",cascade = { CascadeType.ALL } , orphanRemoval = true)
 	@JsonIgnore
 	private List<Clase> clases;
 
@@ -70,7 +71,17 @@ public class Asignatura implements Serializable {
 	}
 
 	public void setClases(List<Clase> clases) {
-		this.clases = clases;
+	if(this.clases == null){
+		this.clases = new LinkedList<Clase>();
+			this.clases.clear();
+		}
+
+		if(clases == null)
+			return;
+
+		this.clases.addAll(clases);
+		for(Clase clase: clases)
+			clase.setAsignatura(this);
 	}
 	
 }

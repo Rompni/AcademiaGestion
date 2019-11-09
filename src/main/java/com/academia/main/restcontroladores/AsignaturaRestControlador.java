@@ -53,7 +53,11 @@ public class AsignaturaRestControlador {
 
 	@PutMapping("/Asignaturas")
 	public Asignatura updateAsignatura(@RequestBody Asignatura Asignatura) {
-		return AsignaturaServicio.save(Asignatura);
+		Asignatura asignatura = AsignaturaServicio.BuscarAsignaturaPorId(Asignatura.getId());
+		asignatura.setNombre(Asignatura.getNombre());
+		asignatura.setCurso(Asignatura.getCurso());
+		asignatura.setClases(Asignatura.getClases());
+		return AsignaturaServicio.save(asignatura);
 	}
 
 	

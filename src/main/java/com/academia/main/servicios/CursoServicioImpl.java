@@ -6,11 +6,11 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
-import com.academia.main.entidades.Asignatura;
+
 import com.academia.main.entidades.Curso;
 import com.academia.main.repositorios.CursoRepository;
 
-import org.hibernate.sql.Delete;
+
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,6 @@ public class CursoServicioImpl implements CursoServicio {
     
     @Override
     public Curso save(Curso Curso) {
-        Curso.setAsignaturas(new LinkedList<Asignatura>());
        return cursorepositorio.save(Curso);
     }
 
@@ -43,16 +42,20 @@ public class CursoServicioImpl implements CursoServicio {
 
     
     @Override
-    public List<Curso> BuscarCursoPorNombre(String nombre) {
-        String[] parts = nombre.split("(?=\\s)");
-        System.out.println(parts[0]);
-        List <Curso> Cursos = cursorepositorio.findCursoByNombre(parts[0]);
+    public List<Curso> BuscarCursoPorNombre(String nivel) {
+        String[] parts = nivel.split("(?=\\s)");
+        List <Curso> Cursos = cursorepositorio.findCursoByNivel(parts[0]);
         return Cursos;
     }
 
     @Override
     public List<Curso> buscarCursos() {
         return cursorepositorio.findAll();
+    }
+    
+    @Override
+    public Curso BuscarCursoPorNivelEtapa(String nivel, String etapa){
+        return cursorepositorio.findCursoByNivelEtapa(nivel, etapa);
     }
     
 }

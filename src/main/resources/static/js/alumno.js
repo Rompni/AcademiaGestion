@@ -31,7 +31,7 @@ function buscarAlumno() {
   var url = "./api/v1/Alumnos";
   var busqueda = $('.card-body input').val();
     console.log(busqueda)
-  if( busqueda != ""){
+  if( busqueda !== ""){
     url = "./api/v1/Alumnos/name/"+busqueda;
   }
 
@@ -42,7 +42,7 @@ function buscarAlumno() {
     		type: "GET",
     		success:function(datos){
           console.log(datos)
-          if(datos.length == 0){ alert("No se encontró la busqueda");}
+          if(datos.length === 0){ alert("No se encontró la busqueda");}
           else{
     			 $.each(datos, function(i, e) {
              var name;

@@ -1,6 +1,8 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -31,10 +33,8 @@ public class Usuario implements Serializable {
 	
 	@Column(nullable = false)
 	private Boolean habilitado;
-	
-	private String role;
 
-	@ManyToMany()//cascade = CascadeType.PERSIST
+	@ManyToMany()
     @JoinTable(name = "USUARIOS_ROLES",
     joinColumns = @JoinColumn(
     name = "ID_USER", referencedColumnName="id"),
@@ -68,15 +68,6 @@ public class Usuario implements Serializable {
 	public void setHabilitado(Boolean habilitado) {
 		this.habilitado = habilitado;
 	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -90,13 +81,14 @@ public class Usuario implements Serializable {
 	}
 
 	public void setRoles(Set<Rol> roles) {
-		this.roles = roles;
+		if(this.roles == null)
+			this.roles = new HashSet<Rol>();
+		this.roles.addAll(roles);
 	}
 
-	public Usuario(String usuario, String role, String clave) {
+	public Usuario(String usuario,String clave) {
 		this.usuario = usuario;
-		this.clave = clave;
-		this.role = role;
+		this.clave = clave;	
 	}
 
 	

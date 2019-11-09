@@ -2,10 +2,13 @@ package com.academia.main.servicios;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import com.academia.main.entidades.*;
 import com.academia.main.repositorios.*;
@@ -18,6 +21,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	@Autowired private RolRepository rolRespositorio;
 	
 	@Autowired private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	private Logger LOG = Logger.getLogger(UsuarioServicioImpl.class);
 	
 	@Override
 	public Usuario findUsuarioByUsuario(String username) {
@@ -36,27 +41,16 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		user.setClave(bCryptPasswordEncoder.encode(user.getClave()));
 		user.setHabilitado(true);
 		Rol userRol = rolRespositorio.findByRole("ADMIN");
-		user.setRoles(new HashSet<Rol>(Arrays.asList(userRol)));
+		LOG.info(userRol);
+		Set<Rol> roles = new HashSet<Rol>(Arrays.asList(userRol)); 
+		LOG.info(roles);
+		user.setRoles(roles);
 		usuarioRepositorio.save(user);
-		}
+		}else{
 		usuarioRepositorio.save(newUser);
+		}
 	}
-/*
-	@Override
-	public void crearUsuario(String user, String rol, String clave) {
-		Usuario usuario = new Usuario();
-		usuario.setUsuario(user);
-		usuario.setClave(bCryptPasswordEncoder.encode(clave));
-		usuario.setHabilitado(true);
-		Rol userRol = rolRespositorio.findByRole(rol);
-		usuario.setRoles(new HashSet<Rol>(Arrays.asList(userRol)));
-		usuarioRepositorio.save(usuario);
 
-	} */
 
-	public void crearUser (Usuario usr) {
-		usuarioRepositorio.save(usr);
-
-	}
 
 }

@@ -7,7 +7,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}">
+  <link th:href="@{https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css}" rel="stylesheet">
   <link rel="stylesheet" th:href="@{/css/} + ${micss} + .css">
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+    <script th:src="@{https://cdn.jsdelivr.net/npm/sweetalert2@9}"></script>
+    
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 1000
+        });
+    </script>
 </head>
 <body>
 	<!-- Cabecera -->
@@ -54,7 +66,9 @@
       <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
       <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
       <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+
       <script th:src="@{/js/} + ${name} + .js"></script>
+
   </footer>
 </body>
 </html>

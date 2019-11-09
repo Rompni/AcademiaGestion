@@ -1,5 +1,7 @@
 package com.academia.main.servicios;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -28,17 +30,18 @@ public class AlumnoServicioImpl implements AlumnoServicio {
     public Alumno save(Alumno alumno) {
         
         Curso curso = cService.BuscarCursoPorId(Long.parseLong(alumno.getStringaux()));
-        curso.getAlumnos().add(alumno);
+        List<Alumno> a =  Arrays.asList(alumno);
+        curso.setAlumnos(a);
         curso = cService.save(curso);
         alumno.setCursoA(curso);
 
-        Responsable responsable = alumno.getResponsable();
-        if(responsable != null) {
-        responsable.setAlumnosrespon(new LinkedList<Alumno>());
-        responsable.getAlumnosrespon().add(alumno);
-        responsable = rService.save(responsable);
-        alumno.setResponsable(responsable);
-        }
+        //Responsable responsable = alumno.getResponsable();
+        //if(responsable != null) {
+        //responsable.setAlumnosrespon(new LinkedList<Alumno>());
+        //responsable.getAlumnosrespon().add(alumno);
+        //responsable = rService.save(responsable);
+        //alumno.setResponsable(responsable);
+        //}
         return aRepository.save(alumno);
     }
 

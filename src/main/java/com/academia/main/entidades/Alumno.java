@@ -58,7 +58,7 @@ public class Alumno implements Serializable {
 	@Transient
 	private String stringaux;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "ID_CURSOA")
 	private Curso cursoA;
 	

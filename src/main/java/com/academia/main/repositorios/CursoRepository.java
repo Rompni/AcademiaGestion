@@ -13,7 +13,10 @@ import com.academia.main.entidades.Curso;
 @Repository
 public interface CursoRepository extends JpaRepository<Curso, Long> {
 
-    @Query("SELECT c FROM Curso c WHERE c.etapa = :nombre" )
-    List<Curso> findCursoByNombre(
-        @Param("nombre") String nombre);
+    @Query("SELECT c FROM Curso c WHERE c.nivel = :nivel and c.etapa =:etapa" )
+    Curso findCursoByNivelEtapa(
+        @Param("nivel") String nivel,
+        @Param("etapa") String etapa);
+
+	List<Curso> findCursoByNivel(String string);
 }

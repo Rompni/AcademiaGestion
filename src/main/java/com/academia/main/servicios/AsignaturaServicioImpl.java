@@ -24,10 +24,11 @@ public class AsignaturaServicioImpl implements AsignaturaServicio {
 
     @Override
     public Asignatura save(Asignatura asignatura) {
-        Curso curso = cService.BuscarCursoPorId(asignatura.getCurso().getId());
-        curso.getAsignaturas().add(asignatura);
-        curso = cService.save(curso);
-        asignatura.setCurso(curso);
+        List<Asignatura> asignaturas= Asignaturarepositorio.findAsignaturaByNombre(asignatura.getNombre());
+        for(Asignatura a: asignaturas)
+            if(a.getNombre().compareToIgnoreCase(asignatura.getNombre()) == 0)
+                throw new EntityNotFoundException("Asignatura existente");
+
         return Asignaturarepositorio.save(asignatura);
     }
 

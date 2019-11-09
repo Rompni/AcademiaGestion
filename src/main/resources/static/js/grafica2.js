@@ -1,3 +1,9 @@
+$(function(){
+  chart();
+});
+
+
+function chart(){
 new Chart($("#bar-chart-grouped"), {
   type: 'bar',
   data: {
@@ -23,3 +29,17 @@ new Chart($("#bar-chart-grouped"), {
     }
   }
 });
+}
+
+function listarCursos() {
+	$.ajax("./api/v1/Cursos",
+        {
+    		contentType: "application/json",
+    		dataType:'json',
+    		type: "GET",
+    		success:function(datos){
+    			 
+                                },
+        error: function(xhr){alert("Error al listar cursos >>> " + xhr.status + " " + xhr.statusText);}    		
+      }); 
+}

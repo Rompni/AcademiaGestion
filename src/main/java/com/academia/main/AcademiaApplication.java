@@ -4,7 +4,6 @@ import javax.annotation.PostConstruct;
 
 import com.academia.main.entidades.Rol;
 import com.academia.main.entidades.Usuario;
-import com.academia.main.servicios.CursoServicio;
 import com.academia.main.servicios.RolServicio;
 import com.academia.main.servicios.UsuarioServicio;
 
@@ -28,7 +27,7 @@ public class AcademiaApplication {
 		rolservicio.save(new Rol((long) 1, "ADMIN"));
 		rolservicio.save(new Rol((long) 2,"ALUMNO"));
 		rolservicio.save(new Rol((long) 3,"PROFESOR"));
-		usuarioservicio.save(new Usuario("admin", "ADMIN", "admin"));
+		usuarioservicio.save(new Usuario("admin", "admin"));
 
 	}
 

@@ -16,4 +16,5 @@ public interface CursoServicio {
 
     List<Curso> BuscarCursoPorNombre(String nombre);
 
+    Curso BuscarCursoPorNivelEtapa(String nivel, String etapa);
 }

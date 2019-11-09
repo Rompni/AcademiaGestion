@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -41,7 +40,7 @@ public class Responsable implements Serializable {
 	@Column(nullable = false)
 	private String correo;
 
-	@OneToMany(mappedBy = "responsable")
+	@OneToMany(mappedBy = "responsable", cascade = { CascadeType.ALL })
 	@JsonIgnore
 	private List<Alumno> alumnosrespon;
 
@@ -108,7 +107,9 @@ public class Responsable implements Serializable {
 	}
 
 	public void setAlumnosrespon(List<Alumno> alumnosrespon) {
-		this.alumnosrespon = alumnosrespon;
+		this.alumnosrespon.addAll(alumnosrespon);
+		for(Alumno alumno: alumnosrespon)
+			alumno.setResponsable(this);
 	}
 	
 }
