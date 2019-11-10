@@ -23,57 +23,52 @@ import javax.persistence.Transient;
 @Table(name = "ALUMNOS")
 public class Alumno implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	private String nombre;
-	
+
 	@Column
 	private String apellido1;
-	
+
 	private String apellido2;
-	
+
 	@Column(unique = true)
 	private String nif;
-	
+
 	private String telefono;
-	
+
 	private String correo;
-	
+
 	@Column
 	private Boolean repetidor;
-	
+
 	@Column
 	@Temporal(TemporalType.DATE)
 	private Date fechaalta;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date fechabaja;
-	
+
 	private String observaciones;
 
 	@Transient
 	private String stringaux;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ID_CURSOA")
 	private Curso cursoA;
-	
+
 	@ManyToMany
-	@JoinTable(name= "CLASE_ALUMNO",
-	joinColumns= @JoinColumn(
-	name="ID_ALUMNO", referencedColumnName="id"),
-	inverseJoinColumns=@JoinColumn(
-	name="ID_CLASE",referencedColumnName="id"))
+	@JoinTable(name = "CLASE_ALUMNO", joinColumns = @JoinColumn(name = "ID_ALUMNO", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ID_CLASE", referencedColumnName = "id"))
 	private List<Clase> clases;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ID_RESPONSABLE")
 	private Responsable responsable;
-	
 
 	public Long getId() {
 		return id;
@@ -187,7 +182,7 @@ public class Alumno implements Serializable {
 		this.responsable = responsable;
 	}
 
-	public Alumno(){
+	public Alumno() {
 	}
 
 	public static long getSerialversionuid() {
@@ -202,8 +197,11 @@ public class Alumno implements Serializable {
 		this.stringaux = stringaux;
 	}
 
+	@Override
+	public String toString() {
+		return "Alumno: "+ nif;
+	}
+
 	
-	
-	
-	
+
 }

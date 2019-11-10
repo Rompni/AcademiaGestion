@@ -15,5 +15,7 @@ public interface AlumnoServicio {
     Alumno BuscarAlumnoPorId(Long id);
 
     List<Alumno> BuscarAlumnoPorNombre(String nombre);
+    List<Alumno> BuscarAlumnoPorCurso(String id);
+    List<Alumno> BuscarAlumnoPorCursoyNombre(String id, String Nombre);
     
 }

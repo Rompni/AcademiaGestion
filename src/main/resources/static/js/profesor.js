@@ -1,52 +1,61 @@
-$(function(){
+$(function () {
   buscarProfesor();
   agregarmodificarProfesor();
   eliminarProfesor();
   llenarCampos();
-  cambiodeBoton();
   limpiarBusqueda();
 });
 
 
 function buscarProfesor() {
-  $('#btn1').on('click', function(ev) {
-  ev.preventDefault();
-  $(".f").remove();
-  var url = "./api/v1/Profesores";
-  var Nombrebusqueda = $('#inputNombreBusqueda').val();
-  var Nifbusqueda = $('#inputNifBusqueda').val();
-    console.log(Nombrebusqueda+ " " +Nifbusqueda)
-  if( Nombrebusqueda != "" || Nifbusqueda != "" ) {
-    url = "./api/v1/Profesores/namenif/"+Nombrebusqueda+"-"+Nifbusqueda;
-  }
+  $('#btn1').on('click', function (ev) {
+    ev.preventDefault();
+    $(".f").remove();
+    var url = "./api/v1/Profesores";
+    var Nombrebusqueda = $('#inputNombreBusqueda').val();
+    var Nifbusqueda = $('#inputNifBusqueda').val();
+    console.log(Nombrebusqueda + " " + Nifbusqueda)
+    if (Nombrebusqueda != "" || Nifbusqueda != "") {
+      url = "./api/v1/Profesores/namenif/" + Nombrebusqueda + "-" + Nifbusqueda;
+    }
 
-	$.ajax(url,
-        {
-    		contentType: "application/json",
-    		dataType:'json',
-    		type: "GET",
-    		success:function(datos){
+    $.ajax(url,
+      {
+        contentType: "application/json",
+        dataType: 'json',
+        type: "GET",
+        success: function (datos) {
           console.log(datos)
-          if(datos.length == 0){ alert("No se encontró la busqueda");}
-          else{
-    			 $.each(datos, function(i, e) {
-                  $('#A-tabla').append("<tr class='f' data-id="+e.id+">" +
-                      "<td>" + "<input value='"+e.id + "' type='radio' class='form-check-input alineado' name='selected'>" + "</td>" +
-    			            "<td>" + e.nombre +" "+e.apellido1+ "</td>" +
-    			            "<td>" + e.nif + "</td>" +
-                      "<td>" + e.correo + "</td>" +
-                      "<td>" + e.telefono + "</td>" + 			            
-                      "</tr>");
-                                          });
-              }
-                                },
-        error: function(xhr){alert("Error al buscar profesores >>> " + xhr.status + " " + xhr.statusText);}    		
-          }); 
-                                        });    
+          if (datos.length == 0) {
+            Toast.fire({
+              icon: "warning",
+              title: "No se encontro la busqueda",
+            });
+          }
+          else {
+            $.each(datos, function (i, e) {
+              $('#A-tabla').append("<tr class='f' data-id=" + e.id + ">" +
+                "<td>" + "<input value='" + e.id + "' type='radio' class='form-check-input alineado' name='selected'>" + "</td>" +
+                "<td>" + e.nombre + " " + e.apellido1 + "</td>" +
+                "<td>" + e.nif + "</td>" +
+                "<td>" + e.correo + "</td>" +
+                "<td>" + e.telefono + "</td>" +
+                "</tr>");
+            });
+          }
+        },
+        error: function (xhr) {
+          Toast.fire({
+            icon: "error",
+            title: "Error al buscar profesores >>> " + xhr.status + " " + xhr.statusText,
+          });
+        }
+      });
+  });
 }
 
 function agregarmodificarProfesor() {
-  $('#botonAceptar').on('click', function(e) {
+  $('#botonAceptar').on('click', function (e) {
     e.preventDefault();
     var id = $("input:radio[name=selected]:checked").val()
     var nombre = $("#inputNombre").val();
@@ -58,83 +67,154 @@ function agregarmodificarProfesor() {
     var titulacion = $("#inputTitulacion").val();
 
     var profesor = {
-    "nombre": nombre,
-    "apellido1": apellido1,
-    "apellido2": apellido2,
-    "nif": nif,
-    "telefono":telefono,
-    "correo": email,
-    "titulacion": titulacion
+      "nombre": nombre,
+      "apellido1": apellido1,
+      "apellido2": apellido2,
+      "nif": nif,
+      "telefono": telefono,
+      "correo": email,
+      "titulacion": titulacion
 
     }
 
-    console.log(profesor)
-
-    if(nombre && apellido1 && nif && telefono && email && titulacion){
-      var elboton = $('#myModal').find('.modal-footer button[id=botonAceptar]').text()
-      console.log(elboton)
-      if(elboton == "Crear"){
-        console.log(profesor)
+    if (nombre && apellido1 && nif && telefono && email && titulacion) {
+      var clicked = $('#myModal').find('.modal-footer button[id=botonAceptar]').text()
+      if (clicked == "Crear") {
         $.ajax("./api/v1/Profesores",
           {
             contentType: "application/json",
-            //dataType:'json',
             type: "POST",
-            data:JSON.stringify(profesor),
-            success:function(datos){
-              console.log("Se agrego el profesor");
+            data: JSON.stringify(profesor),
+            success: function (datos) {
+              Toast.fire({
+                icon: "success",
+                title: "El Profesor ha sido agregado con exito",
+              });
+              $("#myModal").modal("hide");
               limpiarTodo();
-                              },
-            error: function(xhr){alert("Error al insertar un profesor >>> " + xhr.status + " " + xhr.statusText);}
-          }); 
+            },
+            error: function (xhr) {
+              Toast.fire({
+                icon: "error",
+                title: "Error al insertar un profesor >>> " + xhr.status + " " + xhr.statusText,
+              });
+            }
+          });
 
-    }else if(elboton == "Modificar"){
-      profesor["id"] = id
-      $.ajax("./api/v1/Profesores",
-      {
-        contentType: "application/json",
-        dataType:'json',
-        type: "PUT",
-        data: JSON.stringify(profesor),
-        success:function(e){
-          console.log("Modificado");
+      } else if (clicked == "Modificar") {
+        profesor["id"] = id
+        $.ajax("./api/v1/Profesores",
+          {
+            contentType: "application/json",
+            dataType: 'json',
+            type: "PUT",
+            data: JSON.stringify(profesor),
+            success: function (e) {
+              Toast.fire({
+                icon: "success",
+                title: "El profesor ha sido modificado con exito",
+              });
+              $("#myModal").modal("hide");
               limpiarTodo();
-                          },
-        error: function(xhr){alert("Error al modificar un profesor >>> " + xhr.status + " " + xhr.statusText);}  		
-        });
-          
-    }else{
-      alert("Faltan Datos por rellenar");
-    }
-    window.location.href = "./profesor"
-  }else alert("Faltan Datos por rellenar");
-});
-}
+              setTimeout(redirect, 1240);
+            },
+            error: function (xhr) {
+              Toast.fire({
+                icon: "error",
+                title: "Error al modificar un profesor >>> " + xhr.status + " " + xhr.statusText,
+              });
+            }
+          });
 
-function eliminarProfesor() {
-  $('#btnbaja').on('click', function(e) { 
-    e.preventDefault();
-    var id = $("input:radio[name=selected]:checked").val()
-    if(confirm("¿Desea eliminar este profesor?")){
-    $.ajax("./api/v1/Profesores/"+id,{
-      type: "DELETE",
-      success:function(){console.log("Se eliminó el profesor"); window.location.href = "./profesor" },
-      error: function(xhr){alert("Error al eliminar un profesor>>> " + xhr.status + " " + xhr.statusText);}
+      } else {
+        Toast.fire({
+          icon: "warning",
+          title: "Faltan Datos por rellenar",
         });
-      }else {
-        alert("¡Haz cancelado la eliminacion!");
-        }
+      }
+    } else Toast.fire({
+      icon: "warning",
+      title: "Faltan Datos por rellenar",
+    });
   });
 }
 
+function eliminarProfesor() {
+  $('#btnbaja').on('click', function (e) {
+    e.preventDefault();
+    var id = $("input:radio[name=selected]:checked").val()
+
+    if (!id) {
+      Toast.fire({
+        icon: "error",
+        title: "Ningun profesor ha sido seleccionado"
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: "  ¿Desea eliminar el profesor?",
+      text: "No lo podras recuperar!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminalo!",
+      cancelButtonText: "Cancelar",
+      showClass: {
+        popup: "animated flipInY"
+      }
+    }).then(result => {
+      if (result.value) {
+
+        $.ajax("./api/v1/Profesores/" + id, {
+          type: "DELETE",
+          success: function () {
+            Toast.fire({
+              icon: "success",
+              title: "El profesor ha sido eliminado"
+            });
+            setTimeout(redirect, 1240);
+
+          },
+          error: function (xhr) {
+            Toast.fire({
+              icon: "success",
+              title:
+                "Error al eliminar un profesor >>> " +
+                xhr.status +
+                " " +
+                xhr.statusText
+            });
+          }
+        });
+      }
+    });
+  });
+}
+
+function redirect() {
+  window.location.href = "./profesor";
+}
+
 function llenarCampos() {
-  $('#btneditar').on('click', function(e) {
-      e.preventDefault();
-      var id = $("input:radio[name=selected]:checked").val()
-      $.ajax( "./api/v1/Profesores/"+id, 
+  $('#btnEditar').on('click', function (e) {
+    e.preventDefault();
+    var id = $("input:radio[name=selected]:checked").val();
+    if (!id) {
+      Toast.fire({
+        icon: "error",
+        title: "Ningun profesor ha sido seleccionado"
+      });
+      return;
+    }
+
+    cambiodeBoton("#btnEditar", "#myModal")
+    $("#myModal").modal("show");
+    $.ajax("./api/v1/Profesores/" + id,
       {
         type: "GET",
-        success:function(datos){
+        success: function (datos) {
           $("#inputNombre").val(datos.nombre);
           $("#inputApellido1").val(datos.apellido1);
           $("#inputApellido2").val(datos.apellido2);
@@ -143,34 +223,40 @@ function llenarCampos() {
           $("#inputCorreo").val(datos.correo);
           $("#inputTitulacion").val(datos.titulacion);
 
-          },
-        error: function(xhr){
-          $('#myModal').modal('hide')
-          alert("Error al traer datos >>> "+ xhr.status + " " + xhr.statusText);
-                              }
+        },
+        error: function (xhr) {
+          $("#myModal").modal("hide");
+          Toast.fire({
+            icon: "error",
+            title: "Error al traer datos >>> " + xhr.status + " " + xhr.statusText
+          });
+        }
       });
-                                              });
+  });
+
+  $("#btnCrear").on("click", function (e) {
+    e.preventDefault();
+    limpiarTodo();
+    cambiodeBoton("#btnCrear", "#myModal");
+});
+
 }
 
-function cambiodeBoton() {
-$('#myModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var recipient = button.data('titulo') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var recipient2 = button.data('boton')
-    var modal = $(this)
-    modal.find('.modal-title').text(recipient)
-    modal.find('.modal-footer button[id=botonAceptar]').text(recipient2)
-  })
-
+function cambiodeBoton(name, modal) {
+  var button = $(name);
+  var recipient = button.data("titulo");
+  var recipient2 = button.data("boton");
+  console.log(recipient, recipient2);
+  var modal = $(modal);
+  modal.find(".modal-title").text(recipient);
+  modal.find(".modal-footer button[id=botonAceptar]").text(recipient2);
 }
 
 function limpiarBusqueda() {
-  $('#limpiar').on('click', function(event){
-      $('.card-body input').val("")
-    });
-  }
+  $('#limpiar').on('click', function (event) {
+    $('.card-body input').val("")
+  });
+}
 
 function limpiarTodo() {
   $("input[type=text]").val("");

@@ -15,4 +15,9 @@ public interface AsignaturaRepository extends JpaRepository<Asignatura, Long> {
     List<Asignatura> findAsignaturaByNombre(
         @Param("nombre") String nombre);
 
+    @Query("SELECT a FROM Asignatura a WHERE a.curso.nivel = :nivel and a.curso.etapa = :etapa" )
+    List<Asignatura> findAsignaturaByCurso(
+        @Param("nivel") String nivel,
+        @Param("etapa") String etapa);
+
 }

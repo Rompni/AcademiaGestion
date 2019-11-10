@@ -15,6 +15,15 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
     List<Alumno> findAlumnoByNombre(
         @Param("nombre") String nombre);
 
-    
+    @Query("SELECT a FROM Alumno a WHERE a.cursoA.id = :id" )
+    List<Alumno> findAlumnoByCurso(
+        @Param("id") Long id);
+
+    @Query("SELECT a FROM Alumno a WHERE a.cursoA.id = :id and a.nombre = :nombre" )
+    List<Alumno> findAlumnoByCursoAndNombre(
+        @Param("id") Long id,
+        @Param("nombre") String nombre
+        );
+
     
 }

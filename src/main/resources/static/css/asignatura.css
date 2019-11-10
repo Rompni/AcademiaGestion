@@ -9,19 +9,21 @@
     --bg-color-2: #202020;
 }
 
-body {
+
+table
+{
+    height: 100%;
+    width: 50%;  
+}
+
+
+body
+{
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; 
-  }
+}
   
-  h2
-  {    
-      width: 100%;
-      font-family: Georgia, serif;
-      color: var(--label-color);
-  }
-
 .fc h1
 {
     width: 100%;
@@ -29,24 +31,37 @@ body {
     color: var(--label-color);
     text-shadow: 1px 2px rgb(0, 0, 0);
     margin-bottom: 0px;
-    font-size: 3rem;
 }
 
-p {
+h2
+{    
+    width: 100%;
+    font-family: Georgia, serif;
+    color: var(--label-color);
+}
+
+p
+{
     font-size: 20px;
 }
 
-thead {
-    text-align: center;
+.form-group{
+    text-align:center;
+    margin: 2%;
   }
 
-.alineado{
-    text-align: center;
-  }
-
-.form-check-input {
+.form-check-input
+{
     margin-left: 0;
     position: relative;
+}
+
+.form-control
+{
+    padding:10px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: sans-serif;
 }
 
 .fc
@@ -59,10 +74,10 @@ thead {
 {
 	width:100%;
 	margin:auto;
-	max-width:825px;
+	max-width:685px;
 	min-height:580px;
 	position:relative;
-	background:url(https://images.unsplash.com/photo-1511629091441-ee46146481b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80) no-repeat center;
+	background:url(https://images.unsplash.com/photo-1494809610410-160faaed4de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=40) no-repeat center;
     box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
     border: 1px solid var(--border-color);
 }
@@ -103,14 +118,14 @@ label
 }
 
 
-#myModal label
+#myModal3 label
 {
     color: black;
     margin-bottom:0;
     text-align: left;
 }
 
-#myModal h4
+#myModal3 h4
 {
     width: 100%;
     font-family: Georgia, serif;
@@ -122,21 +137,3 @@ hr{
     margin-top: 0px;
 }
 
-
-.form-control
-{
-    padding:10px 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-family: sans-serif;
-}
-
-thead {
-   
-    text-align: center;
-  }
-
-  .form-group{
-    text-align:center;
-    margin: 2%;
-  }

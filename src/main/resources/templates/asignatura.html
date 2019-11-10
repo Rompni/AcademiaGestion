@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layouts/base::head('Mantenimiento de Asignaturas','curso')"></head>
+<head th:replace="layouts/base::head('Mantenimiento de Asignaturas','asignatura')"></head>
 
 <body>
     <header th:replace="layouts/base::header()"></header>
 
-<div class="container">
-  <h1 class="mt-3">Mantenimiento de Asignaturas</h1>
-  <hr/>
-      <div class="card">
-        <div class="card-header bg-success">
+<div class="container mt-3 mb-3 fd animated bounceInDown">
+  <div class="fc">
+      <h1 class="pr-3 pl-3 animated bounce">Mantenimiento de Asignaturas</h1>
+      <hr class="mr-3 ml-3"/>
+      <div class="card mt-md-3 animated bounce">
+        <div class="card-header ml-4">
           <h2 class="card-title">Asignaturas Actuales</h2>
         </div>
       <div class="card-body">
         <div class="form-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal3" data-titulo="Nueva Asignatura" data-boton="Crear">Nueva Asignatura</button>
-                  <button type="button" class="btn btn-outline-secondary" id="btnEditar" data-toggle="" data-target="#myModal3" data-titulo="Modificar Asignatura" data-boton="Modificar">Editar Asignatura</button>
-                  <button type="button" class="btn btn-outline-secondary" id="btnbaja">Eliminar Asignatura</button>
+                  <button type="button" class="btn btn-outline-light" id="btnCrear" data-toggle="modal" data-target="#myModal3" data-titulo="Nueva Asignatura" data-boton="Crear">Nueva Asignatura</button>
+                  <button type="button" class="btn btn-outline-light" id="btnEditar" data-toggle="" data-target="#myModal3" data-titulo="Modificar Asignatura" data-boton="Modificar">Editar Asignatura</button>
+                  <button type="button" class="btn btn-outline-light" id="btnbaja">Eliminar Asignatura</button>
       </div>
     <div class="form-group">
-      <table class="table" id="A-tabla">
-        <thead>
+      <div class="table-responsive">
+      <table class="table table-bordered " id="A-tabla">
+        <thead class="thead-light">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
@@ -31,17 +33,19 @@
       </div>
     </div> 
   </div>
+  </div>
+</div>
 </div>
 
 <section3>
     
     <!-- The Modal -->
-    <div class="modal" id="myModal3" aria-hidden="true" style="display: none;">
-      <div class="modal-dialog modal-lg">
+    <div class="modal" id="myModal3" aria-hidden="true">
+      <div class="modal-dialog flipInY animated">
         <div class="modal-content">
     
           <!-- Modal Header -->
-          <div class="p-3 mb-2 bg-success text-white">
+          <div class="p-3 mb-2 text-white bg-dark">
               <div class="modal-header">
                   <h4 class="modal-title">Crear Asignatura</h4>
                   <button type="button" class="close" data-dismiss="modal">×</button>
@@ -51,29 +55,42 @@
     
           <!-- Modal body -->
           <div class="modal-body">              
-              <div class="row">
               <div class="col">
-                      <div class="form-group">
-                          <div class="col">
-                            <input type="text" class="form-control" id="inputNombre" placeholder="Nombre de la Asignatura">
+                      <div class="form-group input-group">
+                        <div class="input-group-prepend">                           
+                          <span class="input-group-text"> Asignatura: </span>    
+                        </div> 
+                        
+                        <input type="text" class="form-control" id="inputNombre" placeholder="Nombre de la Asignatura">
+                      
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="icon-bookmark"></i>
+                            </span>
                           </div>
                       </div>
-                    <div class="form-group">
-                      <div class="col">
-                        <label for="inputCurso">Cursos:</label>
-                        <select class="form-control" id="inputCurso">
-                        </select>
+
+
+                    <div class="form-group input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Cursos:</span> 
+                      </div>
+                      <select class="form-control" id="inputCurso"></select>
+
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="icon-pushpin"></i>
+                        </span>
                       </div>
                     </div>
             </div>       
-          </div>
         </div>
     
           <!-- Modal footer -->
           <div class="modal-footer">
 
-            <button type="button" class="btn btn-success" data-dismiss="modal" id="botonAceptar">Crear</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-dark" id="botonAceptar">Crear</button>
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
             
           </div>
     

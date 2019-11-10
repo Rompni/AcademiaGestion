@@ -21,27 +21,12 @@ import org.springframework.stereotype.Service;
 public class AlumnoServicioImpl implements AlumnoServicio {
 
     @Autowired private AlumnoRepository aRepository;
-    @Autowired private CursoServicio cService;
-    @Autowired private ResponsableServicio rService;
+    
 
     private Logger LOG = Logger.getLogger(AlumnoServicioImpl.class);
 
     @Override
     public Alumno save(Alumno alumno) {
-        
-        Curso curso = cService.BuscarCursoPorId(Long.parseLong(alumno.getStringaux()));
-        List<Alumno> a =  Arrays.asList(alumno);
-        curso.setAlumnos(a);
-        curso = cService.save(curso);
-        alumno.setCursoA(curso);
-
-        //Responsable responsable = alumno.getResponsable();
-        //if(responsable != null) {
-        //responsable.setAlumnosrespon(new LinkedList<Alumno>());
-        //responsable.getAlumnosrespon().add(alumno);
-        //responsable = rService.save(responsable);
-        //alumno.setResponsable(responsable);
-        //}
         return aRepository.save(alumno);
     }
 
@@ -70,6 +55,16 @@ public class AlumnoServicioImpl implements AlumnoServicio {
     @Override
     public List<Alumno> buscarAlumnos() {
         return aRepository.findAll();
+    }
+
+    @Override
+    public List<Alumno> BuscarAlumnoPorCurso(String id) {
+        return aRepository.findAlumnoByCurso(Long.parseLong(id));
+    }
+
+    @Override
+    public List<Alumno> BuscarAlumnoPorCursoyNombre(String id, String Nombre) {
+        return aRepository.findAlumnoByCursoAndNombre(Long.parseLong(id), Nombre);
     }
 
     

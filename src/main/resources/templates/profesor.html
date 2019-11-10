@@ -1,276 +1,362 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="layouts/base::head('Profesores','profesor')"></head>
 
 <body>
-<header th:replace="layouts/base::header()"></header>
+  <header th:replace="layouts/base::header()"></header>
 
-<div class="container">
-  <h1>Profesorado</h1>
-  <hr/>
-  <div class="card">
-            <div class="card-header bg-success">
-                    <h2 class="card-title">Busqueda de profesores</h2>
+  <div class="container mt-3 mb-3 fd animated bounceInDown">
+    <div class="fc">
+      <div class="col-6">
+        <h1 class="pr-3 pl-4 animated bounce">Profesores</h1>
+        <hr class="mr-3 ml-3" />
+      </div>
+      <div class="card mt-md-3 animated bounce">
+        <div class="card-header">
+          <h2 class="card-title ml-4">Busqueda de profesores</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="icon-font"></i>
+              </span>
             </div>
-          <div class="card-body">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="inputNombreBusqueda" placeholder="Nombre del Profesor">
-                </div>
 
-                <div class="form-group">
-                    <input type="number" class="form-control" id="inputNifBusqueda" placeholder="Numero de Identificación">
-                </div>
-          </div> 
-          <div class="card-footer text-center ">
-                <button type="button" class="btn btn-success" id="btn1">Buscar</button>
-                <button type="button" class="btn btn-success" id="limpiar">Limpiar</button>
+            <input type="text" class="form-control" id="inputNombreBusqueda" placeholder="Nombre del Profesor" />
           </div>
-    </div>
 
-      <div class="card">
-        <div class="card-header bg-success">
+          <div class="form-group input-group">
+            <input type="number" class="form-control" id="inputNifBusqueda" placeholder="Numero de Identificación" />
+
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="icon-archive"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-center ">
+          <button type="button" class="btn btn-light" id="btn1">
+            Buscar
+          </button>
+          <button type="button" class="btn btn-light" id="limpiar">
+            Limpiar
+          </button>
+        </div>
+      </div>
+
+      <div class="card mt-md-3 animated bounce">
+        <div class="card-header">
           <h2 class="card-title">Resultado de la busqueda</h2>
         </div>
-      <div class="card-body">
-        <div class="form-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal" data-titulo="Nuevo Profesor" data-boton="Crear" id="btnnuevo">Nuevo Profesor</button>      
-        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal"  data-titulo="Datos personales" data-boton="Modificar" id="btneditar">Datos personales</button>
-        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal2" id="btnclases" disabled>Clases</button>
-        <button type="button" class="btn btn-outline-secondary" id="btnbaja">Eliminar Profesor</button>
-      </div>
-    <div class="form-group">
-      <table class="table table-bordered table-hover" id="A-tabla">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">NIF</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Telefono</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-      </div>
-    </div> 
-  </div>
-</div>
-
-<section>
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="p-3 mb-2 bg-success text-white">
-      <div class="modal-header">
-        <h4 class="modal-title">Nuevo profesor</h4>
-        <button type="button" class="close" data-dismiss="modal">×</button>
+        <div class="card-body">
+          <div class="form-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#myModal"
+              data-titulo="Nuevo Profesor" data-boton="Crear" id="btnCrear">
+              Nuevo Profesor
+            </button>
+            <button type="button" class="btn btn-outline-light" data-toggle="" data-target="#myModal"
+              data-titulo="Datos personales" data-boton="Modificar" id="btnEditar">
+              Datos personales
+            </button>
+            <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#myModal2"
+              id="btnclases" disabled>
+              Clases
+            </button>
+            <button type="button" class="btn btn-outline-light" id="btnbaja">
+              Eliminar Profesor
+            </button>
+          </div>
+          <div class="form-group">
+            <div class="table-responsive">
+              <table class="table table-bordered table-light " id="A-tabla">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">NIF</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Telefono</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
 
-      <!-- Modal body -->
-      <div class="modal-body">
-          <div class="form-group">
-              <label class="col-md-4 control-label">Nombre</label>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control " id="inputNombre" placeholder="Nombre">
+  <section>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog flipInY animated">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="p-3 mb-2 text-white bg-dark">
+            <div class="modal-header">
+              <h4 class="modal-title">Nuevo profesor</h4>
+              <button type="button" class="close" data-dismiss="modal">
+                ×
+              </button>
+            </div>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="col">
+              <div class="form-group input-group" >
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Nombre: </span>
                 </div>
-          </div>
-          <div class="form-group">
-                  <label class="col-md-4 control-label">Primer Apellido</label>
-                      <div class="col-sm-12">
-                          <input type="text" class="form-control" id="inputApellido1" placeholder="Primer Apellido">
-                      </div>
-          </div>
-          <div class="form-group">
-                  <label class="col-md-4 control-label">Segundo Apellido</label>
-                      <div class="col-sm-12">
-                          <input type="text" class="form-control" id="inputApellido2" placeholder="Segundo Apellido" >
-                      </div>
-          </div>
-          <div class="form-group">
-                  <label class="col-md-4 control-label">Nif</label>
-                      <div class="col-sm-12">
-                          <input type="number" class="form-control" id="inputNif" placeholder="Numero de Identificación">
-                      </div>
-          </div>
-          <div class="form-group">
-                  <label class="col-md-4 control-label">Telefono</label>
-                      <div class="col-sm-12">
-                          <input type="number" class="form-control" id="inputTelefono" placeholder="Numero de Telefono">
-                      </div>
-          </div>
-          <div class="form-group">
-              <label class="col-md-4 control-label">Correo</label>
-              <div class="col-sm-12">
-                  <input type="email" class="form-control" id="inputCorreo" placeholder="Correo Electrónico">
+
+                <input type="text" class="form-control " id="inputNombre" placeholder="Nombre" />
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-pencil"></i>
+                  </span>
+                </div>
               </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-info"></i>
+                  </span>
+                </div>
+
+                <input type="text" class="form-control" id="inputApellido1" placeholder="Primer Apellido" />
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Primer Apellido </span>
+                </div>
+              </div>
+              <div class="form-group input-group">
+
+                <input type="text" class="form-control" id="inputApellido2" placeholder="Segundo Apellido" />
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Segundo Apellido </span>
+                </div>
+              </div>
+              
+              <div class="form-group input-group">
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> NIF </span>
+                </div>
+
+                <input type="number" class="form-control" id="inputNif" placeholder="Numero de Identificación" />
+                
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="icon-exclamation"></i>
+                    </span>
+                  </div>
+              
+              </div>
+              <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"> Telefono </span>
+                    </div>
+
+                  <input type="number" class="form-control" id="inputTelefono" placeholder="Numero de Telefono" />
+
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                          <i class="icon-phone"></i>
+                      </span>
+                    </div>
+
+              </div>
+              <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"> Correo </span>
+                  </div>
+
+                  <input type="email" class="form-control" id="inputCorreo" placeholder="Correo Electrónico" />
+
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                          <i class="icon-google-plus"></i>
+                      </span>
+                    </div>
+
+              </div>
+
+              <div class="form-group input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text">
+                          <i class="icon-star"></i>
+                      </span>
+                    </div>
+
+                  <input type="text" class="form-control" id="inputTitulacion" placeholder="Titulacion" />
+                
+                  <div class="input-group-prepend">
+                      <span class="input-group-text"> Titulación </span>
+                  </div>
+
+              </div>
+            </div>
           </div>
-
-          <div class="form-group">
-                  <label class="col-md-4 control-label">Titulacion</label>
-                      <div class="col-sm-12">
-                          <input type="text" class="form-control" id="inputTitulacion" placeholder="Titulacion">
-                      </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" id="botonAceptar">
+              Crear
+            </button>
+            <button type="button" class="btn btn-dark" data-dismiss="modal">
+              Cancelar
+            </button>
           </div>
+        </div>
       </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-
-        <button type="button" class="btn btn-success" data-dismiss="modal" id=botonAceptar>Crear</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
-        
-      </div>
-
     </div>
-  </div>
-</div>
-</section>
+  </section>
 
-<section2> 
+  <section2>
     <!-- The Modal -->
     <div class="modal" id="myModal2" aria-hidden="true" style="display: none;">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
-    
           <!-- Modal Header -->
           <div class="p-3 mb-2 bg-success text-white">
-          <div class="modal-header">
-            <h4 class="modal-title">Horario</h4>
-            <button type="button" class="close" data-dismiss="modal">×</button>
+            <div class="modal-header">
+              <h4 class="modal-title">Horario</h4>
+              <button type="button" class="close" data-dismiss="modal">
+                ×
+              </button>
+            </div>
           </div>
-        </div>
           <!-- Modal body -->
           <div class="modal-body">
-                  <table class="table table-striped table-inverse table-bordered text-center">
-                          <thead class="thead-inverse">
-                              <tr>
-                                  <th>Hora</th>
-                                  <th>Lunes</th>
-                                  <th>Martes</th>
-                                  <th>Miercoles</th>
-                                  <th>Jueves</th>
-                                  <th>Viernes</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td scope="row">09:00 - 10:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                                <tr>
-                                  <td scope="row">10:00 - 11:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                                <tr>
-                                  <td scope="row">11:00 - 12:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                                <tr>
-                                  <td scope="row">12:00 - 13:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                                <tr>
-                                  <td scope="row">13:00 - 14:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                                <tr>
-                                   <td scope="row">14:00 - 15:00</td>
-                                   <td>-</td>
-                                   <td>-</td>
-                                   <td>-</td>
-                                   <td>-</td>
-                                   <td>-</td>
-                                </tr>
-                                <tr>
-                                  <td scope="row">15:00 - 16:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                                <tr>
-                                  <td scope="row">16:00 - 17:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                                <tr>
-                                  <td scope="row">17:00 - 18:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                                <tr>
-                                  <td scope="row">18:00 - 19:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                                <tr>
-                                  <td scope="row">19:00 - 20:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                                <tr>
-                                  <td scope="row">20:00 - 21:00</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                  <td>-</td>
-                                </tr>
-                              </tbody>
-                      </table>
+            <table class="table table-striped table-inverse table-bordered text-center">
+              <thead class="thead-inverse">
+                <tr>
+                  <th>Hora</th>
+                  <th>Lunes</th>
+                  <th>Martes</th>
+                  <th>Miercoles</th>
+                  <th>Jueves</th>
+                  <th>Viernes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td scope="row">09:00 - 10:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">10:00 - 11:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">11:00 - 12:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">12:00 - 13:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">13:00 - 14:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">14:00 - 15:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">15:00 - 16:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">16:00 - 17:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">17:00 - 18:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">18:00 - 19:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">19:00 - 20:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td scope="row">20:00 - 21:00</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-    
+
           <!-- Modal footer -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-            
+            <button type="button" class="btn btn-success" data-dismiss="modal">
+              Aceptar
+            </button>
           </div>
-    
         </div>
       </div>
     </div>
- </section2>
+  </section2>
 
- <footer th:replace="layouts/base::footer('profesor')"></footer>
+  <footer th:replace="layouts/base::footer('profesor')"></footer>
 </body>
-
 
 </html>

@@ -24,11 +24,6 @@ public class AsignaturaServicioImpl implements AsignaturaServicio {
 
     @Override
     public Asignatura save(Asignatura asignatura) {
-        List<Asignatura> asignaturas= Asignaturarepositorio.findAsignaturaByNombre(asignatura.getNombre());
-        for(Asignatura a: asignaturas)
-            if(a.getNombre().compareToIgnoreCase(asignatura.getNombre()) == 0)
-                throw new EntityNotFoundException("Asignatura existente");
-
         return Asignaturarepositorio.save(asignatura);
     }
 
@@ -59,6 +54,7 @@ public class AsignaturaServicioImpl implements AsignaturaServicio {
         return Asignaturarepositorio.findAll();
     }
     
+    @Override
     public List<Asignatura> BuscarAsignaturaPorCurso(String id) {
         Curso curso = cService.BuscarCursoPorId(Long.parseLong(id));
         return curso.getAsignaturas();

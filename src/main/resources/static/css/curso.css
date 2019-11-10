@@ -1,17 +1,25 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+:root {
+    --border-color: #999999;
+    --form-color: rgba(0, 0, 0, .7);
+    --label-color: #fff;
+    --bg-color: #101010;
+    --bg-color-2: #202020;
+  }
+
+
 table{
     height: 100%;
     width: 50%;
     
 }
 
-.card{
-    margin-right: 20%;
-    margin-left: 20%;
-    height: 439px;
-
+hr{
+    border: 2px solid var(--form-color);
+    margin-top: 0px;
 }
+
 
 body {
     font-family: "Roboto", sans-serif;
@@ -19,31 +27,97 @@ body {
     -moz-osx-font-smoothing: grayscale; 
   }
   
-  footer {
-    text-align:center;
-    background-color: #373B44;
-    color: white;
-    bottom: 0;
+  h1,h3{
     width: 100%;
-    height: 50px;
-    position: fixed;
+    font-family: Georgia, serif;
+    color: var(--label-color);
+    margin-bottom: 0px;
+    text-shadow: 1px 2px rgb(0, 0, 0);
+
 }
 
- h2, h3 {
-    font-weight: 900;
-    color: white;
-}
-
-h1 {
-    color: black;
-    font-weight: 900;
+h2{
+  width: 100%;
+  font-family: Georgia, serif;
+  color: var(--label-color);
+  margin-bottom: 0px;
 }
 
 p {
     font-size: 20px;
 }
 
+.card .form-group{
+    text-align:center;
+}
+
 .form-check-input {
     margin-left: 0;
     position: relative;
+}
+
+.form-control{
+	padding:10px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-family: sans-serif;
+  }
+
+.fc{
+    margin: 5%;
+}
+
+
+.fd{
+	width:100%;
+	margin:auto;
+	max-width:585px;
+	min-height:580px;
+	position:relative;
+	background:url(https://beic.az/images/services/a86e7d722abackground-courses.jpg) no-repeat center;
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+    border: 1px solid var(--border-color);
+}
+
+.fd .card .card-header{
+    background: var(--form-color)
+    
+}
+.fd .card .card-body{
+  padding-bottom: 0;
+}
+
+.fd .card {
+  background:rgba(0, 0, 0, .27);
+  margin-bottom: 40px;
+
+}
+
+label{color: white;}
+
+
+#myModal3 label{
+    color: black;
+    margin-bottom:0;
+    text-align: left;
+  }
+
+#myModal3 h4{
+    width: 100%;
+    font-family: Georgia, serif;
+    font-size: 30px;
+}
+
+
+.table, .table-responsive, .table-light, .table-hover{
+  border-radius: 30px;
+  border: none;
+  margin-bottom: 0;
+  border-color: white;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+}
+
+.table td{
+    background-color: rgba(27, 26, 26, 0.5);
 }

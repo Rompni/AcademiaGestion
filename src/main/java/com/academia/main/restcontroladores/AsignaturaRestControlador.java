@@ -2,8 +2,12 @@ package com.academia.main.restcontroladores;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import com.academia.main.entidades.Asignatura;
+import com.academia.main.entidades.Curso;
 import com.academia.main.servicios.AsignaturaServicio;
+import com.academia.main.servicios.CursoServicio;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class AsignaturaRestControlador {
 
-	@Autowired
-	private AsignaturaServicio AsignaturaServicio;
+	@Autowired private AsignaturaServicio AsignaturaServicio;
+
+	@Autowired private CursoServicio cursoServicio;
 
 	@GetMapping("/Asignaturas")
 	public List<Asignatura> getAsignaturas(){
@@ -30,6 +35,10 @@ public class AsignaturaRestControlador {
 	
 	@PostMapping("/Asignaturas")
 	public Asignatura crearAsignatura(@RequestBody Asignatura Asignatura) {
+		List<Asignatura> asignaturasDelCurso = AsignaturaServicio.BuscarAsignaturaPorCurso(Long.toString(Asignatura.getCurso().getId())); 
+        for(Asignatura a: asignaturasDelCurso)
+            if(a.getNombre().compareToIgnoreCase(Asignatura.getNombre()) == 0)
+                throw new EntityNotFoundException("Asignatura existente");
 		return AsignaturaServicio.save(Asignatura);
 	}
 	

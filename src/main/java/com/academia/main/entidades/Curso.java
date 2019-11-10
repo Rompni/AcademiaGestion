@@ -24,7 +24,7 @@ public class Curso implements Serializable {
 	@Column(nullable = false)
 	private String etapa;
 	
-	@OneToMany(mappedBy = "cursoA", cascade = { CascadeType.ALL })
+	@OneToMany(mappedBy = "cursoA", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	@JsonIgnore
 	private List<Alumno> alumnos;
 

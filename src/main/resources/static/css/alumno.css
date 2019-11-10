@@ -13,26 +13,31 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; 
   }
-  
-  footer {
-    text-align:center;
-    background-color: #373B44;
-    color: white;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    height: 50px;
-}
 
-    
+  h2,h5
+  {    
+      width: 100%;
+      font-family: Georgia, serif;
+      color: var(--label-color);
+  }
 
-h1,h2,h3{
-    color: #222;
+  h4
+  {    
+      width: 100%;
+      font-family: Georgia, serif;
+      color: var(--label-color);
+      font-size: 2.2rem;
+  }
+.fc h1
+{
     width: 100%;
     font-family: Georgia, serif;
     color: var(--label-color);
-
+    text-shadow: 1px 2px rgb(0, 0, 0);
+    margin-bottom: 0px;
+    font-size: 3.2rem;
 }
+
 p {
     font-size: 20px;
 }
@@ -49,17 +54,20 @@ thead {
 
   .form-control{
 	padding:10px 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    background: var(--form-color);
-    color: var(--label-color);
-    font-family: sans-serif;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  font-family: sans-serif;
   }
+
+  hr{
+    border: 2px solid var(--form-color);
+    margin-top: 0px;
+}
 
   .fd{
 	width:100%;
 	margin:auto;
-	max-width:785px;
+	max-width:845px;
 	min-height:570px;
 	position:relative;
 	background:url(https://images.unsplash.com/photo-1558021211-6d1403321394?ixlib=rb-1.2.1&auto=format&fit=crop&w=1068&q=70) no-repeat center;
@@ -67,27 +75,45 @@ thead {
     border: 1px solid var(--border-color);
 }
 
-.fd .card{
-    margin: 2%;
+.fd .card .card-header{
     background: var(--form-color)
     
 }
+.fd .card .card-body{
+  padding-bottom: 0;
+}
 
-label{
-    display: block;
-    color: var(--label-color);
-    font-size: 80%;
-  }
+.fd .card {
+  background:rgba(0, 0, 0, .27);
+  margin-bottom: 40px;
 
-  fieldset {
-    width: 80%;
-    border: 1px solid var(--form-color);
-    border-radius: 15px;
-  }
-  fieldset legend {
-    background: var(--border-color);
-    color: var(--label-color);
-    text-shadow: 2px 2px 4px var(--form-color);
-    border-radius: 10px;
-    padding: 0 .5em;
-  }
+}
+
+label{color: white;}
+
+#myModal3 label{
+  color: black;
+}
+
+ .modal-dialog{
+  max-width:725px;
+  
+  align-content: center;
+}
+
+.table, .table-responsive, .table-light, .table-hover{
+  border-radius: 30px;
+  border: none;
+  margin-bottom: 0;
+  background-color: rgba(216, 216, 216, 0.445);
+}
+
+.table-bordered{
+  border-bottom-color: 1px solid #101010;
+}
+
+.form-group{
+  text-align:center;
+  margin: 2%;
+}
+
