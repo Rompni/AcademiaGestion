@@ -1,321 +1,351 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layouts/base::head('Clases','alumno')"></head>
+
+<head th:replace="layouts/base::head('Clases','clase')"></head>
 
 <body>
-    <header th:replace="layouts/base::header()"></header>
+  <header th:replace="layouts/base::header()"></header>
 
-<div class="container">
-  <h1 class="mt-3">Clases</h1>
-  <hr/>
-    <div class="card">
-        <div class="card-header bg-success">
-                <h2 class="card-title">Busqueda de Clases</h2>
+  <div class="container mt-3 mb-3 fd animated bounceInDown">
+    <div class="fc">
+      <div class="col-6">
+        <h1 class="pt-3 pl-5 animated bounce">Clases</h1>
+        <hr class="mr-5 ml-3" />
+      </div>
+      <div class="card mt-md-3 animated bounce">
+        <div class="card-header">
+          <h2 class="card-title ml-4 ">Busqueda de Clases</h2>
         </div>
-      <div class="card-body">
+
+        <div class="card-body">
+
+          <div class="form-group input-group">
+            <select class="form-control" id="inputCurso">
+            </select>
+
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="icon-pushpin"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="icon-bookmark"></i>
+              </span>
+            </div>
+
+            <select class="form-control" id="inputAsignatura">
+            </select>
+          </div>
+
+          <div class="form-group input-group">
+
+            <select class="form-control" id="inputProfesor">
+            </select>
+
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="icon-male"></i>
+              </span>
+            </div>
+
+          </div>
+        </div>
+        <div class="card-footer text-center ">
+          <button type="submit" class="btn btn-light" id="buscar">Buscar</button>
+          <button type="button" class="btn btn-light" id="limpiar">Limpiar</button>
+        </div>
+      </div>
+
+      <div class="card mt-md-5 mt-md-3 animated bounce">
+        <div class="card-header">
+          <h2 class="card-title">Resultados de la busqueda</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#myModal3"
+              data-titulo="Nueva Clase" data-boton="Crear" id="btnCrear">Nueva Clase</button>
+            <button type="button" class="btn btn-outline-light" data-toggle="" data-target="#myModal3" id="btnEditar"
+              data-titulo="Editar Clase" data-boton="Modificar">Editar Clase</button>
+            <button type="button" class="btn btn-outline-light" data-toggle="modal"
+              data-target="#myModal6">Alumnos</button>
+            <button type="button" class="btn btn-outline-light" id="btnbaja">Eliminar clases</button>
+          </div>
 
           <div class="form-group">
-              <input type="text" class="form-control" id="inputCurso" placeholder="Indique un Curso">
+            <div class="table-responsive">
+              <table class="table table-bordered table-light " id="A-tabla">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Asignatura</th>
+                    <th scope="col">Profesor</th>
+                    <th scope="col">Horario</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
           </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="inputAsignatura" placeholder="Indique una asignatura">
-            </div>
-
-            <div class="form-group">
-                <input type="text" class="form-control" id="inputProfesor" placeholder="Nombre del profesor">
-            </div>
-      </div> 
-      <div class="card-footer text-center ">
-            <button type="button" class="btn btn-success">Buscar</button>
-            <button type="button" class="btn btn-success ">Limpiar</button>
+        </div>
       </div>
-</div>
-  <div class="card">
-    <div class="card-header bg-success">
-      <h2 class="card-title">Resultados de la busqueda</h2>
     </div>
-  <div class="card-body">
-    <div class="form-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal5" data-titulo="Nueva Clase" data-boton="Crear">Nueva Clase</button>
-              <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal5" id="btnEditar" data-titulo="Editar Clase" data-boton="Modificar">Editar Clase</button>
-              <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal6">Alumnos</button>
-              <button type="button" class="btn btn-outline-secondary" id="btnbaja" >Eliminar clases</button>
-  </div>
-<div class="form-group">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Curso</th>
-        <th scope="col">Asignatura</th>
-        <th scope="col">Profesor</th>
-        <th scope="col">Horario</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
-  </div>
-</div> 
-</div>
   </div>
 
-<section5>
-    
-      <!-- The Modal -->
-      <div class="modal fade" id="myModal5" aria-hidden="true">
-        <div class="modal-dialog modal-lg bounceInDown animated">
-          <div class="modal-content">
-      
-            <!-- Modal Header -->
-           
-            <div class="p-3 mb-2 bg-success text-white">
-                <div class="modal-header">
-                    <h4 class="modal-title">Nuevo Clase</h4>
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                  </div>
+  <section5>
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal3" aria-hidden="true">
+      <div class="modal-dialog flipInY animated">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+
+          <div class="p-3 mb-2 text-white bg-dark">
+            <div class="modal-header">
+              <h4 class="modal-title">Nuevo Clase</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
-      
-            <!-- Modal body -->
-            <div class="modal-body">
-             <div>
+          </div>
 
-              <div class="form-group">
-                  <div class="col">
-                    <label for="cursoClase">Cursos:</label>
-                    <select class="form-control" id="cursoClase">
-                    </select>
-                  </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="row">
+
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Curso: </span>
                 </div>
 
-                <div class="form-group">
-                    <div class="col">
-                      <label for="asignaturaClase">Asignatura:</label>
-                      <select class="form-control" id="asignaturaClase">
-                      </select>
-                    </div>
+                <select class="form-control" id="cursoClase"></select>
+
+                <span class="input-group-text">
+                  <i class="icon-pushpin"></i>
+                </span>
+              </div>
+
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Asignatura: </span>
                 </div>
 
-                <div class="form-group">
-                    <div class="col">
-                      <label for="profesorClase">Profesor:</label>
-                      <select class="form-control" id="profesorClase">
-                      </select>
-                    </div>
+                <select class="form-control" id="asignaturaClase"></select>
+
+                <span class="input-group-text">
+                  <i class="icon-bookmark"></i>
+                </span>
+              </div>
+
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Profesor: </span>
                 </div>
 
-                <h5>Horario</h5>
-                <div class="form-group">
-                  <div class="col">
-                    <label for="horaClase">Hora: </label>
-                    <input id="horaClase" type="time" name="horaClase">
-                  </div>
-                </div>
+                <select class="form-control" id="profesorClase"></select>
 
-                <div class="form-group">
-                    <div class="col">
-                      <label for="diaClase">Dia:</label>
-                      <select class="form-control" id="diaClase">
-                          <option value="lunes">Lunes</option>
-                          <option value="martes">Martes</option>
-                          <option value="miercoles">Miercoles</option>
-                          <option value="jueves">Jueves</option>
-                          <option value="viernes">Viernes</option>
-                          <option value="sabado">Sabado</option>
-                          <option value="domingo">Domingo</option>
-                      </select>
-                      
-                    </div>
-                  </div>
+                <span class="input-group-text">
+                  <i class="icon-male"></i>
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <h4>Horario</h4>
+              <div class="table-responsive">
+                <table id="tabla" class="table table-bordered table-sm text-center table-dark">
+                  <thead class="thead-dark">
+                    <tr class="head">
+                      <th>Hora</th>
+                      <th>Lunes</th>
+                      <th>Martes</th>
+                      <th>Miercoles</th>
+                      <th>Jueves</th>
+                      <th>Viernes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">08:00-9:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">09:00-10:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">10:00-11:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">11:00-12:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">12:00-13:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">13:00-14:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">14:00-15:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">15:00-16:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">16:00-17:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">17:00-18:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">18:00-19:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">19:00-20:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">20:00-21:00</th>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                      <td class="clicker"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-             </div>
-             
-             
+          <!-- Modal footer -->
+          <div class="modal-footer">
 
-             <!--
-             <table class="table table-striped table-inverse table-bordered text-center">     
+            <button type="button" class="btn btn-dark" data-dismiss="" id="botonAceptar">Crear</button>
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section5>
+
+  <section6>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal6" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+
+          <div class="p-3 mb-2 bg-success text-white">
+            <div class="modal-header">
+              <h4 class="modal-title">Alumnos</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <h5>Alumnos</h5>
+            <table class="table table-striped table-inverse table-bordered">
               <thead class="thead-inverse">
-                     
-                     <tr>
-                         <th>Hora</th>
-                         <th>Lunes</th>
-                         <th>Martes</th>
-                         <th>Miercoles</th>
-                         <th>Jueves</th>
-                         <th>Viernes</th>
-                     </tr>
-                     </thead>
-                     <tbody>
-                       <tr>
-                         <td scope="row">09:00 - 10:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td scope="row">10:00 - 11:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td scope="row">11:00 - 12:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td scope="row">12:00 - 13:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td scope="row">13:00 - 14:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                          <td scope="row">14:00 - 15:00</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
-                          <td>-</td>
-                       </tr>
-                       <tr>
-                         <td scope="row">15:00 - 16:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td scope="row">16:00 - 17:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td scope="row">17:00 - 18:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td scope="row">18:00 - 19:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td scope="row">19:00 - 20:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td scope="row">20:00 - 21:00</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                         <td>-</td>
-                       </tr>
-                     </tbody>
-             </table>
-            -->
-            </div>
-      
-            <!-- Modal footer -->
-            <div class="modal-footer">
 
-              <button type="button" class="btn btn-success" data-dismiss="modal" id="botonAceptar">Crear</button>
-              <button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button>
-              
-            </div>
-      
+                <tr>
+                  <th>Nombre</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
           </div>
         </div>
       </div>
-   </section5>
+    </div>
+  </section6>
 
-   <section6>
-    
-      <!-- The Modal -->
-      <div class="modal" id="myModal6" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-      
-            <!-- Modal Header -->
-           
-            <div class="p-3 mb-2 bg-success text-white">
-                <div class="modal-header">
-                    <h4 class="modal-title">Alumnos</h4>
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                  </div>
-            </div>
-      
-            <!-- Modal body -->
-            <div class="modal-body">
-             <h5>Alumnos</h5><table class="table table-striped table-inverse table-bordered">
-                 <thead class="thead-inverse">
-                     
-                     <tr>
-                         <th>Nombre</th>
-                     </tr>
-                     </thead>
-                     <tbody>
-                       <tr>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td>-</td>
-                       </tr>
-                       <tr>
-                         <td>-</td>
-                       </tr>
-                     </tbody>
-             </table>
-            </div>
-      
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>         
-            </div>
-          </div>
-        </div>
-      </div>
-   </section6>
-
-<footer th:replace="layouts/base::footer('clase')"></footer>
+  <footer th:replace="layouts/base::footer('clase')"></footer>
 </body>
 
 

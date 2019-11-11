@@ -70,7 +70,6 @@ function agregarmodificarCurso() {
         var curso = {
             nivel: nivel,
             etapa: etapa,
-            asignaturas: []
         };
 
         if (nivel && etapa) {
@@ -104,12 +103,12 @@ function agregarmodificarCurso() {
                 });
             } else if (elboton == "Modificar") {
                 curso["id"] = id;
-                $.ajax("./api/v1/Cursos/", {
+                $.ajax("./api/v1/Cursos", {
                     contentType: "application/json",
                     dataType: "json",
                     type: "PUT",
                     data: JSON.stringify(curso),
-                    success: function () {
+                    success: function (datos) {
                         Toast.fire({
                             icon: "success",
                             title: "El curso ha sido modificado con exito"
@@ -150,7 +149,7 @@ function llenarCampos() {
             });
             return;
         }
-        cambiodeBoton("#btnEditar", "#myModal");
+        cambiodeBoton("#btnEditar", "#myModal3");
         $("#myModal3").modal("show");
         $.ajax("./api/v1/Cursos/" + id, {
             type: "GET",
@@ -173,6 +172,7 @@ function llenarCampos() {
         limpiarTodo();
         cambiodeBoton("#btnCrear", "#myModal3");
     });
+
 }
 
 function eliminarCurso() {

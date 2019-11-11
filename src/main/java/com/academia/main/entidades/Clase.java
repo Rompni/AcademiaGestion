@@ -3,6 +3,8 @@ package com.academia.main.entidades;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +14,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
-@Table(name = "CLASES")
+@Table(name = "CLASE")
 public class Clase implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -23,6 +26,7 @@ public class Clase implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+
 	@ManyToOne
 	@JoinColumn(name = "ID_ASIGNATURA")
 	private Asignatura asignatura;
@@ -31,10 +35,10 @@ public class Clase implements Serializable {
 	@JoinColumn(name = "ID_PROFESOR")
 	private Profesor profesor;
 	
-	@ManyToMany(mappedBy="claseh")
+	@ManyToMany(mappedBy="claseh", cascade = { CascadeType.ALL })
 	private List<HoraSemanal> horario;
 	
-	@ManyToMany(mappedBy="clases") 
+	@ManyToMany(mappedBy="clases", cascade = { CascadeType.ALL })
 	private List<Alumno> alumnos; 
 
 	@Transient

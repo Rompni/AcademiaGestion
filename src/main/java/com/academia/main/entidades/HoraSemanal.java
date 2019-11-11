@@ -27,10 +27,10 @@ public class HoraSemanal implements Serializable {
 	@Column(nullable = false)
 	private String hora;
 	
-	@Column()//nullable = false
+	@Column(nullable = false)
 	private Long diaindice;
 	
-	@Column()//nullable = false
+	@Column(nullable = false)
 	private Long horaindice;
 	
 	@ManyToMany
@@ -93,9 +93,6 @@ public class HoraSemanal implements Serializable {
 		this.claseh = claseh;
 	}
 	
-	
 
-	
-	
 	
 }

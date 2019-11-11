@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "clases")
+@Table(name = "asignaturas")
 public class Asignatura implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -33,7 +33,7 @@ public class Asignatura implements Serializable {
 	@JoinColumn(name = "ID_CURSO")
 	private Curso curso;	
 	
-	@OneToMany(mappedBy = "asignatura",cascade = { CascadeType.ALL } , orphanRemoval = true)
+	@OneToMany(mappedBy = "asignatura" )
 	@JsonIgnore
 	private List<Clase> clases;
 

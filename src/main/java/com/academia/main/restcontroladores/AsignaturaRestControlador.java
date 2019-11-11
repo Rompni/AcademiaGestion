@@ -38,7 +38,9 @@ public class AsignaturaRestControlador {
 		List<Asignatura> asignaturasDelCurso = AsignaturaServicio.BuscarAsignaturaPorCurso(Long.toString(Asignatura.getCurso().getId())); 
         for(Asignatura a: asignaturasDelCurso)
             if(a.getNombre().compareToIgnoreCase(Asignatura.getNombre()) == 0)
-                throw new EntityNotFoundException("Asignatura existente");
+				throw new EntityNotFoundException("Asignatura existente");
+		
+		Asignatura.setClases(null);
 		return AsignaturaServicio.save(Asignatura);
 	}
 	

@@ -48,6 +48,14 @@ public class Curso implements Serializable {
 	}
 
 	public void setAlumnos(List<Alumno> alumnos) {
+		if(this.alumnos == null){
+			this.alumnos = new LinkedList<Alumno>();
+				this.alumnos.clear();
+			}
+		
+		if(alumnos == null)
+			return;
+
 		this.alumnos.addAll(alumnos);
 		for(Alumno alumno: alumnos)
 			alumno.setCursoA(this);
@@ -147,6 +155,13 @@ public class Curso implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Curso [alumnos=" + alumnos + ", asignaturas=" + asignaturas + ", etapa=" + etapa + ", id=" + id
+				+ ", nivel=" + nivel + "]";
+	}
+	
 	
 	
 }

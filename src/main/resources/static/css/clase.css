@@ -1,0 +1,157 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+:root
+{
+    --border-color: #999999;
+    --form-color: rgba(0, 0, 0, .7);
+    --label-color: #fff;
+    --bg-color: #101010;
+    --bg-color-2: #202020;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; 
+  }
+  
+  h2
+  {    
+      width: 100%;
+      font-family: Georgia, serif;
+      color: var(--label-color);
+  }
+
+.fc h1
+{
+    width: 100%;
+    font-family: Georgia, serif;
+    color: var(--label-color);
+    text-shadow: 1px 2px rgb(0, 0, 0);
+    margin-bottom: 0px;
+    font-size: 3rem;
+}
+
+p {
+    font-size: 20px;
+}
+
+thead {
+    text-align: center;
+  }
+
+.alineado{
+    text-align: center;
+  }
+
+.form-check-input {
+    margin-left: 0;
+    position: relative;
+}
+
+.fc
+{
+    margin: 5%;
+}
+
+
+.fd
+{
+	width:100%;
+	margin:auto;
+	max-width:825px;
+	min-height:580px;
+	position:relative;
+	background:url(https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80) no-repeat center;
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+    border: 1px solid var(--border-color);
+}
+
+.fd .card .card-header
+{
+    background: var(--form-color);
+}
+.fd .card .card-body
+{
+    padding-bottom: 0;
+}
+
+.fd .card
+{
+    background:rgba(0, 0, 0, .27);
+    margin-bottom: 40px;
+}
+
+label
+{
+    color: white;
+}
+
+.table, .table-responsive, .table-light, .table-hover
+{
+    border-radius: 30px;
+    border: none;
+    margin-bottom: 0;
+    border-color: white;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+}
+
+.table-responsive
+{
+    max-height:460px;
+}
+
+.table td
+{
+    background-color: rgba(27, 26, 26, 0.5);
+}
+
+
+#myModal3 label
+{
+    color: black;
+    margin-bottom:0;
+    text-align: left;
+}
+
+#myModal3 h4
+{
+    width: 100%;
+    font-family: Georgia, serif;
+    font-size: 30px;
+}
+
+.modal-dialog{
+    max-width:800px;
+    
+    align-content: center;
+  }
+
+hr{
+    border: 2px solid var(--form-color);
+    margin-top: 0px;
+}
+
+
+.form-control
+{
+    padding:10px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: sans-serif;
+}
+
+thead {
+    text-align: center;
+  }
+
+  .form-group{
+    text-align:center;
+    margin: 2%;
+  }
+
+
+.clicker{
+    cursor: pointer;
+  }

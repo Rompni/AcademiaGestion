@@ -67,5 +67,10 @@ public class AlumnoServicioImpl implements AlumnoServicio {
         return aRepository.findAlumnoByCursoAndNombre(Long.parseLong(id), Nombre);
     }
 
+    @Override
+    public Alumno BuscarAlumnoPorNif(String nif) {
+        return aRepository.findAlumnoByNif(nif);
+    }
+
     
 }

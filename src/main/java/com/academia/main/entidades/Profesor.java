@@ -1,6 +1,7 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -118,7 +119,17 @@ public class Profesor implements Serializable {
 	}
 
 	public void setClases(List<Clase> clases) {
-		this.clases = clases;
+		if(this.clases == null){
+			this.clases = new LinkedList<Clase>();
+				this.clases.clear();
+			}
+		
+		if(clases == null)
+			return;
+
+		this.clases.addAll(clases);
+		for(Clase Clase: clases)
+			Clase.setProfesor(this);
 	}
 	
 }

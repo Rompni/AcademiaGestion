@@ -1,152 +1,399 @@
-$(function(){
-  listarCursosAsignaturas();
+$(function () {
+  listarCursosClases();
   listarProfesores();
   agregarmodificarClase();
+  eliminarClase();
+  llenarCampos();
   cambiodeBoton();
+  RowClickEvent();
+  buscarClase();
 });
 
-function agregarmodificarClase(){
-  $('#botonAceptar').on('click', function(e) {
+function RowClickEvent() {
+  $('.clicker').click(function () {
+
+    var Curso = $("#cursoClase").val();
+    var Asignatura = $("#claseClase").val();
+    var Profesor = $("#profesorClase").val();
+
+    if (Curso !== "nn" && Asignatura !== "nn" && Profesor !== "nn") {
+
+      if ($(this).text() == "")
+        $(this).text("X");
+      else {
+        $(this).text("");
+      }
+    }
+  });
+};
+
+function guardasHoraSemanal() {
+  var horario = [];
+  console.log("SELECTED");
+  $("#tabla tbody tr").each(function () {
+    $(this).find("td").each(function () {
+      if ($(this).text() !== "") {
+        var horaindice = $(this).closest('tr').index();
+        var hora = $(this).closest('tr').children().first().text();
+        var diaindice = $(this).index()
+        var dia = $('.head').children().eq(diaindice).text();
+
+        horario.push({
+          "dia": dia,
+          "hora": hora,
+          "diaindice": diaindice,
+          "horaindice": horaindice
+        });
+
+        //console.log($(this).text(), "Fila:" + horaindice, hora, "Col:" + diaindice, dia);
+      }
+    });
+  });
+  console.log(horario);
+  return horario;
+}
+
+
+function agregarmodificarClase() {
+  $('#botonAceptar').on('click', function (e) {
     e.preventDefault();
     var id = $("input:radio[name=selected]:checked").val()
     var idCurso = $("#cursoClase").val();
-    var idAsignatura = $("#asignaturaClase").val();
+    var idAsignatura = $("#claseClase").val();
     var idProfesor = $("#profesorClase").val();
-    var hora = $("#horaClase");
-    var dia = $("#diaClase").val();
+    var horario = guardasHoraSemanal();
 
     var clase = {
       "idAsignatura": idAsignatura,
-      "idProfesor": idProfesor
-      }
-/*
-    BuscarCurso(curso,function(errorLanzado, datosDevueltos){
-      if(!errorLanzado){asignatura["curso"] = datosDevueltos;}        
-      }); */
-     
-    console.log(idCurso, idAsignatura, idProfesor, dia, hora);
+      "idProfesor": idProfesor,
+      "idCurso": idCurso,
+      "horario": horario
+    }
 
-    if(curso && nombre){
+    console.log(clase);
+
+
+    if (idCurso !== "nn" && idAsignatura !== "nn" && idProfesor !== "nn" && horario !== null) {
       var elboton = $('#myModal3').find('.modal-footer button[id=botonAceptar]').text()
       console.log(elboton)
-      if(elboton == "Crear"){
-        console.log(asignatura)
-        $.ajax("./api/v1/Asignaturas",
+      if (elboton == "Crear") {
+        $.ajax("./api/v1/Clases",
           {
             contentType: "application/json",
-            dataType:'json',
+            dataType: 'json',
             type: "POST",
-            data:JSON.stringify(asignatura),
-            success:function(){
-              console.log("Se agrego la asignatura");
+            data: JSON.stringify(clase),
+            success: function () {
+              Toast.fire({
+                icon: "success",
+                title: "La clase ha sido agregada con exito",
+              });
               limpiarTodo();
-                              },
-            error: function(xhr){alert("Error al insertar una asignatura >>> " + xhr.status + " " + xhr.statusText);}
-          }); 
+            },
+            error: function (xhr) {
+              Toast.fire({
+                icon: "error",
+                title: "Error al insertar una clase >>> " + xhr.status + " " + xhr.statusText,
+              });
+            }
+          });
 
-    }else if(elboton == "Modificar"){
-      asignatura["id"] = id
-      $.ajax("./api/v1/Asignaturas/",
-      {
-        contentType: "application/json",
-        dataType:'json',
-        type: "PUT",
-        data: JSON.stringify(asignatura),
-        success:function(){
-              console.log("Modificado");
+      } else if (elboton == "Modificar") {
+        clase["id"] = id
+        $.ajax("./api/v1/Clases/",
+          {
+            contentType: "application/json",
+            dataType: 'json',
+            type: "PUT",
+            data: JSON.stringify(clase),
+            success: function () {
+              Toast.fire({
+                icon: "success",
+                title: "La clase ha sido modificada con exito",
+              });
               limpiarTodo();
-                          },
-        error: function(xhr){alert("Error al modificar una asignatura >>> " + xhr.status + " " + xhr.statusText);}  		
+            },
+            error: function (xhr) {
+              Toast.fire({
+                icon: "error",
+                title: "Error al modificar una clase >>> " + xhr.status + " " + xhr.statusText,
+              });
+            }
+          });
+
+      } else {
+        Toast.fire({
+          icon: "warning",
+          title: "Faltan datos por rellenar",
         });
-          
-    }else{
-      alert("Faltan Datos por rellenar");
+      }
     }
-    window.location.href = "./asignatura";
-  }
-});
-}
-
-function listarCursosAsignaturas(){
-$.ajax("./api/v1/Cursos",
-{
-  contentType: "application/json",
-  dataType:'json',
-  type: "GET",
-  success: renderListaCursos
-});
-}
-
-function renderListaCursos(data){
-  $('#cursoClase option').remove();
-  if(data.length == 0){
-    alert("NO HAY CURSOS")
-  } else {
-    $('#cursoClase').append('<option value="-1">Selecciona un curso</option>');
-   $.each(data, function(i, e) {
-      $('#cursoClase').append("<option value="+e.id+">" + e.nivel +" - "+ e.etapa+"</option>");
-        });   
-    $('#cursoClase').focus();
-    }
-}
-
-$('#cursoClase').change(function(){
-  listarAsignaturas($(this).val());
-});
-
-function listarAsignaturas(idCurso){
-  $.ajax("./api/v1/Asignaturas/curso/"+idCurso,
-  {
-  contentType: "application/json",
-  dataType:'json',
-  type: "GET",
-  success: renderListaAsignaturas
   });
 }
 
-function renderListaAsignaturas(data){
+function listarCursosClases() {
+  $.ajax("./api/v1/Cursos",
+    {
+      contentType: "application/json",
+      dataType: 'json',
+      type: "GET",
+      success: renderListaCursos
+    });
+}
+
+function renderListaCursos(data) {
+  $('#cursoClase option').remove();
+  $('#inputCurso option').remove();
+  if (data.length == 0) {
+    alert("NO HAY CURSOS")
+  } else {
+    $('#cursoClase').append('<option value="nn">Selecciona un curso</option>');
+    $('#inputCurso').append('<option value="nn">Selecciona un curso</option>');
+    $.each(data, function (i, e) {
+      $('#cursoClase').append("<option value=" + e.id + ">" + e.nivel + " - " + e.etapa + "</option>");
+      $('#inputCurso').append("<option value=" + e.id + ">" + e.nivel + " - " + e.etapa + "</option>");
+    });
+    $('#cursoClase').focus();
+    $('#inputCurso').focus();
+  }
+}
+
+$('#cursoClase').change(function () {
+  listarAsignaturas($(this).val());
+});
+
+$('#inputCurso').change(function () {
+  listarAsignaturasx($(this).val());
+});
+
+function listarAsignaturas(idCurso) {
+  $.ajax("./api/v1/Asignaturas/curso/" + idCurso,
+    {
+      contentType: "application/json",
+      dataType: 'json',
+      type: "GET",
+      success: renderListaAsignaturas,
+    });
+}
+
+function listarAsignaturasx(idCurso) {
+  $.ajax("./api/v1/Asignaturas/curso/" + idCurso,
+    {
+      contentType: "application/json",
+      dataType: 'json',
+      type: "GET",
+      success: renderListaAsignaturasx,
+    });
+}
+
+function renderListaAsignaturas(data) {
   $('#asignaturaClase option').remove();
-  if(data.length == 0){
-    alert("No hay Asignaturas");
-  }else{
-    $('#asignaturaClase').append('<option value="-1">Selecciona una asignatura</option>');
-    $.each(data, function(i, e) {
-      $('#asignaturaClase').append("<option value="+e.id+">" + e.nombre + "</option>");
+  $('#asignaturaClase').append('<option value="nn">Selecciona una asignatura</option>');
+  if (data.length == 0) {
+    console.log("vacio")
+  } else {
+
+    $.each(data, function (i, e) {
+      $('#asignaturaClase').append("<option value=" + e.id + ">" + e.nombre + "</option>");
     });
     $('#asignaturaClase').focus();
   }
 }
 
-$('#asignaturaClase').change(function(){
-  //some
-});
-
-function listarProfesores(){
-  $.ajax("./api/v1/Profesores",
-  {
-  contentType: "application/json",
-  dataType:'json',
-  type: "GET",
-  success:function(datos){
-    console.log(datos)
-      $.each(datos, function(i, e) {
-            $('#profesorClase').append("<option value="+e.id+">" + e.nombre + " " + e.apellido1+ "</option>");
-                                  });
-                          },
-  error: function(xhr){alert("Error al listar profesores >>> " + xhr.status + " " + xhr.statusText);}    		
-  }); 
+function renderListaAsignaturasx(data) {
+  $('#inputAsignatura option').remove();
+  $('#inputAsignatura').append('<option value="nn">Selecciona una asignatura</option>');
+  if (data.length == 0) {
+    console.log("vacio")
+  } else {
+    $.each(data, function (i, e) {
+      $('#inputAsignatura').append("<option value=" + e.id + ">" + e.nombre + "</option>");
+    });
+    $('#InputAsignatura').focus();
   }
-  
-  
-function cambiodeBoton() {
-$('#myModal5').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var recipient = button.data('titulo') // Extract info from data-* attributes
-  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-  var recipient2 = button.data('boton')
-  var modal = $(this)
-  modal.find('.modal-title').text(recipient)
-  modal.find('.modal-footer button[id=botonAceptar]').text(recipient2)
+}
+
+function listarProfesores() {
+  $.ajax("./api/v1/Profesores",
+    {
+      contentType: "application/json",
+      dataType: 'json',
+      type: "GET",
+      success: function (datos) {
+        $('#profesorClase').append('<option value="nn">Selecciona un profesor</option>');
+        $('#inputProfesor').append('<option value="nn">Selecciona un profesor</option>');
+        if (datos.length == 0) {
+          alert("No hay Clases");
+        } else {
+          $.each(datos, function (i, e) {
+            $('#profesorClase').append("<option value=" + e.id + ">" + e.nombre + " " + e.apellido1 + "</option>");
+            $('#inputProfesor').append("<option value=" + e.id + ">" + e.nombre + " " + e.apellido1 + "</option>");
+          });
+        }
+      },
+      error: function (xhr) { alert("Error al listar profesores >>> " + xhr.status + " " + xhr.statusText); }
+    });
+}
+
+function buscarClase() {
+  $('#buscar').on('click', function (ev) {
+    ev.preventDefault();
+    $(".f").remove();
+    var url = "./api/v1/Clases";
+    var busqueda = $('.card-body input').val();
+    var curso = $("#inputCurso").val();
+    console.log(curso);
+    /*
+    if (busqueda !== "") {
+      url = "./api/v1/Clases/name/" + busqueda;
+    } else if (curso !== "nn") {
+      url = "./api/v1/Clases/curso/" + curso;
+    }
+
+    if (busqueda !== "" && curso !== "nn")
+      url = "./api/v1/Clases/name/" + busqueda + "/" + curso;
+*/
+    console.log(url)
+    $.ajax(url,
+      {
+        contentType: "application/json",
+        dataType: 'json',
+        type: "GET",
+        success: function (datos) {
+          console.log(datos)
+          if (datos.length === 0) {
+            Toast.fire({
+              icon: "warning",
+              title: "No se encontro la busqueda",
+            });
+          }
+          else {
+            $.each(datos, function (i, e) {
+
+              $('#A-tabla').append("<tr class='f' data-id=" + e.id + ">" +
+                "<td>" + "<input value='" + e.id + "' type='radio' class='form-check-input' name='selected'>" + "</td>" +
+                "<td>" + e.asignatura.curso.nivel + " de " + e.asignatura.curso.etapa + "</td>" +
+                "<td>" + e.asignatura.nombre + "</td>" +
+                "<td>" + e.profesor.nombre + " " + e.profesor.apellido1 + "</td>" +
+                "<td>" + "</td>" +
+                "</tr>");
+            });
+          }
+        },
+        error: function (xhr) {
+          Toast.fire({
+            icon: "error",
+            title: "Error al buscar clases >>> " + xhr.status + " " + xhr.statusText,
+          });
+        }
+      });
+  });
+}
+
+
+function redirect() {
+  window.location.href = "./clase";
+}
+function llenarCampos() {
+  $('#btnEditar').on('click', function (e) {
+    e.preventDefault();
+    var id = $("input:radio[name=selected]:checked").val()
+    if (!id) {
+      Toast.fire({
+        icon: "error",
+        title: "Ninguna clase ha sido seleccionada"
+      });
+      return;
+    }
+
+    cambiodeBoton("#btnEditar", "#myModal3")
+    $("#myModal3").modal("show");
+    $.ajax("./api/v1/Clases/" + id,
+      {
+        type: "GET",
+        success: function (datos) {
+          $("#cursoClase").val(datos.clase.curso.id);
+          $("#claseClase").val(datos.clase.id);
+          $("#profesorClase").val(datos.profesor.id);
+
+        },
+        error: function (xhr) {
+          $('#myModal3').modal('hide')
+          Toast.fire({
+            icon: "error",
+            title: "Error al traer datos >>> " + xhr.status + " " + xhr.statusText
+          });
+        }
+      });
+  });
+}
+
+function eliminarClase() {
+  $('#btnbaja').on('click', function (e) {
+    e.preventDefault();
+    var id = $("input:radio[name=selected]:checked").val()
+
+    if (!id) {
+      Toast.fire({
+        icon: "error",
+        title: "Ninguna Clase ha sido seleccionado"
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: "  ¿Desea eliminar la Clase?",
+      text: "No la podras recuperar!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminalo!",
+      cancelButtonText: "Cancelar",
+      showClass: {
+        popup: "animated flipInY"
+      }
+    }).then(result => {
+      if (result.value) {
+
+        $.ajax("./api/v1/Clases/" + id, {
+          type: "DELETE",
+          success: function () {
+            Toast.fire({
+              icon: "success",
+              title: "El Clase ha sido eliminado"
+            });
+            setTimeout(redirect, 1240);
+          },
+          error: function (xhr) {
+            Toast.fire({
+              icon: "success",
+              title:
+                "Error al eliminar una clase >>> " +
+                xhr.status +
+                " " +
+                xhr.statusText
+            });
+          }
+        });
+      }
+    });
+  });
+}
+
+
+function cambiodeBoton(name, modal) {
+  var button = $(name);
+  var recipient = button.data("titulo");
+  var recipient2 = button.data("boton");
+  console.log(recipient, recipient2);
+  var modal = $(modal);
+  modal.find(".modal-title").text(recipient);
+  modal.find(".modal-footer button[id=botonAceptar]").text(recipient2);
+}
+
+function limpiarBusqueda() {
+  $('#limpiar').on('click', function (event) {
+    $('.card-body select').val("nn")
   });
 }

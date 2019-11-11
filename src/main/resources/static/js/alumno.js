@@ -43,45 +43,45 @@ function buscarAlumno() {
     }
 
     if (busqueda !== "" && curso !== "nn")
-    url = "./api/v1/Alumnos/name/"+busqueda+"/"+curso;
+      url = "./api/v1/Alumnos/name/" + busqueda + "/" + curso;
 
     console.log(url)
-      $.ajax(url,
-        {
-          contentType: "application/json",
-          dataType: 'json',
-          type: "GET",
-          success: function (datos) {
-            console.log(datos)
-            if (datos.length === 0) {
-              Toast.fire({
-                icon: "warning",
-                title: "No se encontro la busqueda",
-              });
-            }
-            else {
-              $.each(datos, function (i, e) {
-                var name;
-                if (!e.responsable) name = 'NO APLICA'; else name = e.responsable.nombre;
-                $('#A-tabla').append("<tr class='f' data-id=" + e.id + ">" +
-                  "<td>" + "<input value='" + e.id + "' type='radio' class='form-check-input' name='selected'>" + "</td>" +
-                  "<td>" + e.nombre + "</td>" +
-                  "<td>" + e.apellido1 + "</td>" +
-                  "<td>" + e.cursoA.nivel + " de " + e.cursoA.etapa + "</td>" +
-                  "<td>" + name + "</td>" +
-                  "<td>" + e.fechaalta + "</td>" +
-                  "<td>" + "</td>" +
-                  "</tr>");
-              });
-            }
-          },
-          error: function (xhr) {
+    $.ajax(url,
+      {
+        contentType: "application/json",
+        dataType: 'json',
+        type: "GET",
+        success: function (datos) {
+          console.log(datos)
+          if (datos.length === 0) {
             Toast.fire({
-              icon: "error",
-              title: "Error al buscar alumnos >>> " + xhr.status + " " + xhr.statusText,
+              icon: "warning",
+              title: "No se encontro la busqueda",
             });
           }
-        });
+          else {
+            $.each(datos, function (i, e) {
+              var name;
+              if (!e.responsable) name = 'NO APLICA'; else name = e.responsable.nombre;
+              $('#A-tabla').append("<tr class='f' data-id=" + e.id + ">" +
+                "<td>" + "<input value='" + e.id + "' type='radio' class='form-check-input' name='selected'>" + "</td>" +
+                "<td>" + e.nombre + "</td>" +
+                "<td>" + e.apellido1 + "</td>" +
+                "<td>" + e.cursoA.nivel + " de " + e.cursoA.etapa + "</td>" +
+                "<td>" + name + "</td>" +
+                "<td>" + e.fechaalta + "</td>" +
+                "<td>" + "</td>" +
+                "</tr>");
+            });
+          }
+        },
+        error: function (xhr) {
+          Toast.fire({
+            icon: "error",
+            title: "Error al buscar alumnos >>> " + xhr.status + " " + xhr.statusText,
+          });
+        }
+      });
   });
 }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import com.academia.main.entidades.Curso;
 import com.academia.main.servicios.CursoServicio;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,8 @@ public class CursoRestControlador {
     
     @Autowired
 	private CursoServicio Cursoservicio;
+
+	private Logger LOG = Logger.getLogger(CursoRestControlador.class);
 
 	@GetMapping("/Cursos")
 	public List<Curso> getCursos(){
@@ -41,12 +44,15 @@ public class CursoRestControlador {
 		return Cursoservicio.BuscarCursoPorNombre(nombre);	 
 	}
 	
+	
 	@PutMapping("/Cursos")
 	public Curso updateCurso(@RequestBody Curso Curso) {
+		LOG.info(Curso);
 		Curso curso = Cursoservicio.BuscarCursoPorId(Curso.getId());
 		curso.setNivel(Curso.getNivel());
 		curso.setEtapa(Curso.getEtapa());
 		curso.setAsignaturas(Curso.getAsignaturas());
+
 		return Cursoservicio.save(curso);
 	}
 

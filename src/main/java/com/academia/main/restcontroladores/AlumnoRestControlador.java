@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.jboss.logging.Logger;
 
 import com.academia.main.entidades.Alumno;
@@ -38,7 +41,10 @@ public class AlumnoRestControlador {
 
 	@PostMapping("/Alumnos")
 	public Alumno crearAlumno(@RequestBody Alumno alumno) {
-		 
+		Alumno al = alumnoservicio.BuscarAlumnoPorNif(alumno.getNif());
+		if(al != null)
+			throw new EntityNotFoundException("Alumno existente");
+			
         Curso curso = cService.BuscarCursoPorId(Long.parseLong(alumno.getStringaux()));
         List<Alumno> a =  Arrays.asList(alumno);
         curso.setAlumnos(a);
