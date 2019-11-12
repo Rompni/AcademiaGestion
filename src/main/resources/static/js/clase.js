@@ -315,6 +315,7 @@ function redirect() {
 function llenarCampos() {
   $('#btnEditar').on('click', function (e) {
     e.preventDefault();
+    limpiarTodo();
     var id = $("input:radio[name=selected]:checked").val()
     if (!id) {
       Toast.fire({
@@ -331,10 +332,12 @@ function llenarCampos() {
         type: "GET",
         success: function (datos) {
           console.log(datos)
-          listarCursosClases();
+         
           $("#cursoClase").val(datos.asignatura.curso.id);
           $("#profesorClase").val(datos.profesor.id);
+          
           $("#asignaturaClase").val(datos.asignatura.id);
+          
           $("#tabla tbody tr").each(function () {
             $(this).find("td").each(function () {
               var horaindice = $(this).closest('tr').index();

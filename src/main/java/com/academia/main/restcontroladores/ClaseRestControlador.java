@@ -47,21 +47,20 @@ public class ClaseRestControlador {
     @ResponseStatus(HttpStatus.CREATED)
     public Clase crearClase(@Valid @RequestBody Clase clase) throws Exception {
         java.util.List<Clase> clases = clService.buscarClases();
-        
+
         Asignatura asignatura = aService.BuscarAsignaturaPorId(Long.parseLong(clase.getIdAsignatura()));
         if (asignatura == null)
-            throw new EntityNotFoundException("No se encontro la asignatura");
+            throw new Exception("No se encontro la asignatura");
 
         Profesor profesor = pService.BuscarProfesorPorId(Long.parseLong(clase.getIdProfesor()));
         if (profesor == null)
-            throw new EntityNotFoundException("No se encontro el profesor");
-
+            throw new Exception("No se encontro el profesor");
 
         if (clases != null) {
             for (Clase c : clases) {
                 if (c.getProfesor().getId() == profesor.getId()) {
                     if (c.getAsignatura().getId() == asignatura.getId()) {
-                        throw new EntityNotFoundException("Clase existente");
+                        throw new Exception("Clase existente");
                     }
                 }
             }
@@ -116,16 +115,56 @@ public class ClaseRestControlador {
     }
 
     @PutMapping("/Clases")
-    public Clase updateClase(@Valid @RequestBody Clase clase) {
-        Asignatura asignatura = aService.BuscarAsignaturaPorId(Long.parseLong(clase.getIdAsignatura()));
-        Profesor profesor = pService.BuscarProfesorPorId(Long.parseLong(clase.getIdProfesor()));
-        clase.setAsignatura(asignatura);
-        clase.setProfesor(profesor);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Clase updateClase(@Valid @RequestBody Clase clase) throws Exception {
 
-        return clService.save(clase);
+
+        Clase CLASE = clService.BuscarClasePorId(clase.getId());
+
+        if (CLASE == null)
+            throw new EntityNotFoundException("No se encontro la clase");
+
+            java.util.List<Clase> C = Arrays.asList(CLASE);
+        /*
+        Asignatura asignatura = aService.BuscarAsignaturaPorId(Long.parseLong(clase.getIdAsignatura()));
+        if (asignatura == null)
+            throw new EntityNotFoundException("No se encontro la asignatura");
+
+        Profesor profesor = pService.BuscarProfesorPorId(Long.parseLong(clase.getIdProfesor()));
+        if (profesor == null)
+            throw new EntityNotFoundException("No se encontro el profesor"); */
+
+            for (Clase clasesprofe : CLASE.getProfesor().getClases()) {
+                if (clasesprofe == null) throw new EntityNotFoundException("CLASES PROFES");
+                if (clasesprofe.getId() == null) throw new EntityNotFoundException(" GET CLASES PROFES");
+                if(clasesprofe.getId() == CLASE.getId())
+                    for (HoraSemanal horaS : clasesprofe.getHorario()) {
+                        if (horaS == null) throw new EntityNotFoundException("HORA PROFE ERRO");
+                        for (HoraSemanal horaN : clase.getHorario()) {
+                            if (horaN == null) throw new EntityNotFoundException("HORA NUEVO ERRO");
+                             if (horaN.getId() == null) {
+                               if( horaS.getDiaindice() != horaN.getDiaindice() && horaS.getHoraindice()  != horaN.getHoraindice() )
+                                //CLASE.getHorario().add(horaN);
+                                hsService.save(horaN);
+                             }
+                           else if (horaS.getDiaindice() != horaN.getDiaindice() && horaS.getHoraindice() != horaN.getHoraindice() && horaS.getId() == horaN.getId()){
+                                int index = clase.getHorario().indexOf(horaN);
+                                //CLASE.getHorario().set(index, horaN);  
+                                HoraSemanal h = hsService.BuscarHoraSemanalPorId(horaN.getId());
+                                if (h== null) throw new EntityNotFoundException("HORAsemanal null");
+                                h.setClaseh(C);
+                                    hsService.save(h);
+
+                            }
+                        }
+                        
+                    }
+                }
+        return clService.save(CLASE);
     }
 
     @DeleteMapping("/Clases/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
     public void eliminar(@Valid @PathVariable Long id) {
         Clase Clase = clService.BuscarClasePorId(id);
         clService.delete(Clase);
