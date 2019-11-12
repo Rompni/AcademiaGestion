@@ -13,7 +13,7 @@ function RowClickEvent() {
   $('.clicker').click(function () {
 
     var Curso = $("#cursoClase").val();
-    var Asignatura = $("#claseClase").val();
+    var Asignatura = $("#asignaturaClase").val();
     var Profesor = $("#profesorClase").val();
 
     if (Curso !== "nn" && Asignatura !== "nn" && Profesor !== "nn") {
@@ -24,12 +24,14 @@ function RowClickEvent() {
         $(this).text("");
       }
     }
+
   });
-};
+}
+
 
 function guardasHoraSemanal() {
   var horario = [];
-  console.log("SELECTED");
+  //console.log("SELECTED");
   $("#tabla tbody tr").each(function () {
     $(this).find("td").each(function () {
       if ($(this).text() !== "") {
@@ -59,7 +61,7 @@ function agregarmodificarClase() {
     e.preventDefault();
     var id = $("input:radio[name=selected]:checked").val()
     var idCurso = $("#cursoClase").val();
-    var idAsignatura = $("#claseClase").val();
+    var idAsignatura = $("#asignaturaClase").val();
     var idProfesor = $("#profesorClase").val();
     var horario = guardasHoraSemanal();
 
@@ -69,8 +71,6 @@ function agregarmodificarClase() {
       "idCurso": idCurso,
       "horario": horario
     }
-
-    console.log(clase);
 
 
     if (idCurso !== "nn" && idAsignatura !== "nn" && idProfesor !== "nn" && horario !== null) {
@@ -83,12 +83,14 @@ function agregarmodificarClase() {
             dataType: 'json',
             type: "POST",
             data: JSON.stringify(clase),
-            success: function () {
+            success: function (e) {
+              console.log(e);
               Toast.fire({
                 icon: "success",
                 title: "La clase ha sido agregada con exito",
               });
               limpiarTodo();
+              $('#myModal3').modal('hide')
             },
             error: function (xhr) {
               Toast.fire({
@@ -106,12 +108,14 @@ function agregarmodificarClase() {
             dataType: 'json',
             type: "PUT",
             data: JSON.stringify(clase),
-            success: function () {
+            success: function (e) {
+              console.log(e);
               Toast.fire({
                 icon: "success",
                 title: "La clase ha sido modificada con exito",
               });
               limpiarTodo();
+              $('#myModal3').modal('hide')
             },
             error: function (xhr) {
               Toast.fire({
@@ -145,7 +149,10 @@ function renderListaCursos(data) {
   $('#cursoClase option').remove();
   $('#inputCurso option').remove();
   if (data.length == 0) {
-    alert("NO HAY CURSOS")
+    Toast.fire({
+      icon: "warning",
+      title: "No hay cursos disponibles"
+    });
   } else {
     $('#cursoClase').append('<option value="nn">Selecciona un curso</option>');
     $('#inputCurso').append('<option value="nn">Selecciona un curso</option>');
@@ -223,7 +230,10 @@ function listarProfesores() {
         $('#profesorClase').append('<option value="nn">Selecciona un profesor</option>');
         $('#inputProfesor').append('<option value="nn">Selecciona un profesor</option>');
         if (datos.length == 0) {
-          alert("No hay Clases");
+          Toast.fire({
+            icon: "warning",
+            title: "No hay profesores disponibles"
+          });
         } else {
           $.each(datos, function (i, e) {
             $('#profesorClase').append("<option value=" + e.id + ">" + e.nombre + " " + e.apellido1 + "</option>");
@@ -231,7 +241,12 @@ function listarProfesores() {
           });
         }
       },
-      error: function (xhr) { alert("Error al listar profesores >>> " + xhr.status + " " + xhr.statusText); }
+      error: function (xhr) {
+        Toast.fire({
+          icon: "success",
+          title: "Error al listar profesores >>> " + xhr.status + " " + xhr.statusText
+        });
+      }
     });
 }
 
@@ -269,13 +284,16 @@ function buscarClase() {
           }
           else {
             $.each(datos, function (i, e) {
+              var cadena = "";
+              for (var i = 0; i < e.horario.length; i++)
+                cadena += "[" + e.horario[i].dia + "::" + e.horario[i].hora + "]";
 
               $('#A-tabla').append("<tr class='f' data-id=" + e.id + ">" +
                 "<td>" + "<input value='" + e.id + "' type='radio' class='form-check-input' name='selected'>" + "</td>" +
                 "<td>" + e.asignatura.curso.nivel + " de " + e.asignatura.curso.etapa + "</td>" +
                 "<td>" + e.asignatura.nombre + "</td>" +
                 "<td>" + e.profesor.nombre + " " + e.profesor.apellido1 + "</td>" +
-                "<td>" + "</td>" +
+                "<td>" + cadena + "</td>" +
                 "</tr>");
             });
           }
@@ -312,9 +330,22 @@ function llenarCampos() {
       {
         type: "GET",
         success: function (datos) {
-          $("#cursoClase").val(datos.clase.curso.id);
-          $("#claseClase").val(datos.clase.id);
+          console.log(datos)
+          listarCursosClases();
+          $("#cursoClase").val(datos.asignatura.curso.id);
           $("#profesorClase").val(datos.profesor.id);
+          $("#asignaturaClase").val(datos.asignatura.id);
+          $("#tabla tbody tr").each(function () {
+            $(this).find("td").each(function () {
+              var horaindice = $(this).closest('tr').index();
+              var diaindice = $(this).index()
+
+              for (var i = 0; i < datos.horario.length; i++)
+                if (datos.horario[i].horaindice == horaindice && datos.horario[i].diaindice == diaindice) {
+                  $(this).text("X")
+                }
+            });
+          });
 
         },
         error: function (xhr) {
@@ -325,6 +356,12 @@ function llenarCampos() {
           });
         }
       });
+  });
+
+  $("#btnCrear").on("click", function (e) {
+    e.preventDefault();
+    limpiarTodo();
+    cambiodeBoton("#btnCrear", "#myModal3");
   });
 }
 
@@ -396,4 +433,17 @@ function limpiarBusqueda() {
   $('#limpiar').on('click', function (event) {
     $('.card-body select').val("nn")
   });
+}
+
+function limpiarTodo() {
+  $("#cursoClase").val("nn");
+  $("#profesorClase").val("nn");
+  $("#asignaturaClase").val("nn");
+
+  $("#tabla tbody tr").each(function () {
+    $(this).find("td").each(function () {
+      $(this).text("");
+    });
+  });
+
 }

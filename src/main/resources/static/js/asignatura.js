@@ -44,6 +44,7 @@ function buscarAsignaturas(){
               }); 
             }
           else{
+            console.log(datos);
     			 $.each(datos, function(i, e) {
                   $('#A-tabla').append("<tr class='f' data-id="+e.id+">" +
                       "<td>" + "<input value='"+e.id + "' type='radio' class='form-check-input' name='selected'>" + "</td>" +

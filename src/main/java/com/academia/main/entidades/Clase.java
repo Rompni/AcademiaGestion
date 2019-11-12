@@ -1,6 +1,7 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,10 +36,10 @@ public class Clase implements Serializable {
 	@JoinColumn(name = "ID_PROFESOR")
 	private Profesor profesor;
 	
-	@ManyToMany(mappedBy="claseh", cascade = { CascadeType.ALL })
+	@ManyToMany(mappedBy="claseh", cascade = {CascadeType.ALL})
 	private List<HoraSemanal> horario;
 	
-	@ManyToMany(mappedBy="clases", cascade = { CascadeType.ALL })
+	@ManyToMany(mappedBy="clases", cascade = {CascadeType.ALL} )
 	private List<Alumno> alumnos; 
 
 	@Transient
@@ -74,8 +75,9 @@ public class Clase implements Serializable {
 	}
 
 	public void setHorario(List<HoraSemanal> horario) {
-		this.horario = horario;
-	}
+			this.horario = horario;
+		}
+	
 
 	public Long getId() {
 		return id;
@@ -116,5 +118,12 @@ public class Clase implements Serializable {
 	public void setIdCurso(String idCurso) {
 		this.idCurso = idCurso;
 	}
+
+	@Override
+	public String toString() {
+		return "Clase [alumnos=" + alumnos + ", asignatura=" + asignatura + ", horario=" + horario + ", id=" + id
+				+ ", profesor=" + profesor + "]";
+	}
+	
 	
 }
