@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.*;
-
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,6 +19,7 @@ public class Curso implements Serializable {
 	private Long id;
 	
 	@Column(nullable = false)
+	@Pattern(message = "Primera letra en mayúscula y no debe haber numeros", regexp = "^[A-Z][a-z]+$")
 	private String nivel;
 	
 	@Column(nullable = false)

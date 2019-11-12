@@ -121,7 +121,8 @@ function agregarmodificarProfesor() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error, " + xhr.responseJSON.message 
+                title: "Error, " + xhr.responseJSON.message ,
+                timer: 2000
               });
             }
           });

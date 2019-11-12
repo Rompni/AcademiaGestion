@@ -81,7 +81,7 @@ function agregarmodificarAsignatura(){
      
     
 
-    if(curso && nombre){
+    //if(curso && nombre){
       var elboton = $('#myModal3').find('.modal-footer button[id=botonAceptar]').text()
       if(elboton == "Crear"){
         $.ajax("./api/v1/Asignaturas",
@@ -136,7 +136,7 @@ function agregarmodificarAsignatura(){
         title: "Faltan datos por rellenar",   
     });
     }
-  }
+ // }
 });
 }
 

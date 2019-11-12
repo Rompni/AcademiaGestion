@@ -2,14 +2,28 @@ package com.academia.main.restcontroladores;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
+
 import com.academia.main.entidades.Curso;
 import com.academia.main.servicios.CursoServicio;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Validated
 @RequestMapping("/api/v1")
 public class CursoRestControlador {
 
@@ -24,11 +38,12 @@ public class CursoRestControlador {
 	}
 
 	@PostMapping("/Cursos")
-	@ResponseBody
-	public Curso crearCurso(@RequestBody Curso Curso) throws Exception {
+	@ResponseStatus(HttpStatus.CREATED)
+	public Curso crearCurso(@Valid @RequestBody Curso Curso) throws Exception {
+		
 		Curso curso = Cursoservicio.BuscarCursoPorNivelEtapa(Curso.getNivel(), Curso.getEtapa());
 		if (curso != null)
-			throw new Exception("Curso Existente");
+			throw new EntityNotFoundException("curso existente");
 
 		Curso.setAsignaturas(null);
 		return Cursoservicio.save(Curso);
@@ -46,8 +61,8 @@ public class CursoRestControlador {
 	}
 
 	@PutMapping("/Cursos")
-	@ResponseBody
-	public Curso updateCurso(@RequestBody Curso Curso) throws Exception {
+	@ResponseStatus(HttpStatus.CREATED)
+	public Curso updateCurso(@Valid @RequestBody Curso Curso) throws Exception {
 		Curso curso = Cursoservicio.BuscarCursoPorId(Curso.getId());
 		if (curso == null)
 			throw new Exception("No se encontró el curso con id=" + Curso.getId());
@@ -59,8 +74,8 @@ public class CursoRestControlador {
 	}
 
 	@DeleteMapping("/Cursos/{id}")
-	@ResponseBody
-	public void eliminar(@PathVariable Long id) throws Exception {
+	@ResponseStatus(HttpStatus.CREATED)
+	public void eliminar(@Valid @PathVariable Long id) throws Exception {
 		Curso Curso = Cursoservicio.BuscarCursoPorId(id);
 		if (Curso == null)
 			throw new Exception("No se encontró el curso con id=" + id);

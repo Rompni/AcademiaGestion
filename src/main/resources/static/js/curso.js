@@ -88,7 +88,7 @@ function agregarmodificarCurso() {
                             title: "El curso ha sido agregado con exito"
                         });
                         $("#myModal3").modal("hide");
-                        setTimeout(redirect, 1240);
+                        setTimeout(redirect, 1300);
                     },
                     error: function (xhr) {
                         Toast.fire({
@@ -112,7 +112,7 @@ function agregarmodificarCurso() {
                         });
 
                         $("#myModal3").modal("hide");
-                        setTimeout(redirect, 1240);
+                        setTimeout(redirect, 1300);
                     },
                     error: function (xhr) {
                         Toast.fire({
@@ -205,7 +205,7 @@ function eliminarCurso() {
                             title: "El curso ha sido eliminado"
                         });
 
-                        setTimeout(redirect, 1240);
+                        setTimeout(redirect, 1300);
                     },
                     error: function (xhr) {
                         Toast.fire({

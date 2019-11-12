@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -26,6 +28,7 @@ public class Asignatura implements Serializable {
 	private Long id;
 	
 	@Column(nullable = false)
+	@Pattern(message = "Primera letra en mayúscula y no debe haber numeros", regexp = "^[A-Z][a-z]+$")
 	private String nombre;
 	
 	@ManyToOne

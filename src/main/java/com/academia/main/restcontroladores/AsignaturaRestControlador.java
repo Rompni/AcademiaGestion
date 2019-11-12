@@ -2,9 +2,13 @@ package com.academia.main.restcontroladores;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.academia.main.entidades.Asignatura;
 import com.academia.main.servicios.AsignaturaServicio;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +18,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Validated
 @RequestMapping("/api/v1")
 public class AsignaturaRestControlador {
 
@@ -28,8 +34,8 @@ public class AsignaturaRestControlador {
 	}
 	
 	@PostMapping("/Asignaturas")
-	@ResponseBody
-	public Asignatura crearAsignatura(@RequestBody Asignatura Asignatura) throws Exception {
+	@ResponseStatus (HttpStatus.CREATED)
+	public Asignatura crearAsignatura(@Valid @RequestBody Asignatura Asignatura) throws Exception {
 		List<Asignatura> asignaturasDelCurso = AsignaturaServicio.BuscarAsignaturaPorCurso(Long.toString(Asignatura.getCurso().getId())); 
         for(Asignatura a: asignaturasDelCurso)
             if(a.getNombre().compareToIgnoreCase(Asignatura.getNombre()) == 0)
@@ -57,8 +63,8 @@ public class AsignaturaRestControlador {
 	
 
 	@PutMapping("/Asignaturas")
-	@ResponseBody
-	public Asignatura updateAsignatura(@RequestBody Asignatura Asignatura) throws Exception {
+	@ResponseStatus (HttpStatus.CREATED)
+	public Asignatura updateAsignatura(@Valid @RequestBody Asignatura Asignatura) throws Exception {
 		Asignatura asignatura = AsignaturaServicio.BuscarAsignaturaPorId(Asignatura.getId());
 		if(asignatura == null) throw new Exception("No se encontró la asignatura con el id="+Asignatura.getId());
 
@@ -70,8 +76,8 @@ public class AsignaturaRestControlador {
 
 	
 	@DeleteMapping("/Asignaturas/{id}")
-	@ResponseBody
-	public void eliminar(@PathVariable Long id) throws Exception {
+	@ResponseStatus (HttpStatus.CREATED)
+	public void eliminar(@Valid @PathVariable Long id) throws Exception {
 		Asignatura Asignatura = AsignaturaServicio.BuscarAsignaturaPorId(id);
 		if(Asignatura == null) throw new Exception("No se encontró la asignatura con el id="+id);
 

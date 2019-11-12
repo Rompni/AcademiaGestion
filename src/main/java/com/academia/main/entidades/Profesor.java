@@ -24,23 +24,29 @@ public class Profesor implements Serializable {
 	private Long id;
 	
 	@Column(nullable = false)
+	@Pattern(message = " Nombre invalido ", regexp = "^[A-Za-z]+$")
 	private String nombre;
 	
 	@Column(nullable = false)
+	@Pattern(message = " Primer Apellido invalido ", regexp = "^[A-Za-z]+$")
 	private String apellido1;
 	
+	@Column(nullable = true)
+	@Pattern(message = " Segundo Nombre invalido ", regexp = "^[A-Za-z]+$")
 	private String apellido2;
 	
 	@Column(nullable = false, unique = true)
 	private String nif;
 	
 	@Column(nullable = false)
+	@Pattern(message = " Telefono invalido[3xxxxx] ", regexp = "^3[0-9]{5}$")
 	private String telefono;
 	
 	@Column(nullable = false)
-	@Pattern(message = "Correo invalido", regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
+	@Pattern(message = " Correo invalido ", regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
 	private String correo;
 	
+	@Pattern(message = " Titulación invalida ", regexp = "^[A-Za-z]+$")
 	private String titulacion;
 	
 	@OneToMany(mappedBy = "profesor")
