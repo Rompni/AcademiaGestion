@@ -95,7 +95,7 @@ function agregarmodificarClase() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error al insertar una clase >>> " + xhr.status + " " + xhr.statusText,
+                title: "Error, "+xhr.responseJSON.message 
               });
             }
           });
@@ -120,7 +120,7 @@ function agregarmodificarClase() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error al modificar una clase >>> " + xhr.status + " " + xhr.statusText,
+                title: "Error, "+xhr.responseJSON.message 
               });
             }
           });
