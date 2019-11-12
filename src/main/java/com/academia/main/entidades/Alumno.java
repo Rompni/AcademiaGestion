@@ -62,7 +62,7 @@ public class Alumno implements Serializable {
 	@JoinColumn(name = "ID_CURSOA")
 	private Curso cursoA;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "CLASE_ALUMNO", joinColumns = @JoinColumn(name = "ID_ALUMNO", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "ID_CLASE", referencedColumnName = "id"))
 	private List<Clase> clases;
 

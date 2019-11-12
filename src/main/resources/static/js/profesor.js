@@ -96,7 +96,7 @@ function agregarmodificarProfesor() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error al insertar un profesor >>> " + xhr.status + " " + xhr.statusText,
+                title: "Error, "+ xhr.responseJSON.message 
               });
             }
           });
@@ -121,7 +121,7 @@ function agregarmodificarProfesor() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error al modificar un profesor >>> " + xhr.status + " " + xhr.statusText,
+                title: "Error, " + xhr.responseJSON.message 
               });
             }
           });
@@ -180,11 +180,7 @@ function eliminarProfesor() {
           error: function (xhr) {
             Toast.fire({
               icon: "success",
-              title:
-                "Error al eliminar un profesor >>> " +
-                xhr.status +
-                " " +
-                xhr.statusText
+              title: "Error; " + xhr.responseJSON.message 
             });
           }
         });

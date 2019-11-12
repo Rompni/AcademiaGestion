@@ -9,7 +9,6 @@ import com.academia.main.entidades.Asignatura;
 import com.academia.main.entidades.Curso;
 import com.academia.main.repositorios.AsignaturaRepository;
 
-import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +18,6 @@ public class AsignaturaServicioImpl implements AsignaturaServicio {
     @Autowired private AsignaturaRepository Asignaturarepositorio;
 
     @Autowired private CursoServicio cService;
-
-    private Logger LOG = Logger.getLogger(AsignaturaServicioImpl.class);
 
     @Override
     public Asignatura save(Asignatura asignatura) {

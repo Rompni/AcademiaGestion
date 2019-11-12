@@ -23,6 +23,7 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long> {
 			@Param("nif") String nif
 			);
 	
+	Profesor findByNif (String nif);
 	
 	
 }

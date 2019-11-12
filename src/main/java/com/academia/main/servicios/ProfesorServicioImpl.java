@@ -48,5 +48,10 @@ public class ProfesorServicioImpl implements ProfesorServicio {
         return profesorrepositorio.findAll();
     }
 
+    @Override
+    public Profesor BuscarProfesorPorNif(String nif) {
+        return profesorrepositorio.findByNif(nif);
+    }
+
     
 }

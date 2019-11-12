@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,7 +31,11 @@ public class ProfesorRestControlador {
 	}
 	
 	@PostMapping("/Profesores")
-	public Profesor crearProfesor(@Valid @RequestBody Profesor profesor) {
+	@ResponseBody
+	public Profesor crearProfesor(@Valid @RequestBody Profesor profesor) throws Exception{
+		Profesor p = profesorservicio.BuscarProfesorPorNif(profesor.getNif());
+		if(p != null) throw new Exception("Ya hay almacenado un profesor con ese NIF.");
+
 		return profesorservicio.save(profesor);
 	}
 	

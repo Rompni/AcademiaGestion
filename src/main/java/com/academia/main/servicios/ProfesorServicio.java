@@ -14,6 +14,8 @@ public interface ProfesorServicio {
 
     Profesor BuscarProfesorPorId(Long id);
 
+    Profesor BuscarProfesorPorNif(String nif);
+
     List<Profesor> BuscarProfesorPorNombre(String nombre, String nif);
     
 }

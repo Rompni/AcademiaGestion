@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
@@ -30,13 +31,14 @@ public class Profesor implements Serializable {
 	
 	private String apellido2;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String nif;
 	
 	@Column(nullable = false)
 	private String telefono;
 	
 	@Column(nullable = false)
+	@Pattern(message = "Correo invalido", regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
 	private String correo;
 	
 	private String titulacion;

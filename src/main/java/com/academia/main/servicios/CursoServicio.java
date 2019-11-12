@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.academia.main.entidades.Curso;
 
+import org.springframework.http.ResponseEntity;
+
 public interface CursoServicio {
     
     Curso save(Curso Curso);

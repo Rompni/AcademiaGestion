@@ -9,7 +9,7 @@ import com.academia.main.entidades.Clase;
 import com.academia.main.entidades.Curso;
 import com.academia.main.repositorios.ClaseRepository;
 
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +21,6 @@ public class ClaseServicioImpl implements ClaseServicio {
 
     @Autowired
     private CursoServicio cService;
-
-    private Logger LOG = Logger.getLogger(ClaseServicioImpl.class);
 
     @Override
     public Clase save(Clase Clase) {

@@ -94,10 +94,7 @@ function agregarmodificarCurso() {
                         Toast.fire({
                             icon: "error",
                             title:
-                                "Error al insertar un curso >>> " +
-                                xhr.status +
-                                " " +
-                                xhr.statusText
+                                "Error, " + xhr.responseJSON.message
                         });
                     }
                 });
@@ -121,10 +118,7 @@ function agregarmodificarCurso() {
                         Toast.fire({
                             icon: "error",
                             title:
-                                "Error al modificar un curso >>> " +
-                                xhr.status +
-                                " " +
-                                xhr.statusText
+                                "Error," + xhr.responseJSON.message
                         });
                     }
                 });
@@ -161,7 +155,7 @@ function llenarCampos() {
                 $("#myModal3").modal("hide");
                 Toast.fire({
                     icon: "error",
-                    title: "Error al traer datos >>> " + xhr.status + " " + xhr.statusText
+                    title: "Error, " + xhr.responseJSON.message
                 });
             }
         });
@@ -216,11 +210,7 @@ function eliminarCurso() {
                     error: function (xhr) {
                         Toast.fire({
                             icon: "success",
-                            title:
-                                "Error al eliminar un curso >>> " +
-                                xhr.status +
-                                " " +
-                                xhr.statusText
+                            title: "Error, " + xhr.responseJSON.message
                         });
                     }
                 });

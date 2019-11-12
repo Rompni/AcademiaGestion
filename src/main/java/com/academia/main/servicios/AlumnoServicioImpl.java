@@ -1,19 +1,14 @@
 package com.academia.main.servicios;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
 import com.academia.main.entidades.Alumno;
-import com.academia.main.entidades.Curso;
-import com.academia.main.entidades.Responsable;
 import com.academia.main.repositorios.AlumnoRepository;
 
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +18,7 @@ public class AlumnoServicioImpl implements AlumnoServicio {
     @Autowired private AlumnoRepository aRepository;
     
 
-    private Logger LOG = Logger.getLogger(AlumnoServicioImpl.class);
+    //private Logger LOG = Logger.getLogger(AlumnoServicioImpl.class);
 
     @Override
     public Alumno save(Alumno alumno) {

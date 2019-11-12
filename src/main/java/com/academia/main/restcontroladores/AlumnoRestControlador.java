@@ -1,13 +1,10 @@
 package com.academia.main.restcontroladores;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
-
-import org.jboss.logging.Logger;
 
 import com.academia.main.entidades.Alumno;
 import com.academia.main.entidades.Curso;

@@ -1,26 +1,24 @@
 package com.academia.main.servicios;
 
 import java.util.Optional;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
-
 
 import com.academia.main.entidades.Curso;
 import com.academia.main.repositorios.CursoRepository;
 
 
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CursoServicioImpl implements CursoServicio {
 
-    @Autowired private CursoRepository cursorepositorio;
-    private Logger LOG = Logger.getLogger(CursoServicioImpl.class);
-    
+    @Autowired
+    private CursoRepository cursorepositorio;
+
     @Override
     public Curso save(Curso Curso) {
        return cursorepositorio.save(Curso);

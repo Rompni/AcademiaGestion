@@ -6,12 +6,11 @@ import javax.persistence.EntityNotFoundException;
 
 import com.academia.main.entidades.Asignatura;
 import com.academia.main.entidades.Clase;
-import com.academia.main.entidades.Curso;
 import com.academia.main.entidades.HoraSemanal;
 import com.academia.main.entidades.Profesor;
 import com.academia.main.servicios.AsignaturaServicio;
 import com.academia.main.servicios.ClaseServicio;
-import com.academia.main.servicios.CursoServicio;
+//import com.academia.main.servicios.CursoServicio;
 import com.academia.main.servicios.HoraSemanalServicio;
 import com.academia.main.servicios.ProfesorServicio;
 
@@ -19,16 +18,14 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import antlr.collections.List;
-
 @RestController
 @RequestMapping("/api/v1")
 public class ClaseRestControlador {
 
     @Autowired
     private ClaseServicio clService;
-    @Autowired
-    private CursoServicio cService;
+    //@Autowired
+    //private CursoServicio cService;
     @Autowired
     private ProfesorServicio pService;
     @Autowired
@@ -37,7 +34,6 @@ public class ClaseRestControlador {
     private HoraSemanalServicio hsService;
 
     private Logger LOG = Logger.getLogger(ClaseRestControlador.class);
-    private Logger LOGG = Logger.getLogger(HoraSemanal.class);
 
     @GetMapping("/Clases")
     public java.util.List<Clase> getClases() {

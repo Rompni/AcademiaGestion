@@ -1,7 +1,6 @@
 package com.academia.main.servicios;
 
 import java.util.Optional;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -10,7 +9,7 @@ import javax.persistence.EntityNotFoundException;
 import com.academia.main.entidades.HoraSemanal;
 import com.academia.main.repositorios.HoraSemanalRepository;
 
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class HoraSemanalServicioImpl implements HoraSemanalServicio {
 
     @Autowired
     private HoraSemanalRepository HoraSemanalrepositorio;
-    private Logger LOG = Logger.getLogger(HoraSemanalServicioImpl.class);
+    //private Logger LOG = Logger.getLogger(HoraSemanalServicioImpl.class);
 
     @Override
     public HoraSemanal save(HoraSemanal HoraSemanal) {

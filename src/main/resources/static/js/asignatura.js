@@ -101,7 +101,7 @@ function agregarmodificarAsignatura(){
             error: function(xhr){
               Toast.fire({
                 icon: "error",
-                title: "Error al insertar una asignatura >>> " + xhr.status + " " + xhr.statusText,   
+                title: "Error, "+ xhr.responseJSON.message   
             });
           }
       }); 
@@ -125,7 +125,7 @@ function agregarmodificarAsignatura(){
         error: function(xhr){
           Toast.fire({
             icon: "error",
-            title: "Error al modificar una asignatura >>> " + xhr.status + " " + xhr.statusText,   
+            title: "Error, "+xhr.responseJSON.message   
         });
         }  		
         });
@@ -202,7 +202,7 @@ function eliminarAsignatura() {
       error: function(xhr){
         Toast.fire({
           icon: "success",
-          title: "Error al eliminar una asignatura >>> " + xhr.status + " " + xhr.statusText,   
+          title: "Error, "+ xhr.responseJSON.message   
         });
       }
 
