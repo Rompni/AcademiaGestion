@@ -48,26 +48,29 @@ public class ClaseServicioImpl implements ClaseServicio {
 
     @Override
     public List<Clase> BuscarClasePorCurso(String id) {
-        Curso curso = cService.BuscarCursoPorId(Long.parseLong(id));
-        return Claserepositorio.findClasesByCurso(curso);
+        // falta
+        return Claserepositorio.findClasesByCurso(Long.parseLong(id));
     }
 
     @Override
     public List<Clase> BuscarClasePorAsignatura(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        return Claserepositorio.findClasesByAsignatura(Long.parseLong(id));
     }
 
     @Override
     public List<Clase> BuscarClasePorProfesor(String id) {
-        // TODO Auto-generated method stub
-        return null;
+        return Claserepositorio.findClasesByProfesor(Long.parseLong(id));
     }
 
     @Override
-    public List<Clase> BuscarClasePorCursoAsignaturaPrifesor(String id) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<Clase> BuscarClasePorCursoAsignaturaProfesor(String idCurso, String idAsignatura, String idProfesor) {
+        return Claserepositorio.findClasesByCursoAsignaturaProfesor(Long.parseLong(idCurso),
+                Long.parseLong(idAsignatura), Long.parseLong(idProfesor));
     }
-    
+
+    @Override
+    public List<Clase> BuscarClasePorCursoProfesor(String idCurso, String idProfesor) {
+        return Claserepositorio.findClasesByCursoProfesor(Long.parseLong(idCurso), Long.parseLong(idProfesor));
+    }
+
 }

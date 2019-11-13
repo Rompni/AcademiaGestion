@@ -94,7 +94,7 @@ function agregarmodificarClase() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error, "+xhr.responseJSON.message 
+                title: "Error, " + xhr.responseJSON.message
               });
             }
           });
@@ -119,7 +119,7 @@ function agregarmodificarClase() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error, "+xhr.responseJSON.message 
+                title: "Error, " + xhr.responseJSON.message
               });
             }
           });
@@ -130,7 +130,7 @@ function agregarmodificarClase() {
           title: "Faltan datos por rellenar",
         });
       }
-    }else {
+    } else {
       Toast.fire({
         icon: "warning",
         title: "Faltan datos por rellenar",
@@ -259,19 +259,25 @@ function buscarClase() {
     ev.preventDefault();
     $(".f").remove();
     var url = "./api/v1/Clases";
-    var busqueda = $('.card-body input').val();
+    var asignatura = $("#inputAsignatura").val();
     var curso = $("#inputCurso").val();
+    var profesor = $("#inputProfesor").val();
     console.log(curso);
-    /*
-    if (busqueda !== "") {
-      url = "./api/v1/Clases/name/" + busqueda;
-    } else if (curso !== "nn") {
-      url = "./api/v1/Clases/curso/" + curso;
-    }
 
-    if (busqueda !== "" && curso !== "nn")
-      url = "./api/v1/Clases/name/" + busqueda + "/" + curso;
-*/
+    if (curso !== "nn") {
+      url = "./api/v1/Clases/curso/" + curso;
+      if (asignatura !== "nn")
+        url = "./api/v1/Clases/asig/" + asignatura;
+      else if (profesor !== "nn")
+        url = "./api/v1/Clases/cursoprofe/" + curso + "/" + profesor;
+
+    } else if (profesor !== "nn")
+      url = "./api/v1/Clases/profe/" + profesor;
+
+    if (curso !== "nn" && asignatura !== "nn" && profesor !== "nn")
+      url = "./api/v1/Clases/CsAsPr/" + curso + "/" + asignatura + "/" + profesor;
+
+
     console.log(url)
     $.ajax(url,
       {
@@ -336,12 +342,12 @@ function llenarCampos() {
         type: "GET",
         success: function (datos) {
           console.log(datos)
-         
+
           $("#cursoClase").val(datos.asignatura.curso.id);
           $("#profesorClase").val(datos.profesor.id);
-          
+
           $("#asignaturaClase").val(datos.asignatura.id);
-          
+
           $("#tabla tbody tr").each(function () {
             $(this).find("td").each(function () {
               var horaindice = $(this).closest('tr').index();

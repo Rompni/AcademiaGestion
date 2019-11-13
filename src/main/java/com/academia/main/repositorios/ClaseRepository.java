@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.academia.main.entidades.Alumno;
+import com.academia.main.entidades.Asignatura;
 import com.academia.main.entidades.Clase;
 import com.academia.main.entidades.Curso;
 
@@ -19,11 +20,20 @@ public interface ClaseRepository extends JpaRepository<Clase, Long> {
 	@Query("SELECT c FROM Clase c WHERE :alumno MEMBER OF c.alumnos")
 	List<Clase> findClasesByAlumno(@Param("alumno") Alumno alumno);
 
-	@Query("SELECT c FROM Clase c")
-	List<Clase> findClasesByCurso(@Param("curso") Curso curso);
+	@Query("SELECT c FROM Clase c, Asignatura a WHERE a.curso.id = :cursox AND a.id = c.asignatura")
+	List<Clase> findClasesByCurso(@Param("cursox") Long cursox);
 
-	// por asignatura
+	@Query("SELECT c FROM Clase c, Asignatura a WHERE a.id = :asignaturax AND :asignaturax = c.asignatura")
+	List<Clase> findClasesByAsignatura(@Param("asignaturax") Long asignaturax);
 
-	// por profesor
+	@Query("SELECT c FROM Clase c, Profesor p WHERE p.id = :profesorx AND :profesorx = c.profesor")
+	List<Clase> findClasesByProfesor(@Param("profesorx") Long profesorx);
+
+	@Query("SELECT c FROM Clase c, Asignatura a, Profesor p WHERE p.id = :profesorx AND a.id = :asignaturax AND a.curso.id = :cursox AND a.id = c.asignatura AND :asignaturax = c.asignatura AND :profesorx = c.profesor")
+	List<Clase> findClasesByCursoAsignaturaProfesor(@Param("cursox") Long cursox,
+			@Param("asignaturax") Long asignaturax, @Param("profesorx") Long profesorx);
+
+	@Query("SELECT c FROM Clase c, Asignatura a, Profesor p WHERE a.curso.id = :cursox AND a.id = c.asignatura AND p.id = :profesorx AND :profesorx = c.profesor" )
+	List<Clase> findClasesByCursoProfesor(@Param("cursox") Long cursox, @Param("profesorx") long profesorx);
 
 }

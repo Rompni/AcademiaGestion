@@ -17,7 +17,8 @@ public interface ClaseServicio {
     List<Clase> BuscarClasePorCurso(String id);
     List<Clase> BuscarClasePorAsignatura(String id);
     List<Clase> BuscarClasePorProfesor(String id);
-    List<Clase> BuscarClasePorCursoAsignaturaPrifesor(String id);
+    List<Clase> BuscarClasePorCursoAsignaturaProfesor(String idCurso, String idAsignatura, String idProfesor);
+    List<Clase> BuscarClasePorCursoProfesor(String idCurso, String idProfesor);
 
 
 }

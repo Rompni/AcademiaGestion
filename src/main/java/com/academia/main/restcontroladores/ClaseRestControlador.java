@@ -115,6 +115,27 @@ public class ClaseRestControlador {
         return clService.BuscarClasePorCurso(id);
     }
 
+    @GetMapping("/Clases/asig/{id}")
+    public java.util.List<Clase> ClasesbyAsignatura(@PathVariable String id) {
+        return clService.BuscarClasePorAsignatura(id);
+    }
+
+    @GetMapping("/Clases/profe/{id}")
+    public java.util.List<Clase> ClasesbyProfesor(@PathVariable String id) {
+        return clService.BuscarClasePorProfesor(id);
+    }
+
+    @GetMapping("/Clases/CsAsPr/{idCurso}/{idAsignatura}/{idProfesor}")
+    public java.util.List<Clase> ClasesbyCursoAsignaturaProfesor(@PathVariable String idCurso,
+            @PathVariable String idAsignatura, @PathVariable String idProfesor) {
+        return clService.BuscarClasePorCursoAsignaturaProfesor(idCurso, idAsignatura, idProfesor);
+    }
+
+    @GetMapping("/Clases/cursoprofe/{idCurso}/{idProfesor}")
+    public java.util.List<Clase> ClasesbyCursoProfesor(@PathVariable String idCurso, @PathVariable String idProfesor) {
+        return clService.BuscarClasePorCursoProfesor(idCurso, idProfesor);
+    }
+
     @PutMapping("/Clases")
     @ResponseStatus(HttpStatus.CREATED)
     public Clase updateClase(@Valid @RequestBody Clase clase) throws Exception {
@@ -122,9 +143,9 @@ public class ClaseRestControlador {
         Clase CLASE = clService.BuscarClasePorId(clase.getId());
         if (CLASE == null)
             throw new EntityNotFoundException("No se encontró la clase");
-        
 
-        eliminar(CLASE.getId());;
+        eliminar(CLASE.getId());
+        ;
 
         clase.setId(null);
         return crearClase(clase);
