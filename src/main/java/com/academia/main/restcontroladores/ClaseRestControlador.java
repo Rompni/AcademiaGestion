@@ -2,20 +2,11 @@ package com.academia.main.restcontroladores;
 
 import java.util.Arrays;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
-import com.academia.main.entidades.Asignatura;
-import com.academia.main.entidades.Clase;
-import com.academia.main.entidades.HoraSemanal;
-import com.academia.main.entidades.Profesor;
-import com.academia.main.servicios.AsignaturaServicio;
-import com.academia.main.servicios.ClaseServicio;
-import com.academia.main.servicios.CursoServicio;
-//import com.academia.main.servicios.CursoServicio;
-import com.academia.main.servicios.HoraSemanalServicio;
-import com.academia.main.servicios.ProfesorServicio;
+import com.academia.main.entidades.*;
+import com.academia.main.servicios.*;
 import org.springframework.http.HttpStatus;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +22,8 @@ public class ClaseRestControlador {
     private ClaseServicio clService;
     @Autowired
     private ProfesorServicio pService;
+    @Autowired
+    private CursoServicio cService;
     @Autowired
     private AsignaturaServicio aService;
     @Autowired
@@ -139,13 +132,37 @@ public class ClaseRestControlador {
     @PutMapping("/Clases")
     @ResponseStatus(HttpStatus.CREATED)
     public Clase updateClase(@Valid @RequestBody Clase clase) throws Exception {
+       
+        java.util.List<Clase> clases = clService.buscarClases();
+
+        if (clase.getIdCurso() == null)
+            throw new Exception("El curso  es nula");
+
+        if (clase.getIdAsignatura() == null)
+            throw new Exception("La asignatura es nula");
+
+        if (clase.getIdProfesor() == null)
+            throw new Exception("el profesor es nulo");
 
         Clase CLASE = clService.BuscarClasePorId(clase.getId());
         if (CLASE == null)
             throw new EntityNotFoundException("No se encontró la clase");
 
+        
+            if (clases != null) {
+                for (Clase c : clases) {
+                    if(c.getId() ==  clase.getId())
+                        continue;
+                        
+                    if (c.getProfesor().getId() == Long.parseLong(clase.getIdProfesor())) {
+                        if (c.getAsignatura().getId() ==Long.parseLong(clase.getIdAsignatura())) {
+                            throw new Exception("Clase existente");
+                        }
+                    }
+                }
+            }
+
         eliminar(CLASE.getId());
-        ;
 
         clase.setId(null);
         return crearClase(clase);

@@ -35,9 +35,6 @@ public class ClaseServicioImpl implements ClaseServicio {
     @Override
     public Clase BuscarClasePorId(Long id) {
         Optional<Clase> Clase = Claserepositorio.findById(id);
-        if (!Clase.isPresent()) {
-            throw new EntityNotFoundException("No se encontro el Clase con id " + id);
-        }
         return Clase.get();
     }
 
