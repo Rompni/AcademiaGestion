@@ -3,6 +3,7 @@ package com.academia.main.repositorios;
 import java.util.List;
 
 import com.academia.main.entidades.Alumno;
+import com.academia.main.entidades.Clase;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,5 +24,8 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
 
     @Query("SELECT a FROM Alumno a WHERE a.nif = :nif")
     Alumno findAlumnoByNif(@Param("nif") String nif);
+
+    @Query("SELECT c FROM Clase c, Asignatura a, Alumno al WHERE a.curso.id = :cursox AND a.id = c.asignatura AND al.id = :alumnox" )
+    List<Clase> findClaseByCurso(@Param("cursox") Long cursox, @Param("alumnox") long alumnox);
 
 }

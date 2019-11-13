@@ -30,6 +30,7 @@ function buscarCurso() {
                     title: "No hay cursos registrados"
                 });
             } else {
+                console.log(datos)
                 $.each(datos, function (i, e) {
                     $("#A-tabla").append(
                         "<tr class='f' data-id=" +

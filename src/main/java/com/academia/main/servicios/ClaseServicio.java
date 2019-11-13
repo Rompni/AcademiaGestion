@@ -2,6 +2,7 @@ package com.academia.main.servicios;
 
 import java.util.List;
 
+import com.academia.main.entidades.Alumno;
 import com.academia.main.entidades.Clase;
 
 public interface ClaseServicio {
@@ -19,6 +20,7 @@ public interface ClaseServicio {
     List<Clase> BuscarClasePorProfesor(String id);
     List<Clase> BuscarClasePorCursoAsignaturaProfesor(String idCurso, String idAsignatura, String idProfesor);
     List<Clase> BuscarClasePorCursoProfesor(String idCurso, String idProfesor);
+    List<Alumno> BuscarAlumnoPorCurso(Long idCurso);
 
 
 }

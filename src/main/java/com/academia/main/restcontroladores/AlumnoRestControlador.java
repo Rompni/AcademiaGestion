@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
 import com.academia.main.entidades.Alumno;
+import com.academia.main.entidades.Clase;
 import com.academia.main.entidades.Curso;
 import com.academia.main.entidades.Responsable;
 import com.academia.main.servicios.AlumnoServicio;
@@ -27,9 +28,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class AlumnoRestControlador {
 
-	@Autowired private AlumnoServicio alumnoservicio;
-	@Autowired private CursoServicio cService;
-    @Autowired private ResponsableServicio rService;
+	@Autowired
+	private AlumnoServicio alumnoservicio;
+	@Autowired
+	private CursoServicio cService;
+	@Autowired
+	private ResponsableServicio rService;
+	private String idAlumno;
 
 	@GetMapping("/Alumnos")
 	public List<Alumno> getAlumnos() {
@@ -39,23 +44,23 @@ public class AlumnoRestControlador {
 	@PostMapping("/Alumnos")
 	public Alumno crearAlumno(@RequestBody Alumno alumno) {
 		Alumno al = alumnoservicio.BuscarAlumnoPorNif(alumno.getNif());
-		if(al != null)
+		if (al != null)
 			throw new EntityNotFoundException("Alumno existente");
-			
-        Curso curso = cService.BuscarCursoPorId(Long.parseLong(alumno.getStringaux()));
-        List<Alumno> a =  Arrays.asList(alumno);
-        curso.setAlumnos(a);
-        //curso = cService.save(curso);
-        alumno.setCursoA(curso);
 
-        Responsable responsable = alumno.getResponsable();
-        if(responsable != null) {
-        responsable.setAlumnosrespon(new LinkedList<Alumno>());
-        responsable.getAlumnosrespon().add(alumno);
-        responsable = rService.save(responsable);
-        alumno.setResponsable(responsable);
+		Curso curso = cService.BuscarCursoPorId(Long.parseLong(alumno.getStringaux()));
+		List<Alumno> a = Arrays.asList(alumno);
+		curso.setAlumnos(a);
+		// curso = cService.save(curso);
+		alumno.setCursoA(curso);
+
+		Responsable responsable = alumno.getResponsable();
+		if (responsable != null) {
+			responsable.setAlumnosrespon(new LinkedList<Alumno>());
+			responsable.getAlumnosrespon().add(alumno);
+			responsable = rService.save(responsable);
+			alumno.setResponsable(responsable);
 		}
-		
+
 		return alumnoservicio.save(alumno);
 	}
 
@@ -91,6 +96,19 @@ public class AlumnoRestControlador {
 	public void eliminar(@PathVariable Long id) {
 		Alumno alumno = alumnoservicio.BuscarAlumnoPorId(id);
 		alumnoservicio.delete(alumno);
+	}
+
+	@GetMapping("/Alumnos/clase/{idAlumno}")
+	public List<Clase> ClasebyCurso(@PathVariable String idAlumno) {
+		Alumno alumno = alumnoservicio.BuscarAlumnoPorId(Long.parseLong(idAlumno));
+		if (alumno == null)
+			throw new EntityNotFoundException("Alumno no existe");
+
+		Curso curso = cService.BuscarCursoPorId(alumno.getCursoA().getId());
+		if (curso == null)
+			throw new EntityNotFoundException("Curso no existe");
+
+		return alumnoservicio.BuscarClasePorCurso(Long.toString(curso.getId()), idAlumno);
 	}
 
 }

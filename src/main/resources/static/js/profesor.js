@@ -1,6 +1,7 @@
 $(function () {
   buscarProfesor();
   agregarmodificarProfesor();
+  mostrarClases();
   eliminarProfesor();
   llenarCampos();
   limpiarBusqueda();
@@ -96,7 +97,7 @@ function agregarmodificarProfesor() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error, "+ xhr.responseJSON.message 
+                title: "Error, " + xhr.responseJSON.message
               });
             }
           });
@@ -121,7 +122,7 @@ function agregarmodificarProfesor() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error, " + xhr.responseJSON.message ,
+                title: "Error, " + xhr.responseJSON.message,
                 timer: 2000
               });
             }
@@ -181,7 +182,7 @@ function eliminarProfesor() {
           error: function (xhr) {
             Toast.fire({
               icon: "success",
-              title: "Error; " + xhr.responseJSON.message 
+              title: "Error; " + xhr.responseJSON.message
             });
           }
         });
@@ -235,9 +236,60 @@ function llenarCampos() {
     e.preventDefault();
     limpiarTodo();
     cambiodeBoton("#btnCrear", "#myModal");
-});
+  });
 
 }
+
+function mostrarClases() {
+  $('#btnclases').on('click', function (e) {
+    e.preventDefault();
+    var id = $("input:radio[name=selected]:checked").val();
+    if (!id) {
+      Toast.fire({
+        icon: "error",
+        title: "Ningun profesor ha sido seleccionado"
+      });
+      return;
+    }
+    limpiarTodo();
+    $.ajax("./api/v1/Profesores/clases/" + id,
+      {
+        type: "GET",
+        success: function (datos) {
+
+          if (datos.length == 0) {
+            Toast.fire({
+              icon: "warning",
+              title: "Este profesor no tiene clases estipuladas"
+            });
+          } else {
+            $("#myModal2").modal("show");
+            $("#tabla tbody tr").each(function () {
+              $(this).find("td").each(function () {
+                var horaindice = $(this).closest('tr').index();
+                var diaindice = $(this).index()
+                for (var i = 0; i < datos.length; i++)
+                  for (var j = 0; j < datos[i].horario.length; j++)
+                    if (datos[i].horario[j].horaindice == horaindice && datos[i].horario[j].diaindice == diaindice) {
+                      $(this).text(datos[i].asignatura.curso.nivel + " de " + datos[i].asignatura.curso.etapa + "-" + datos[i].asignatura.nombre)
+                    }
+              });
+            });
+          }
+        },
+        error: function (xhr) {
+          $("#myModal").modal("hide");
+          Toast.fire({
+            icon: "error",
+            title: "Error al traer datos >>> " + xhr.status + " " + xhr.statusText
+          });
+        }
+      });
+  });
+
+}
+
+
 
 function cambiodeBoton(name, modal) {
   var button = $(name);
@@ -250,8 +302,17 @@ function cambiodeBoton(name, modal) {
 }
 
 function limpiarBusqueda() {
-  $('#limpiar').on('click', function (event) {
+  $('#limpiar').on('click', function () {
     $('.card-body input').val("")
+  });
+
+
+  $('#regresar').on('click', function () {
+    $("#tabla tbody tr").each(function () {
+      $(this).find("td").each(function () {
+        $(this).text("");
+      });
+    });
   });
 }
 
@@ -259,4 +320,10 @@ function limpiarTodo() {
   $("input[type=text]").val("");
   $("input[type=number]").val("");
   $("input[type=email]").val("");
+
+  $("#tabla tbody tr").each(function () {
+    $(this).find("td").each(function () {
+      $(this).text("");
+    });
+  });
 }

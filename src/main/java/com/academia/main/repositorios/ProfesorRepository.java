@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.academia.main.entidades.Clase;
 import com.academia.main.entidades.Profesor;
 
 @Repository
@@ -24,6 +25,9 @@ public interface ProfesorRepository extends JpaRepository<Profesor, Long> {
 			);
 	
 	Profesor findByNif (String nif);
+
+	@Query("SELECT c FROM Clase c, Profesor p WHERE p.id = :profesorx AND :profesorx = c.profesor")
+	List<Clase> findClasesByProfesor(@Param("profesorx") Long profesorx);
 	
 	
 }

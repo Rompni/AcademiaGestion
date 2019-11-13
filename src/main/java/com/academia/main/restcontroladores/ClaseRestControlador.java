@@ -118,6 +118,19 @@ public class ClaseRestControlador {
         return clService.BuscarClasePorProfesor(id);
     }
 
+    @GetMapping("/Clases/Alumno/{id}")
+    public java.util.List<Alumno> AlumnobyClase(@PathVariable String id) {
+
+        Clase clase = clService.BuscarClasePorId(Long.parseLong(id));
+        if (clase == null)
+            throw new EntityNotFoundException("Clase no existe");
+
+        if (clase.getAsignatura().getCurso().getId() == null)
+            throw new EntityNotFoundException("Curso no existe");
+
+        return clService.BuscarAlumnoPorCurso(clase.getAsignatura().getCurso().getId());
+    }
+
     @GetMapping("/Clases/CsAsPr/{idCurso}/{idAsignatura}/{idProfesor}")
     public java.util.List<Clase> ClasesbyCursoAsignaturaProfesor(@PathVariable String idCurso,
             @PathVariable String idAsignatura, @PathVariable String idProfesor) {
@@ -132,7 +145,7 @@ public class ClaseRestControlador {
     @PutMapping("/Clases")
     @ResponseStatus(HttpStatus.CREATED)
     public Clase updateClase(@Valid @RequestBody Clase clase) throws Exception {
-       
+
         java.util.List<Clase> clases = clService.buscarClases();
 
         if (clase.getIdCurso() == null)
@@ -148,19 +161,18 @@ public class ClaseRestControlador {
         if (CLASE == null)
             throw new EntityNotFoundException("No se encontró la clase");
 
-        
-            if (clases != null) {
-                for (Clase c : clases) {
-                    if(c.getId() ==  clase.getId())
-                        continue;
-                        
-                    if (c.getProfesor().getId() == Long.parseLong(clase.getIdProfesor())) {
-                        if (c.getAsignatura().getId() ==Long.parseLong(clase.getIdAsignatura())) {
-                            throw new Exception("Clase existente");
-                        }
+        if (clases != null) {
+            for (Clase c : clases) {
+                if (c.getId() == clase.getId())
+                    continue;
+
+                if (c.getProfesor().getId() == Long.parseLong(clase.getIdProfesor())) {
+                    if (c.getAsignatura().getId() == Long.parseLong(clase.getIdAsignatura())) {
+                        throw new Exception("Clase existente");
                     }
                 }
             }
+        }
 
         eliminar(CLASE.getId());
 

@@ -36,4 +36,7 @@ public interface ClaseRepository extends JpaRepository<Clase, Long> {
 	@Query("SELECT c FROM Clase c, Asignatura a, Profesor p WHERE a.curso.id = :cursox AND a.id = c.asignatura AND p.id = :profesorx AND :profesorx = c.profesor" )
 	List<Clase> findClasesByCursoProfesor(@Param("cursox") Long cursox, @Param("profesorx") long profesorx);
 
+	@Query("SELECT al FROM Alumno al WHERE al.cursoA.id = :cursox" )
+	List<Alumno> findAlumnoByCursoClase(@Param("cursox") Long cursox);
+
 }

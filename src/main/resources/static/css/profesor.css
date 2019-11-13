@@ -117,6 +117,13 @@ label
     font-size: 30px;
 }
 
+#myModal2 .modal-dialog{
+    max-width:1200px;
+    min-height: 600px;
+    
+    align-content: center;
+  }
+
 hr{
     border: 2px solid var(--form-color);
     margin-top: 0px;

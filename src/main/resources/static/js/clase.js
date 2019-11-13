@@ -7,6 +7,7 @@ $(function () {
   cambiodeBoton();
   RowClickEvent();
   buscarClase();
+  buscarAlumnos();
 });
 
 function RowClickEvent() {

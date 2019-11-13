@@ -5,6 +5,7 @@ $(function () {
   agregarmodificarAlumno();
   eliminarAlumno();
   limpiarBusqueda();
+  mostrarClases();
 });
 
 function listarCursos() {
@@ -287,6 +288,56 @@ function agregarResponsable(responsable, my_callback) {
         my_callback(xrh);
       }
     });
+}
+
+function mostrarClases() {
+  $('#btnclases').on('click', function (e) {
+    e.preventDefault();
+    var id = $("input:radio[name=selected]:checked").val();
+    if (!id) {
+      Toast.fire({
+        icon: "error",
+        title: "Ningun alumno ha sido seleccionado"
+      });
+      return;
+    }
+    limpiarTodo();
+ 
+    $.ajax("./api/v1/Alumnos/clase/" + id,
+      {
+        type: "GET",
+        success: function (datos) {
+
+          if (datos.length == 0) {
+            Toast.fire({
+              icon: "warning",
+              title: "Este alumno no tiene clases estipuladas"
+            });
+          } else {
+            $("#myModal4").modal("show");
+            $("#tabla2 tbody tr").each(function () {
+              $(this).find("td").each(function () {
+                var horaindice = $(this).closest('tr').index();
+                var diaindice = $(this).index()
+                for (var i = 0; i < datos.length; i++)
+                  for (var j = 0; j < datos[i].horario.length; j++)
+                    if (datos[i].horario[j].horaindice == horaindice && datos[i].horario[j].diaindice == diaindice) {
+                      $(this).text(datos[i].asignatura.curso.nivel + " de " + datos[i].asignatura.curso.etapa + "-" + datos[i].asignatura.nombre)
+                    }
+              });
+            });
+          }
+        },
+        error: function (xhr) {
+          $("#myModal4").modal("hide");
+          Toast.fire({
+            icon: "error",
+            title: "Error al traer datos >>> " + xhr.status + " " + xhr.statusText
+          });
+        }
+      });
+  });
+
 }
 
 function eliminarAlumno() {

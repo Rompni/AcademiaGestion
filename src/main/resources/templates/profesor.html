@@ -61,8 +61,8 @@
               data-titulo="Datos personales" data-boton="Modificar" id="btnEditar">
               Datos personales
             </button>
-            <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#myModal2"
-              id="btnclases" disabled>
+            <button type="button" class="btn btn-outline-light" data-toggle="" data-target="#myModal2"
+              id="btnclases">
               Clases
             </button>
             <button type="button" class="btn btn-outline-light" id="btnbaja">
@@ -108,7 +108,7 @@
           <!-- Modal body -->
           <div class="modal-body">
             <div class="col">
-              <div class="form-group input-group" >
+              <div class="form-group input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"> Nombre: </span>
                 </div>
@@ -142,7 +142,7 @@
                   <span class="input-group-text"> Segundo Apellido </span>
                 </div>
               </div>
-              
+
               <div class="form-group input-group">
 
                 <div class="input-group-prepend">
@@ -150,55 +150,55 @@
                 </div>
 
                 <input type="number" class="form-control" id="inputNif" placeholder="Numero de Identificación" />
-                
+
                 <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="icon-exclamation"></i>
-                    </span>
-                  </div>
-              
-              </div>
-              <div class="form-group input-group">
-                  <div class="input-group-prepend">
-                      <span class="input-group-text"> Telefono </span>
-                    </div>
-
-                  <input type="number" class="form-control" id="inputTelefono" placeholder="Numero de Telefono" />
-
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                          <i class="icon-phone"></i>
-                      </span>
-                    </div>
+                  <span class="input-group-text">
+                    <i class="icon-exclamation"></i>
+                  </span>
+                </div>
 
               </div>
               <div class="form-group input-group">
-                  <div class="input-group-prepend">
-                      <span class="input-group-text"> Correo </span>
-                  </div>
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Telefono </span>
+                </div>
 
-                  <input type="email" class="form-control" id="inputCorreo" placeholder="Correo Electrónico" />
+                <input type="number" class="form-control" id="inputTelefono" placeholder="Numero de Telefono" />
 
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                          <i class="icon-google-plus"></i>
-                      </span>
-                    </div>
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-phone"></i>
+                  </span>
+                </div>
+
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Correo </span>
+                </div>
+
+                <input type="email" class="form-control" id="inputCorreo" placeholder="Correo Electrónico" />
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-google-plus"></i>
+                  </span>
+                </div>
 
               </div>
 
               <div class="form-group input-group">
-                  <div class="input-group-prepend">
-                      <span class="input-group-text">
-                          <i class="icon-star"></i>
-                      </span>
-                    </div>
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="icon-star"></i>
+                  </span>
+                </div>
 
-                  <input type="text" class="form-control" id="inputTitulacion" placeholder="Titulacion" />
-                
-                  <div class="input-group-prepend">
-                      <span class="input-group-text"> Titulación </span>
-                  </div>
+                <input type="text" class="form-control" id="inputTitulacion" placeholder="Titulacion" />
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> Titulación </span>
+                </div>
 
               </div>
             </div>
@@ -217,144 +217,155 @@
     </div>
   </section>
 
-  <section2>
+  <section5>
     <!-- The Modal -->
-    <div class="modal" id="myModal2" aria-hidden="true" style="display: none;">
-      <div class="modal-dialog modal-lg">
+    <div class="modal fade" id="myModal2" aria-hidden="true">
+      <div class="modal-dialog flipInY animated">
         <div class="modal-content">
+
           <!-- Modal Header -->
-          <div class="p-3 mb-2 bg-success text-white">
+
+          <div class="p-3 mb-2 text-white bg-dark">
             <div class="modal-header">
-              <h4 class="modal-title">Horario</h4>
-              <button type="button" class="close" data-dismiss="modal">
-                ×
-              </button>
+              <h4 class="modal-title">Horario del profesor</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
           </div>
+
           <!-- Modal body -->
           <div class="modal-body">
-            <table class="table table-striped table-inverse table-bordered text-center">
-              <thead class="thead-inverse">
-                <tr>
-                  <th>Hora</th>
-                  <th>Lunes</th>
-                  <th>Martes</th>
-                  <th>Miercoles</th>
-                  <th>Jueves</th>
-                  <th>Viernes</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td scope="row">09:00 - 10:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">10:00 - 11:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">11:00 - 12:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">12:00 - 13:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">13:00 - 14:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">14:00 - 15:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">15:00 - 16:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">16:00 - 17:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">17:00 - 18:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">18:00 - 19:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">19:00 - 20:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-                <tr>
-                  <td scope="row">20:00 - 21:00</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="table-responsive">
+              <table id="tabla" class="table table-bordered table-sm text-center table-dark">
+                <thead class="thead-dark">
+                  <tr class="head">
+                    <th>Hora</th>
+                    <th>Lunes</th>
+                    <th>Martes</th>
+                    <th>Miercoles</th>
+                    <th>Jueves</th>
+                    <th>Viernes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">08:00-9:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">09:00-10:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">10:00-11:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">11:00-12:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">12:00-13:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">13:00-14:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">14:00-15:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">15:00-16:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">16:00-17:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">17:00-18:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">18:00-19:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">19:00-20:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">20:00-21:00</th>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <!-- Modal footer -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">
-              Aceptar
-            </button>
+            <button type="button" class="btn btn-dark" data-dismiss="modal" id="regresar">Regresar </button>
+
           </div>
+
         </div>
       </div>
     </div>
-  </section2>
+  </section5>
 
   <footer th:replace="layouts/base::footer('profesor')"></footer>
 </body>

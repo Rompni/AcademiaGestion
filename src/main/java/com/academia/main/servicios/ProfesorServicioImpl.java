@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.academia.main.entidades.Clase;
 import com.academia.main.entidades.Profesor;
 import com.academia.main.repositorios.ProfesorRepository;
 
@@ -14,7 +15,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProfesorServicioImpl implements ProfesorServicio {
 
-    @Autowired private ProfesorRepository profesorrepositorio;
+    @Autowired
+    private ProfesorRepository profesorrepositorio;
 
     @Override
     public Profesor save(Profesor profesor) {
@@ -29,17 +31,17 @@ public class ProfesorServicioImpl implements ProfesorServicio {
     @Override
     public Profesor BuscarProfesorPorId(Long id) {
         Optional<Profesor> profesor = profesorrepositorio.findById(id);
-        if(!profesor.isPresent()){
-            throw new EntityNotFoundException("No se encontro el profesor con id "+id);
+        if (!profesor.isPresent()) {
+            throw new EntityNotFoundException("No se encontro el profesor con id " + id);
         }
         return profesor.get();
-        }
+    }
 
     @Override
     public List<Profesor> BuscarProfesorPorNombre(String nombre, String nif) {
         String[] parts = nombre.split("(?=\\s)");
         System.out.println(parts[0]);
-        List <Profesor> profesors = profesorrepositorio.findProfesorByNombreOrNif(parts[0], nif);
+        List<Profesor> profesors = profesorrepositorio.findProfesorByNombreOrNif(parts[0], nif);
         return profesors;
     }
 
@@ -51,6 +53,11 @@ public class ProfesorServicioImpl implements ProfesorServicio {
     @Override
     public Profesor BuscarProfesorPorNif(String nif) {
         return profesorrepositorio.findByNif(nif);
+    }
+
+    @Override
+    public List<Clase> BuscarClasesPorProfesor(Long idProfesor) {
+        return profesorrepositorio.findClasesByProfesor(idProfesor);
     }
 
     

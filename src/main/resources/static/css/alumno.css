@@ -1,119 +1,126 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 :root {
-    --border-color: #999999;
-    --form-color: rgba(0, 0, 0, .7);
-    --label-color: #fff;
-    --bg-color: #101010;
-    --bg-color-2: #202020;
-  }
+  --border-color: #999999;
+  --form-color: rgba(0, 0, 0, 0.7);
+  --label-color: #fff;
+  --bg-color: #101010;
+  --bg-color-2: #202020;
+}
 
 body {
-    font-family: "Roboto", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; 
-  }
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  h2,h5
-  {    
-      width: 100%;
-      font-family: Georgia, serif;
-      color: var(--label-color);
-  }
+h2,
+h5 {
+  width: 100%;
+  font-family: Georgia, serif;
+  color: var(--label-color);
+}
 
-  h4
-  {    
-      width: 100%;
-      font-family: Georgia, serif;
-      color: var(--label-color);
-      font-size: 2.2rem;
-  }
-.fc h1
-{
-    width: 100%;
-    font-family: Georgia, serif;
-    color: var(--label-color);
-    text-shadow: 1px 2px rgb(0, 0, 0);
-    margin-bottom: 0px;
-    font-size: 3.2rem;
+h4 {
+  width: 100%;
+  font-family: Georgia, serif;
+  color: var(--label-color);
+  font-size: 2.2rem;
+}
+.fc h1 {
+  width: 100%;
+  font-family: Georgia, serif;
+  color: var(--label-color);
+  text-shadow: 1px 2px rgb(0, 0, 0);
+  margin-bottom: 0px;
+  font-size: 3.2rem;
 }
 
 p {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .form-check-input {
-    margin-left: 0;
-    position: relative;
+  margin-left: 0;
+  position: relative;
 }
 
 thead {
-   
-    text-align: center;
-  }
+  text-align: center;
+}
 
-  .form-control{
-	padding:10px 10px;
+.form-control {
+  padding: 10px 10px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
   font-family: sans-serif;
-  }
-
-  hr{
-    border: 2px solid var(--form-color);
-    margin-top: 0px;
 }
 
-  .fd{
-	width:100%;
-	margin:auto;
-	max-width:845px;
-	min-height:570px;
-	position:relative;
-	background:url(https://images.unsplash.com/photo-1558021211-6d1403321394?ixlib=rb-1.2.1&auto=format&fit=crop&w=1068&q=70) no-repeat center;
-    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-    border: 1px solid var(--border-color);
+hr {
+  border: 2px solid var(--form-color);
+  margin-top: 0px;
 }
 
-.fd .card .card-header{
-    background: var(--form-color)
-    
+.fd {
+  width: 100%;
+  margin: auto;
+  max-width: 845px;
+  min-height: 570px;
+  position: relative;
+  background: url(https://images.unsplash.com/photo-1558021211-6d1403321394?ixlib=rb-1.2.1&auto=format&fit=crop&w=1068&q=70)
+    no-repeat center;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid var(--border-color);
 }
-.fd .card .card-body{
+
+.fd .card .card-header {
+  background: var(--form-color);
+}
+.fd .card .card-body {
   padding-bottom: 0;
 }
 
 .fd .card {
-  background:rgba(0, 0, 0, .27);
+  background: rgba(0, 0, 0, 0.27);
   margin-bottom: 40px;
-
 }
 
-label{color: white;}
+label {
+  color: white;
+}
 
-#myModal3 label{
+#myModal3 label {
   color: black;
 }
 
- .modal-dialog{
-  max-width:725px;
-  
+.modal-dialog {
+  max-width: 725px;
+
   align-content: center;
 }
 
-.table, .table-responsive, .table-light, .table-hover{
-  border-radius: 30px;
-  border: none;
-  margin-bottom: 0;
-  background-color: rgba(216, 216, 216, 0.445);
+
+.table, .table-responsive, .table-light, .table-hover
+{
+    border-radius: 30px;
+    border: none;
+    margin-bottom: 0;
+    border-color: white;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
 }
 
-.table-bordered{
+.table td
+{
+    background-color: rgba(27, 26, 26, 0.5);
+}
+
+.table-bordered {
   border-bottom-color: 1px solid #101010;
 }
 
-.form-group{
-  text-align:center;
+.form-group {
+  text-align: center;
   margin: 2%;
 }
-

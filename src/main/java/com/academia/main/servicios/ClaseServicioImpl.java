@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.academia.main.entidades.Alumno;
 import com.academia.main.entidades.Clase;
 import com.academia.main.entidades.Curso;
 import com.academia.main.repositorios.ClaseRepository;
@@ -21,6 +22,8 @@ public class ClaseServicioImpl implements ClaseServicio {
 
     @Autowired
     private CursoServicio cService;
+
+    private String idAlumno;
 
     @Override
     public Clase save(Clase Clase) {
@@ -68,6 +71,11 @@ public class ClaseServicioImpl implements ClaseServicio {
     @Override
     public List<Clase> BuscarClasePorCursoProfesor(String idCurso, String idProfesor) {
         return Claserepositorio.findClasesByCursoProfesor(Long.parseLong(idCurso), Long.parseLong(idProfesor));
+    }
+
+    @Override
+    public List<Alumno> BuscarAlumnoPorCurso(Long idCurso) {
+        return Claserepositorio.findAlumnoByCursoClase(idCurso);
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.academia.main.entidades.Clase;
 import com.academia.main.entidades.Profesor;
 import com.academia.main.servicios.ProfesorServicio;
 
@@ -42,6 +43,12 @@ public class ProfesorRestControlador {
 	@GetMapping("/Profesores/{id}")
 	public Profesor getProfesores(@PathVariable Long id) {
 		return profesorservicio.BuscarProfesorPorId(id);	
+		
+	}
+
+	@GetMapping("/Profesores/clases/{id}")
+	public List<Clase> getClases(@PathVariable Long id) {
+		return profesorservicio.BuscarClasesPorProfesor(id);	
 		
 	}
 
