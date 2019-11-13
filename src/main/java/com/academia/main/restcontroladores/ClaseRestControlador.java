@@ -2,6 +2,7 @@ package com.academia.main.restcontroladores;
 
 import java.util.Arrays;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
@@ -11,6 +12,7 @@ import com.academia.main.entidades.HoraSemanal;
 import com.academia.main.entidades.Profesor;
 import com.academia.main.servicios.AsignaturaServicio;
 import com.academia.main.servicios.ClaseServicio;
+import com.academia.main.servicios.CursoServicio;
 //import com.academia.main.servicios.CursoServicio;
 import com.academia.main.servicios.HoraSemanalServicio;
 import com.academia.main.servicios.ProfesorServicio;
@@ -27,8 +29,6 @@ public class ClaseRestControlador {
 
     @Autowired
     private ClaseServicio clService;
-    // @Autowired
-    // private CursoServicio cService;
     @Autowired
     private ProfesorServicio pService;
     @Autowired
@@ -47,14 +47,15 @@ public class ClaseRestControlador {
     @ResponseStatus(HttpStatus.CREATED)
     public Clase crearClase(@Valid @RequestBody Clase clase) throws Exception {
         java.util.List<Clase> clases = clService.buscarClases();
+        LOG.info(clases);
 
         Asignatura asignatura = aService.BuscarAsignaturaPorId(Long.parseLong(clase.getIdAsignatura()));
         if (asignatura == null)
-            throw new Exception("No se encontro la asignatura");
+            throw new Exception("No se encontró la asignatura");
 
         Profesor profesor = pService.BuscarProfesorPorId(Long.parseLong(clase.getIdProfesor()));
         if (profesor == null)
-            throw new Exception("No se encontro el profesor");
+            throw new Exception("No se encontró el profesor");
 
         if (clases != null) {
             for (Clase c : clases) {
@@ -73,7 +74,7 @@ public class ClaseRestControlador {
                         if (horaS.getDiaindice() == horaN.getDiaindice()
                                 && horaS.getHoraindice() == horaN.getHoraindice())
                             throw new EntityNotFoundException(
-                                    "El profesor tiene ocupado el dia:" + horaS.getDia() + " a las " + horaS.getHora());
+                                    "El profesor tiene ocupado el día:" + horaS.getDia() + " a las " + horaS.getHora());
                     }
                 }
             }
@@ -118,55 +119,24 @@ public class ClaseRestControlador {
     @ResponseStatus(HttpStatus.CREATED)
     public Clase updateClase(@Valid @RequestBody Clase clase) throws Exception {
 
-
         Clase CLASE = clService.BuscarClasePorId(clase.getId());
-
         if (CLASE == null)
-            throw new EntityNotFoundException("No se encontro la clase");
+            throw new EntityNotFoundException("No se encontró la clase");
+        
 
-            java.util.List<Clase> C = Arrays.asList(CLASE);
-        /*
-        Asignatura asignatura = aService.BuscarAsignaturaPorId(Long.parseLong(clase.getIdAsignatura()));
-        if (asignatura == null)
-            throw new EntityNotFoundException("No se encontro la asignatura");
+        eliminar(CLASE.getId());;
 
-        Profesor profesor = pService.BuscarProfesorPorId(Long.parseLong(clase.getIdProfesor()));
-        if (profesor == null)
-            throw new EntityNotFoundException("No se encontro el profesor"); */
-
-            for (Clase clasesprofe : CLASE.getProfesor().getClases()) {
-                if (clasesprofe == null) throw new EntityNotFoundException("CLASES PROFES");
-                if (clasesprofe.getId() == null) throw new EntityNotFoundException(" GET CLASES PROFES");
-                if(clasesprofe.getId() == CLASE.getId())
-                    for (HoraSemanal horaS : clasesprofe.getHorario()) {
-                        if (horaS == null) throw new EntityNotFoundException("HORA PROFE ERRO");
-                        for (HoraSemanal horaN : clase.getHorario()) {
-                            if (horaN == null) throw new EntityNotFoundException("HORA NUEVO ERRO");
-                             if (horaN.getId() == null) {
-                               if( horaS.getDiaindice() != horaN.getDiaindice() && horaS.getHoraindice()  != horaN.getHoraindice() )
-                                //CLASE.getHorario().add(horaN);
-                                hsService.save(horaN);
-                             }
-                           else if (horaS.getDiaindice() != horaN.getDiaindice() && horaS.getHoraindice() != horaN.getHoraindice() && horaS.getId() == horaN.getId()){
-                                int index = clase.getHorario().indexOf(horaN);
-                                //CLASE.getHorario().set(index, horaN);  
-                                HoraSemanal h = hsService.BuscarHoraSemanalPorId(horaN.getId());
-                                if (h== null) throw new EntityNotFoundException("HORAsemanal null");
-                                h.setClaseh(C);
-                                    hsService.save(h);
-
-                            }
-                        }
-                        
-                    }
-                }
-        return clService.save(CLASE);
+        clase.setId(null);
+        return crearClase(clase);
     }
 
     @DeleteMapping("/Clases/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public void eliminar(@Valid @PathVariable Long id) {
         Clase Clase = clService.BuscarClasePorId(id);
+        if (Clase == null)
+            throw new EntityNotFoundException("No se encontró la clase");
+
         clService.delete(Clase);
     }
 

@@ -105,56 +105,30 @@ public class HoraSemanal implements Serializable {
 			clase.setHorario(hs);
 	}
 
+
+	public void addClass(Clase clase) {
+		//prevent endless loop
+		if (!claseh.contains(clase))
+		  return ;
+		//add new clase
+		claseh.add(clase);
+		//asignarse a la hora
+		clase.AddHoraSemanal(this);
+	  }
+	  public void RemoveClass(Clase clase) {
+		//prevent endless loop
+		if (!claseh.contains(clase))
+		  return ;
+		//remove the follower
+		claseh.remove(clase);
+		//remove myself from the follower
+		clase.RemoveHoraSemanal(this);
+	  }
+
+
 	@Override
 	public String toString() {
 		return "HoraSemanal [claseh=" + claseh + ", dia=" + dia + ", diaindice=" + diaindice + ", hora=" + hora
 				+ ", horaindice=" + horaindice + ", id=" + id + "]";
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dia == null) ? 0 : dia.hashCode());
-		result = prime * result + ((diaindice == null) ? 0 : diaindice.hashCode());
-		result = prime * result + ((hora == null) ? 0 : hora.hashCode());
-		result = prime * result + ((horaindice == null) ? 0 : horaindice.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		HoraSemanal other = (HoraSemanal) obj;
-		if (dia == null) {
-			if (other.dia != null)
-				return false;
-		} else if (!dia.equals(other.dia))
-			return false;
-		if (diaindice == null) {
-			if (other.diaindice != null)
-				return false;
-		} else if (!diaindice.equals(other.diaindice))
-			return false;
-		if (hora == null) {
-			if (other.hora != null)
-				return false;
-		} else if (!hora.equals(other.hora))
-			return false;
-		if (horaindice == null) {
-			if (other.horaindice != null)
-				return false;
-		} else if (!horaindice.equals(other.horaindice))
-			return false;
-		return true;
-	}
-
-	
-
-	
 }

@@ -14,7 +14,10 @@ public interface ClaseServicio {
 
     List<Clase> buscarClases();
 
-	List<Clase> BuscarClasePorCurso(String id);
+    List<Clase> BuscarClasePorCurso(String id);
+    List<Clase> BuscarClasePorAsignatura(String id);
+    List<Clase> BuscarClasePorProfesor(String id);
+    List<Clase> BuscarClasePorCursoAsignaturaPrifesor(String id);
 
 
 }

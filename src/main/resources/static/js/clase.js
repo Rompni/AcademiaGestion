@@ -72,8 +72,7 @@ function agregarmodificarClase() {
       "horario": horario
     }
 
-
-    if (idCurso !== "nn" && idAsignatura !== "nn" && idProfesor !== "nn" && horario !== null) {
+    if (idCurso !== "nn" && idAsignatura !== "nn" && idProfesor !== "nn" && horario.length > 0) {
       var elboton = $('#myModal3').find('.modal-footer button[id=botonAceptar]').text()
       console.log(elboton)
       if (elboton == "Crear") {
@@ -131,6 +130,11 @@ function agregarmodificarClase() {
           title: "Faltan datos por rellenar",
         });
       }
+    }else {
+      Toast.fire({
+        icon: "warning",
+        title: "Faltan datos por rellenar",
+      });
     }
   });
 }
