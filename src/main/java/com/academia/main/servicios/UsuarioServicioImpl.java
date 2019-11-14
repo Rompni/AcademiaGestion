@@ -8,13 +8,16 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
 
 import com.academia.main.entidades.*;
 import com.academia.main.repositorios.*;
 
 
 @Service
+@Validated
 public class UsuarioServicioImpl implements UsuarioServicio {
 	@Autowired private UsuarioRepository usuarioRepositorio;
 	
@@ -35,7 +38,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 	}
 
 	@Override
-	public void save(Usuario user) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public void save(Usuario user) throws Exception {
 		Usuario newUser = usuarioRepositorio.findByUsuario(user.getUsuario());
 		if(newUser == null){
 		user.setClave(bCryptPasswordEncoder.encode(user.getClave()));
@@ -47,8 +51,14 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		user.setRoles(roles);
 		usuarioRepositorio.save(user);
 		}else{
-		usuarioRepositorio.save(newUser);
+			//usuarioRepositorio.save(newUser);
+			throw new Exception("Usuario existente");
 		}
+	}
+
+	@Override
+	public void delete(Usuario usuario) {
+		usuarioRepositorio.delete(usuario);
 	}
 
 

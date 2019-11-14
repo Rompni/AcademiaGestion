@@ -56,5 +56,10 @@ public class ResponsableServicioImpl implements ResponsableServicio {
         return responsable.getAlumnosrespon();
     }
 
+    @Override
+    public Responsable BuscarResponsablePorNif(String nif) {
+        return responsablerepositorio.findByNif(nif);
+    }
+
     
 }

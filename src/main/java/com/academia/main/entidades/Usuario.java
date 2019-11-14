@@ -84,9 +84,10 @@ public class Usuario implements Serializable {
 		this.roles.addAll(roles);
 	}
 
-	public Usuario(String usuario,String clave) {
+	public Usuario(Long id, String usuario,String clave) {
 		this.usuario = usuario;
 		this.clave = clave;	
+		this.id = id;
 	}
 
 	

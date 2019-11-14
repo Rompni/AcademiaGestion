@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Login Academia</title>
-  <link rel="stylesheet" th:href="@{/css/login.css}">
+  <link rel="stylesheet" th:href="@{/css/login2.css}">
+  <link th:href='@{https://fonts.googleapis.com/css?family=Montserrat}' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css}">
+  <link rel="stylesheet" th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css}">
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<aside id="aside"></aside>
-<div id="wrapper">
-
-    <div class="justify-content-center">
-        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+    <div class="justify-content-center animated bounceInUp">
+        <div th:if="${param.error}" class="alert alert-danger animated" role="alert">
           Usuario o contraseña invalido.</div>
-        <div th:if="${param.logout}" class="alert alert-success"
-          role="alert">Tu has cerrado sesion.</div>
-    </div>
+        <div th:if="${param.logout}" class="alert alert-success animated" role="alert">Tu has cerrado sesion.</div>
+      </div>
+  <!-- partial:index.partial.html -->
+  <div class="login-container animated bounceInDown">
+    <form name="login" class="form-login" th:action="@{/login}" method="POST" autocomplete="off">
+      <ul class="login-nav">
+        <li class="login-nav__item active">
+          <a th:href="@{/login}">Iniciar Sesion</a>
+        </li>
+        <li class="login-nav__item">
+          <a th:href="@{/registro}">Registro</a>
+        </li>
+      </ul>
+      <label for="login-input-user" class="login__label">
+        Usuario
+      </label>
+      <input id="login-input-user" name="usuario" class="login__input" type="text" />
 
-  <form name="login"  th:action="@{/login}" method="POST" autocomplete="off">
-    <h1>Login</h1>
-    <div class="row inputtxt">
-      <label for="usuario">Usuario</label>
-      <input type="text" id="inputUsuario" placeholder="Usuario" name="usuario">
-    </div>
+      <label for="login-input-password" class="login__label">
+        Password
+      </label>
 
-    <div class="row inputtxt">
-      <label for="pass">Password</label>
-      <input type="password" id="inputClave" placeholder="Contraseña" name="clave">
-    </div>
+      <input id="login-input-password" name="clave" class="login__input" type="password" />
 
-    <div class="row btn">
-      <input type="submit" value="Login">
-      <button type="button" class="btn btn-primary"> <a class="button" th:href="@{/registro}">Registrarse</a></button>
-    </div>
-  </form>  
-</div>
-<!-- partial -->
-  
+      <button class="login__submit" type="submit" >Iniciar sesion</button>
+    </form>
+
+  </div>
+
+
+  <!-- partial -->
+
 </body>
+<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js}"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+
 </html>

@@ -1,45 +1,40 @@
-$(function(){
-  chart();
+$(function () {
+  profesores();
 });
 
 
-function chart(){
-new Chart($("#bar-chart-grouped"), {
-  type: 'bar',
-  data: {
-    labels: ["Total"],
-    datasets: [
-      {
-        label: "Altas",
-        backgroundColor: "#3e95cd",
-        borderColor: 'rgb(255, 255, 255)',
-        data: [2]
-      }, {
-        label: "Bajas",
-        backgroundColor: "#8e5ea2",
-        borderColor: 'rgb(255, 255, 255)',
-        data: [4]
+function create2(e) {
+
+  var chart2 =  new Chart($("#bar-chart-grouped"), {
+    type: 'bar',
+    data: {
+      labels: ["Total"],
+      datasets: [
+        {
+          label: "Profesores existentes",
+          backgroundColor: "rgba(76, 28, 183, 0.5)",
+          borderColor: 'rgba(76, 28, 183, 0.9)',
+          data: [e.length]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Profesores'
       }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'Altas y Bajas'
     }
-  }
-});
+  });
+  chart2.render()
 }
 
-function listarCursos() {
-	$.ajax("./api/v1/Cursos",
-        {
-    		contentType: "application/json",
-    		dataType:'json',
-    		type: "GET",
-    		success:function(datos){
-    			 
-                                },
-        error: function(xhr){alert("Error al listar cursos >>> " + xhr.status + " " + xhr.statusText);}    		
-      }); 
+function profesores() {
+  var url = "./api/v1/Profesores";
+  $.ajax(url,
+    {
+      contentType: "application/json",
+      dataType: 'json',
+      type: "GET",
+      success: create2
+    })
 }

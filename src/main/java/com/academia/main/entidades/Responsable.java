@@ -1,6 +1,7 @@
 package com.academia.main.entidades;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -107,9 +108,17 @@ public class Responsable implements Serializable {
 	}
 
 	public void setAlumnosrespon(List<Alumno> alumnosrespon) {
-		this.alumnosrespon.addAll(alumnosrespon);
-		for(Alumno alumno: alumnosrespon)
-			alumno.setResponsable(this);
+			if (this.alumnosrespon == null) {
+				this.alumnosrespon = new LinkedList<Alumno>();
+				this.alumnosrespon.clear();
+			}
+	
+			if (alumnosrespon  == null)
+				return;
+	
+			this.alumnosrespon.addAll(alumnosrespon );
+			for (Alumno al : alumnosrespon)
+				al.setResponsable(this);
 	}
 	
 }

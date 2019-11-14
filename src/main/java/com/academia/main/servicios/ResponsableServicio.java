@@ -18,4 +18,6 @@ public interface ResponsableServicio {
  List<Responsable> BuscarResponsablePorNombre(String nombre);
 
  List<Alumno> getAlumnosResponsable(Long id);
+
+Responsable BuscarResponsablePorNif(String nif);
 }

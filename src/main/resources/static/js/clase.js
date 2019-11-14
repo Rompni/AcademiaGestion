@@ -319,6 +319,53 @@ function buscarClase() {
   });
 }
 
+function buscarAlumnos() {
+  $('#btnAlumnos').on('click', function (ev) {
+    ev.preventDefault();
+    $(".z").remove();
+    var id = $("input:radio[name=selected]:checked").val()
+    if (!id) {
+      Toast.fire({
+        icon: "error",
+        title: "Ninguna Clase ha sido seleccionado"
+      });
+      return;
+    }
+    var url = "./api/v1/Clases/Alumno/" + id;
+    console.log(url)
+    $.ajax(url,
+      {
+        contentType: "application/json",
+        dataType: 'json',
+        type: "GET",
+        success: function (datos) {
+          var apellidos2 = "";
+          if (datos.length === 0) {
+            Toast.fire({
+              icon: "warning",
+              title: "No hay estudiantes en esta clase",
+            });
+          }
+          else {
+            $("#myModal6").modal("show");
+            $.each(datos, function (i, e) {
+              if(e.apellido2 != null) apellidos2 = e.apellido2
+              $('#tabla2').append("<tr class='z'>"+
+                "<td>" + e.nombre +" "+ e.apellido1 +" "+apellidos2 +". </td>" +
+                "</tr>");
+            });
+          }
+        },
+        error: function (xhr) {
+          Toast.fire({
+            icon: "error",
+            title: "Error al buscar alumnos >>> " + xhr.status + " " + xhr.statusText,
+          });
+        }
+      });
+  });
+}
+
 
 function redirect() {
   window.location.href = "./clase";
@@ -431,7 +478,6 @@ function eliminarClase() {
     });
   });
 }
-
 
 function cambiodeBoton(name, modal) {
   var button = $(name);

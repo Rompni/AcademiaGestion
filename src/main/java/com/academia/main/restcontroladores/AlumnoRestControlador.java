@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 
 import com.academia.main.entidades.Alumno;
 import com.academia.main.entidades.Clase;
@@ -15,16 +16,12 @@ import com.academia.main.servicios.CursoServicio;
 import com.academia.main.servicios.ResponsableServicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
 @RestController
+@Validated
 @RequestMapping("/api/v1")
 public class AlumnoRestControlador {
 
@@ -34,7 +31,6 @@ public class AlumnoRestControlador {
 	private CursoServicio cService;
 	@Autowired
 	private ResponsableServicio rService;
-	private String idAlumno;
 
 	@GetMapping("/Alumnos")
 	public List<Alumno> getAlumnos() {
@@ -42,7 +38,8 @@ public class AlumnoRestControlador {
 	}
 
 	@PostMapping("/Alumnos")
-	public Alumno crearAlumno(@RequestBody Alumno alumno) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public Alumno crearAlumno(@Valid @RequestBody Alumno alumno) throws Exception {
 		Alumno al = alumnoservicio.BuscarAlumnoPorNif(alumno.getNif());
 		if (al != null)
 			throw new EntityNotFoundException("Alumno existente");
@@ -55,10 +52,11 @@ public class AlumnoRestControlador {
 
 		Responsable responsable = alumno.getResponsable();
 		if (responsable != null) {
-			responsable.setAlumnosrespon(new LinkedList<Alumno>());
-			responsable.getAlumnosrespon().add(alumno);
-			responsable = rService.save(responsable);
+			responsable.setAlumnosrespon(Arrays.asList(alumno));
+			//responsable = rService.save(responsable);
+
 			alumno.setResponsable(responsable);
+
 		}
 
 		return alumnoservicio.save(alumno);
@@ -99,7 +97,8 @@ public class AlumnoRestControlador {
 	}
 
 	@GetMapping("/Alumnos/clase/{idAlumno}")
-	public List<Clase> ClasebyCurso(@PathVariable String idAlumno) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public List<Clase> ClasebyCurso(@Valid @PathVariable String idAlumno) {
 		Alumno alumno = alumnoservicio.BuscarAlumnoPorId(Long.parseLong(idAlumno));
 		if (alumno == null)
 			throw new EntityNotFoundException("Alumno no existe");

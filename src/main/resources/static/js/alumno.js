@@ -160,7 +160,7 @@ function agregarmodificarAlumno() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error al insertar un estudiante >>> " + xhr.status + " " + xhr.statusText,
+                title: "Error, " + xhr.responseJSON.message
               });
             }
           });
@@ -186,7 +186,7 @@ function agregarmodificarAlumno() {
             error: function (xhr) {
               Toast.fire({
                 icon: "error",
-                title: "Error al modificar un estudiante >>> " + xhr.status + " " + xhr.statusText,
+                title: "Error, " + xhr.responseJSON.message
               });
 
             }
@@ -302,7 +302,7 @@ function mostrarClases() {
       return;
     }
     limpiarTodo();
- 
+
     $.ajax("./api/v1/Alumnos/clase/" + id,
       {
         type: "GET",
@@ -314,16 +314,35 @@ function mostrarClases() {
               title: "Este alumno no tiene clases estipuladas"
             });
           } else {
+            var horario = "";
+            $('.t').remove();
+            for (var i = 0; i < datos.length; i++) {
+              for (var j = 0; j < datos[i].horario.length; j++) {
+                horario += datos[i].horario[j].dia + " " + datos[i].horario[j].hora + "; "
+              }
+              $('#tabla3').append("<tr class='t'>" +
+                "<td>" + datos[i].asignatura.nombre + "</td>" +
+                "<td>" + datos[i].profesor.apellido1 + ", " + datos[i].profesor.nombre + "</td>" +
+                "<td>" + horario + "</td>" +
+                "</tr>");
+            }
+
             $("#myModal4").modal("show");
             $("#tabla2 tbody tr").each(function () {
               $(this).find("td").each(function () {
                 var horaindice = $(this).closest('tr').index();
                 var diaindice = $(this).index()
-                for (var i = 0; i < datos.length; i++)
-                  for (var j = 0; j < datos[i].horario.length; j++)
+                for (var i = 0; i < datos.length; i++) {
+                  for (var j = 0; j < datos[i].horario.length; j++) {
                     if (datos[i].horario[j].horaindice == horaindice && datos[i].horario[j].diaindice == diaindice) {
                       $(this).text(datos[i].asignatura.curso.nivel + " de " + datos[i].asignatura.curso.etapa + "-" + datos[i].asignatura.nombre)
+                      asignatura = datos[i].asignatura.nombre;
+                      profesor = datos[i].profesor.apellido1 + ", " + datos[i].profesor.nombre;
+
                     }
+                  }
+
+                }
               });
             });
           }
@@ -381,11 +400,7 @@ function eliminarAlumno() {
           error: function (xhr) {
             Toast.fire({
               icon: "success",
-              title:
-                "Error al eliminar un profesor >>> " +
-                xhr.status +
-                " " +
-                xhr.statusText
+              title: "Error, " + xhr.responseJSON.message
             });
           }
         });
@@ -400,6 +415,14 @@ function limpiarTodo() {
   $("input[type=email]").val("");
   $("#fechabaja").val("");
   $("#inputObservaciones").val("");
+
+
+  $("#tabla2 tbody tr").each(function () {
+    $(this).find("td").each(function () {
+      $(this).text("");
+    });
+  });
+
 }
 
 function cambiodeBoton(name, modal) {
@@ -416,6 +439,8 @@ function limpiarBusqueda() {
   $('#limpiar').on('click', function (event) {
     $('.card-body input').val("")
   });
+
+
 }
 
 window.onload = function () {

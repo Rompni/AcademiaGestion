@@ -59,10 +59,10 @@ thead {
 {
 	width:100%;
 	margin:auto;
-	max-width:825px;
+	max-width:1025px;
 	min-height:580px;
 	position:relative;
-	background:url(https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80) no-repeat center;
+	background:url(https://images.unsplash.com/photo-1524178232363-1fb2b075b655?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80) no-repeat center;
     box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
     border: 1px solid var(--border-color);
 }
@@ -108,22 +108,28 @@ label
 }
 
 
-#myModal3 label
+#myModal3 label, #myModal6 label
 {
     color: black;
     margin-bottom:0;
     text-align: left;
 }
 
-#myModal3 h4
+#myModal3 h4, #myModal6 h4
 {
     width: 100%;
     font-family: Georgia, serif;
     font-size: 30px;
 }
 
-.modal-dialog{
+#myModal3 .modal-dialog{
     max-width:800px;
+    
+    align-content: center;
+  }
+
+#myModal6 .modal-dialog{
+    max-width:400px;
     
     align-content: center;
   }

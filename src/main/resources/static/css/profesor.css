@@ -103,14 +103,14 @@ label
 }
 
 
-#myModal label
+#myModal label, #myModal2 label
 {
     color: black;
     margin-bottom:0;
     text-align: left;
 }
 
-#myModal h4
+#myModal h4, #myModal2 h4
 {
     width: 100%;
     font-family: Georgia, serif;

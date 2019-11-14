@@ -124,3 +124,10 @@ label {
   text-align: center;
   margin: 2%;
 }
+
+#myModal4 .modal-dialog{
+  max-width:1200px;
+  min-height: 600px;
+  
+  align-content: center;
+}

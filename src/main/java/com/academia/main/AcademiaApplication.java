@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 
 import com.academia.main.entidades.Rol;
 import com.academia.main.entidades.Usuario;
+import com.academia.main.repositorios.UsuarioRepository;
 import com.academia.main.servicios.RolServicio;
 import com.academia.main.servicios.UsuarioServicio;
 
@@ -23,12 +24,14 @@ public class AcademiaApplication {
 	}
 
 	@PostConstruct
-	public void Inicializar(){
+	public void Inicializar() throws Exception {
 		rolservicio.save(new Rol((long) 1, "ADMIN"));
 		rolservicio.save(new Rol((long) 2,"ALUMNO"));
 		rolservicio.save(new Rol((long) 3,"PROFESOR"));
-		usuarioservicio.save(new Usuario("admin", "admin"));
-
+		Usuario u = usuarioservicio.findUsuarioByUsuario("admin");
+		usuarioservicio.delete(u);
+		usuarioservicio.save(new Usuario((long) 1, "admin", "admin"));
+		
 	}
 
 }

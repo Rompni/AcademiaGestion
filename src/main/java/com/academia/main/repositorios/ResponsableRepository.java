@@ -15,5 +15,8 @@ public interface ResponsableRepository extends JpaRepository<Responsable, Long> 
     List<Responsable> findResponsablebyNombre(
         @Param("nombre") String nombre);
 
+    @Query("SELECT a FROM Responsable a WHERE a.nif = :nif" )
+	Responsable findByNif(String nif);
+
     
 }

@@ -18,8 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "ALUMNOS")
@@ -30,19 +29,26 @@ public class Alumno implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
+	@Column(nullable = false)
+	@Pattern(message = " Nombre invalido ", regexp = "^[A-Za-z]+$")
 	private String nombre;
 
-	@Column
+	@Column(nullable = false)
+	@Pattern(message = " Primer Apellido invalido ", regexp = "^[A-Za-z]+$")
 	private String apellido1;
 
+	@Pattern(message = " Segundo Apellido invalido ", regexp = "^[A-Za-z]+$")
 	private String apellido2;
 
-	@Column(unique = true)
+	@Column(unique = true, nullable = false)
 	private String nif;
 
+	@Column(nullable = false)
+	@Pattern(message = " Telefono invalido[3xxxxx] ", regexp = "^3[0-9]{5}$")
 	private String telefono;
 
+	@Column(nullable = false)
+	@Pattern(message = " Correo invalido ", regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
 	private String correo;
 
 	@Column
