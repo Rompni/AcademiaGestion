@@ -37,7 +37,7 @@ public class Clase implements Serializable {
 	@ManyToMany(mappedBy="claseh", cascade = {CascadeType.ALL})
 	private List<HoraSemanal> horario;
 	
-	@ManyToMany(mappedBy="clases", cascade = {CascadeType.ALL} )
+	@ManyToMany(mappedBy="clases" )
 	@JsonIgnore
 	private List<Alumno> alumnos; 
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class Asignatura implements Serializable {
 	@JoinColumn(name = "ID_CURSO")
 	private Curso curso;	
 	
-	@OneToMany(mappedBy = "asignatura" )
+	@OneToMany(mappedBy = "asignatura", cascade = {CascadeType.ALL}, orphanRemoval = true )
 	@JsonIgnore
 	private List<Clase> clases;
 

@@ -143,6 +143,7 @@ function agregarmodificarClase() {
 function listarCursosClases() {
   $.ajax("./api/v1/Cursos",
     {
+      async: false,
       contentType: "application/json",
       dataType: 'json',
       type: "GET",
@@ -181,6 +182,7 @@ $('#inputCurso').change(function () {
 function listarAsignaturas(idCurso) {
   $.ajax("./api/v1/Asignaturas/curso/" + idCurso,
     {
+      async: false,
       contentType: "application/json",
       dataType: 'json',
       type: "GET",
@@ -191,6 +193,7 @@ function listarAsignaturas(idCurso) {
 function listarAsignaturasx(idCurso) {
   $.ajax("./api/v1/Asignaturas/curso/" + idCurso,
     {
+      async: false,
       contentType: "application/json",
       dataType: 'json',
       type: "GET",
@@ -221,7 +224,6 @@ function renderListaAsignaturasx(data) {
     $.each(data, function (i, e) {
       $('#inputAsignatura').append("<option value=" + e.id + ">" + e.nombre + "</option>");
     });
-    $('#InputAsignatura').focus();
   }
 }
 
@@ -249,7 +251,7 @@ function listarProfesores() {
       error: function (xhr) {
         Toast.fire({
           icon: "success",
-          title: "Error al listar profesores >>> " + xhr.status + " " + xhr.statusText
+          title: "Error, " + xhr.responseJSON.message
         });
       }
     });
@@ -265,6 +267,14 @@ function buscarClase() {
     var profesor = $("#inputProfesor").val();
     console.log(curso);
 
+    if (curso == null) {
+      Toast.fire({
+        icon: "error",
+        title: "No hay cursos para buscar"
+      });
+      return;
+    }
+
     if (curso !== "nn") {
       url = "./api/v1/Clases/curso/" + curso;
       if (asignatura !== "nn")
@@ -278,6 +288,7 @@ function buscarClase() {
     if (curso !== "nn" && asignatura !== "nn" && profesor !== "nn")
       url = "./api/v1/Clases/CsAsPr/" + curso + "/" + asignatura + "/" + profesor;
 
+    
 
     console.log(url)
     $.ajax(url,
@@ -312,7 +323,7 @@ function buscarClase() {
         error: function (xhr) {
           Toast.fire({
             icon: "error",
-            title: "Error al buscar clases >>> " + xhr.status + " " + xhr.statusText,
+            title: "Error, " + xhr.responseJSON.message
           });
         }
       });
@@ -359,7 +370,7 @@ function buscarAlumnos() {
         error: function (xhr) {
           Toast.fire({
             icon: "error",
-            title: "Error al buscar alumnos >>> " + xhr.status + " " + xhr.statusText,
+            title: "Error, " + xhr.responseJSON.message
           });
         }
       });
@@ -373,7 +384,6 @@ function redirect() {
 function llenarCampos() {
   $('#btnEditar').on('click', function (e) {
     e.preventDefault();
-    limpiarTodo();
     var id = $("input:radio[name=selected]:checked").val()
     if (!id) {
       Toast.fire({
@@ -382,7 +392,7 @@ function llenarCampos() {
       });
       return;
     }
-
+    limpiarTodo();
     cambiodeBoton("#btnEditar", "#myModal3")
     $("#myModal3").modal("show");
     $.ajax("./api/v1/Clases/" + id,
@@ -390,11 +400,10 @@ function llenarCampos() {
         type: "GET",
         success: function (datos) {
           console.log(datos)
-
-          $("#cursoClase").val(datos.asignatura.curso.id);
+        
           $("#profesorClase").val(datos.profesor.id);
-
-          $("#asignaturaClase").val(datos.asignatura.id);
+          $("#cursoClase").val(datos.asignatura.curso.id);
+         $("#asignaturaClase").val(datos.asignatura.id);
 
           $("#tabla tbody tr").each(function () {
             $(this).find("td").each(function () {
@@ -413,7 +422,7 @@ function llenarCampos() {
           $('#myModal3').modal('hide')
           Toast.fire({
             icon: "error",
-            title: "Error al traer datos >>> " + xhr.status + " " + xhr.statusText
+            title: "Error, " + xhr.responseJSON.message
           });
         }
       });
@@ -466,11 +475,7 @@ function eliminarClase() {
           error: function (xhr) {
             Toast.fire({
               icon: "success",
-              title:
-                "Error al eliminar una clase >>> " +
-                xhr.status +
-                " " +
-                xhr.statusText
+              title: "Error, " + xhr.responseJSON.message
             });
           }
         });

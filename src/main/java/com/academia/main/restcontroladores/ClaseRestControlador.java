@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import antlr.collections.List;
+
 @RestController
 @Validated
 @RequestMapping("/api/v1")
@@ -98,28 +100,46 @@ public class ClaseRestControlador {
     }
 
     @GetMapping("/Clases/{id}")
-    public Clase getClases(@PathVariable Long id) {
-        return clService.BuscarClasePorId(id);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Clase getClases(@PathVariable Long id) throws Exception {
+        Clase c = clService.BuscarClasePorId(id);
+        if (c == null)
+            throw new EntityNotFoundException("No existe la clase");
+        return c;
 
     }
 
     @GetMapping("/Clases/curso/{id}")
-    public java.util.List<Clase> ClasesbyCurso(@PathVariable String id) {
-        return clService.BuscarClasePorCurso(id);
+    @ResponseStatus(HttpStatus.CREATED)
+    public java.util.List<Clase> ClasesbyCurso(@PathVariable String id) throws Exception {
+        java.util.List<Clase> c = clService.BuscarClasePorCurso(id);
+        if (c == null)
+            throw new EntityNotFoundException("No hay clases asociadas a ese curso");
+        return c;
+
     }
 
     @GetMapping("/Clases/asig/{id}")
-    public java.util.List<Clase> ClasesbyAsignatura(@PathVariable String id) {
-        return clService.BuscarClasePorAsignatura(id);
+    @ResponseStatus(HttpStatus.CREATED)
+    public java.util.List<Clase> ClasesbyAsignatura(@PathVariable String id) throws Exception {
+        java.util.List<Clase> c = clService.BuscarClasePorAsignatura(id);
+        if (c == null)
+            throw new EntityNotFoundException("No hay clases asociadas a esa asignatura");
+        return c;
     }
 
     @GetMapping("/Clases/profe/{id}")
-    public java.util.List<Clase> ClasesbyProfesor(@PathVariable String id) {
-        return clService.BuscarClasePorProfesor(id);
+    @ResponseStatus(HttpStatus.CREATED)
+    public java.util.List<Clase> ClasesbyProfesor(@PathVariable String id) throws Exception {
+        java.util.List<Clase> c = clService.BuscarClasePorProfesor(id);
+        if (c == null)
+            throw new EntityNotFoundException("No hay clases asociadas a ese profesor");
+        return c;
     }
 
     @GetMapping("/Clases/Alumno/{id}")
-    public java.util.List<Alumno> AlumnobyClase(@PathVariable String id) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public java.util.List<Alumno> AlumnobyClase(@PathVariable String id) throws Exception {
 
         Clase clase = clService.BuscarClasePorId(Long.parseLong(id));
         if (clase == null)
@@ -132,14 +152,23 @@ public class ClaseRestControlador {
     }
 
     @GetMapping("/Clases/CsAsPr/{idCurso}/{idAsignatura}/{idProfesor}")
+    @ResponseStatus(HttpStatus.CREATED)
     public java.util.List<Clase> ClasesbyCursoAsignaturaProfesor(@PathVariable String idCurso,
             @PathVariable String idAsignatura, @PathVariable String idProfesor) {
-        return clService.BuscarClasePorCursoAsignaturaProfesor(idCurso, idAsignatura, idProfesor);
+
+        java.util.List<Clase> c = clService.BuscarClasePorCursoAsignaturaProfesor(idCurso, idAsignatura, idProfesor);
+        if (c == null)
+            throw new EntityNotFoundException("No hay clases asociadas al profesor, curso y asignatura");
+        return c;
     }
 
     @GetMapping("/Clases/cursoprofe/{idCurso}/{idProfesor}")
+    @ResponseStatus(HttpStatus.CREATED)
     public java.util.List<Clase> ClasesbyCursoProfesor(@PathVariable String idCurso, @PathVariable String idProfesor) {
-        return clService.BuscarClasePorCursoProfesor(idCurso, idProfesor);
+        java.util.List<Clase> c = clService.BuscarClasePorCursoProfesor(idCurso, idProfesor);
+        if (c == null)
+            throw new EntityNotFoundException("No hay clases asociadas al profesor y a ese curso");
+        return c;
     }
 
     @PutMapping("/Clases")

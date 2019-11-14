@@ -29,6 +29,7 @@ h2 {
   --bg-color: #101010;
   --bg-color-2: #202020;
 }
+
 hr {
   border: 2px solid var(--form-color);
   margin-top: 0px;

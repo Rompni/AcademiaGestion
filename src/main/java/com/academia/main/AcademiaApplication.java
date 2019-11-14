@@ -29,6 +29,7 @@ public class AcademiaApplication {
 		rolservicio.save(new Rol((long) 2,"ALUMNO"));
 		rolservicio.save(new Rol((long) 3,"PROFESOR"));
 		Usuario u = usuarioservicio.findUsuarioByUsuario("admin");
+		if(u != null)
 		usuarioservicio.delete(u);
 		usuarioservicio.save(new Usuario((long) 1, "admin", "admin"));
 		

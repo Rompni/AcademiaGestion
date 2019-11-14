@@ -23,7 +23,7 @@ function create(e) {
       datasets: [
         {
           label: "Etapas",
-          backgroundColor: ["rgba(255, 0, 1, 0.4)", " rgba(0, 0, 255, 0.4)"],
+          backgroundColor: ["rgba(255, 0, 0, 0.4)", " rgba(0, 0, 255, 0.4)"],
           borderColor:  ['rgba(255, 0, 0, 0.7)',  ' rgba(0, 0, 255, 0.8)'],
           data: [primaria, secundaria]
         }
