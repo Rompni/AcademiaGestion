@@ -45,7 +45,7 @@ public class Profesor implements Serializable {
 	@Pattern(message = " Correo invalido ", regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
 	private String correo;
 	
-	@Pattern(message = " Titulación invalida ", regexp = "^[A-Za-z]+$")
+	@Pattern(message = " Titulación invalida ", regexp = "^[A-Za-z/ ]+$")
 	private String titulacion;
 	
 	@OneToMany(mappedBy = "profesor")

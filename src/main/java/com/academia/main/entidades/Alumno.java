@@ -37,7 +37,6 @@ public class Alumno implements Serializable {
 	@Pattern(message = " Primer Apellido invalido ", regexp = "^[A-Za-z]+$")
 	private String apellido1;
 
-	@Pattern(message = " Segundo Apellido invalido ", regexp = "^[A-Za-z]+$")
 	@Column(nullable = true)
 	private String apellido2;
 
