@@ -12,9 +12,8 @@
 
 <body>
     <div class="justify-content-center animated bounceInDown">
-        <div th:if="${param.error}" class="alert alert-danger animated" role="alert">
+        <div th:if="${param.e}" class="alert alert-danger animated" role="alert">
           Usuario existente.</div>
-        <div th:if="${param.logout}" class="alert alert-success animated" role="alert">Tu has cerrado sesion.</div>
       </div>
   <!-- partial:index.partial.html -->
   <div class="login-container animated bounceInUp">

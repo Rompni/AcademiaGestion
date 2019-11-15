@@ -47,9 +47,10 @@ public class UsuarioControlador {
 
 			model.addAttribute("user", usuario);
 
-			return "login";
+			return "home";
 
 		} catch (Exception e) {
+			
 			return "registro";
 		}
 		

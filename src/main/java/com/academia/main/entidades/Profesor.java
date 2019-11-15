@@ -32,7 +32,6 @@ public class Profesor implements Serializable {
 	private String apellido1;
 	
 	@Column(nullable = true)
-	@Pattern(message = " Segundo Apellido invalido ", regexp = "^[A-Za-z]+$")
 	private String apellido2;
 	
 	@Column(nullable = false, unique = true)

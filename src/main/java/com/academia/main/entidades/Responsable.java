@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,20 +26,25 @@ public class Responsable implements Serializable {
 	private Long id;
 
 	@Column(nullable = false)
+	@Pattern(message = " Nombre invalido ", regexp = "^[A-Za-z]+$")
 	private String nombre;
 
 	@Column(nullable = false)
+	@Pattern(message = " Primero apellido invalido ", regexp = "^[A-Za-z]+$")
 	private String apellido1;
 
+	@Column(nullable = true)
 	private String apellido2;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String nif;
 
 	@Column(nullable = false)
+	@Pattern(message = " Telefono invalido[3xxxxx] ", regexp = "^3[0-9]{5}$")
 	private String telefono;
 
 	@Column(nullable = false)
+	@Pattern(message = " Correo invalido ", regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
 	private String correo;
 
 	@OneToMany(mappedBy = "responsable", cascade = { CascadeType.ALL })

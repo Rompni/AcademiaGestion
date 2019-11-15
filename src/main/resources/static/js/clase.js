@@ -8,6 +8,7 @@ $(function () {
   RowClickEvent();
   buscarClase();
   buscarAlumnos();
+  limpiarBusqueda();
 });
 
 function RowClickEvent() {
@@ -16,8 +17,9 @@ function RowClickEvent() {
     var Curso = $("#cursoClase").val();
     var Asignatura = $("#asignaturaClase").val();
     var Profesor = $("#profesorClase").val();
+    var elboton = $('#myModal3').find('.modal-footer button[id=botonAceptar]').text()
 
-    if (Curso !== "nn" && Asignatura !== "nn" && Profesor !== "nn") {
+    if ( (Curso !== "nn" && Asignatura !== "nn" && Profesor !== "nn") || elboton == "Modificar" ) {
 
       if ($(this).text() == "")
         $(this).text("X");
@@ -73,9 +75,10 @@ function agregarmodificarClase() {
       "horario": horario
     }
 
+    var elboton = $('#myModal3').find('.modal-footer button[id=botonAceptar]').text()
+    
     if (idCurso !== "nn" && idAsignatura !== "nn" && idProfesor !== "nn" && horario.length > 0) {
-      var elboton = $('#myModal3').find('.modal-footer button[id=botonAceptar]').text()
-      console.log(elboton)
+
       if (elboton == "Crear") {
         $.ajax("./api/v1/Clases",
           {
@@ -99,8 +102,10 @@ function agregarmodificarClase() {
               });
             }
           });
+        }
 
-      } else if (elboton == "Modificar") {
+      } else if (horario.length > 0) {
+        if (elboton == "Modificar") {
         clase["id"] = id
         $.ajax("./api/v1/Clases/",
           {
@@ -124,12 +129,6 @@ function agregarmodificarClase() {
               });
             }
           });
-
-      } else {
-        Toast.fire({
-          icon: "warning",
-          title: "Faltan datos por rellenar",
-        });
       }
     } else {
       Toast.fire({
@@ -392,18 +391,24 @@ function llenarCampos() {
       });
       return;
     }
+
     limpiarTodo();
+    $(".create").attr("hidden", true);
+    $(".edit").attr("hidden", false);
     cambiodeBoton("#btnEditar", "#myModal3")
     $("#myModal3").modal("show");
     $.ajax("./api/v1/Clases/" + id,
       {
         type: "GET",
         success: function (datos) {
-          console.log(datos)
-        
-          $("#profesorClase").val(datos.profesor.id);
-          $("#cursoClase").val(datos.asignatura.curso.id);
-         $("#asignaturaClase").val(datos.asignatura.id);
+
+         var curso = $("input:radio[name=selected]:checked").closest('tr').children()[1].textContent
+         var asignatura = $("input:radio[name=selected]:checked").closest('tr').children()[2].textContent
+         var profesor = $("input:radio[name=selected]:checked").closest('tr').children()[3].textContent
+
+        $("#verCurso").text(curso)
+        $("#verAsignatura").text(asignatura)
+        $("#verProfesor").text(profesor)
 
           $("#tabla tbody tr").each(function () {
             $(this).find("td").each(function () {
@@ -431,6 +436,8 @@ function llenarCampos() {
   $("#btnCrear").on("click", function (e) {
     e.preventDefault();
     limpiarTodo();
+    $(".create").attr("hidden", false);
+    $(".edit").attr("hidden", true);
     cambiodeBoton("#btnCrear", "#myModal3");
   });
 }
@@ -496,14 +503,20 @@ function cambiodeBoton(name, modal) {
 
 function limpiarBusqueda() {
   $('#limpiar').on('click', function (event) {
-    $('.card-body select').val("nn")
+    limpiarTodo();
   });
 }
 
 function limpiarTodo() {
   $("#cursoClase").val("nn");
   $("#profesorClase").val("nn");
-  $("#asignaturaClase").val("nn");
+  $("#asignaturaClase option").remove();
+
+  $("#inputCurso").val("nn");
+  $("#inputProfesor").val("nn");
+  $("#inputAsignatura option").remove();
+
+
 
   $("#tabla tbody tr").each(function () {
     $(this).find("td").each(function () {

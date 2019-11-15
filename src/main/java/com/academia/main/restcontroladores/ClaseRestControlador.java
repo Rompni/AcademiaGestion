@@ -175,33 +175,14 @@ public class ClaseRestControlador {
     @ResponseStatus(HttpStatus.CREATED)
     public Clase updateClase(@Valid @RequestBody Clase clase) throws Exception {
 
-        java.util.List<Clase> clases = clService.buscarClases();
-
-        if (clase.getIdCurso() == null)
-            throw new Exception("El curso  es nula");
-
-        if (clase.getIdAsignatura() == null)
-            throw new Exception("La asignatura es nula");
-
-        if (clase.getIdProfesor() == null)
-            throw new Exception("el profesor es nulo");
-
         Clase CLASE = clService.BuscarClasePorId(clase.getId());
+
         if (CLASE == null)
             throw new EntityNotFoundException("No se encontró la clase");
-
-        if (clases != null) {
-            for (Clase c : clases) {
-                if (c.getId() == clase.getId())
-                    continue;
-
-                if (c.getProfesor().getId() == Long.parseLong(clase.getIdProfesor())) {
-                    if (c.getAsignatura().getId() == Long.parseLong(clase.getIdAsignatura())) {
-                        throw new Exception("Clase existente");
-                    }
-                }
-            }
-        }
+        
+        clase.setIdCurso(Long.toString(CLASE.getAsignatura().getCurso().getId()));
+        clase.setIdAsignatura(Long.toString(CLASE.getAsignatura().getId()));
+        clase.setIdProfesor(Long.toString(CLASE.getProfesor().getId()));
 
         eliminar(CLASE.getId());
 
