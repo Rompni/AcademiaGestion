@@ -1,7 +1,6 @@
 package com.academia.main.restcontroladores;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
