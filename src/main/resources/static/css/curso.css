@@ -75,8 +75,8 @@ p {
 	min-height:580px;
 	position:relative;
 	background:url(https://beic.az/images/services/a86e7d722abackground-courses.jpg) no-repeat center;
-    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-    border: 1px solid var(--border-color);
+  box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+  border: 1px solid var(--border-color);
 }
 
 .fd .card .card-header{
@@ -116,6 +116,7 @@ label{color: white;}
   border-color: white;
   background-color: rgba(0,0,0,0.5);
   color: white;
+  max-width: 300px;
 }
 
 .table td{
