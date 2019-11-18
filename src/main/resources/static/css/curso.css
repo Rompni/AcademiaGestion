@@ -116,7 +116,7 @@ label{color: white;}
   border-color: white;
   background-color: rgba(0,0,0,0.5);
   color: white;
-  max-width: 300px;
+  max-height: 300px;
 }
 
 .table td{
